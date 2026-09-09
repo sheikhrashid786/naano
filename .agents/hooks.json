@@ -1,0 +1,22 @@
+{
+  "agent-capture": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node D:/nano.com/.agents/capture.js"
+      }
+    ],
+    "PostInvocation": [
+      {
+        "type": "command",
+        "command": "node D:/nano.com/.agents/capture.js"
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node D:/nano.com/.agents/capture.js"
+      }
+    ]
+  }
+}

@@ -1,0 +1,236 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  COMPANY
+  CREATOR
+  ADMIN
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum CollabStatus {
+  INVITED
+  APPLIED
+  ACCEPTED
+  DECLINED
+  IN_PROGRESS
+  CONTENT_SUBMITTED
+  APPROVED
+  COMPLETED
+  CANCELLED
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+}
+
+model User {
+  id            String         @id @default(cuid()) @db.VarChar(36)
+  email         String         @unique @db.VarChar(191)
+  passwordHash  String         @db.VarChar(255)
+  name          String         @db.VarChar(191)
+  avatarUrl     String?        @db.Text
+  role          Role           @default(COMPANY)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  company       Company?
+  creator       Creator?
+  sentMessages  Message[]      @relation("SentMessages")
+  notifications Notification[]
+}
+
+model Company {
+  id               String          @id @default(cuid()) @db.VarChar(36)
+  userId           String          @unique @db.VarChar(36)
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name             String          @db.VarChar(191)
+  website          String?         @db.VarChar(255)
+  logoUrl          String?         @db.Text
+  tagline          String?         @db.VarChar(255)
+  description      String?         @db.Text
+  industry         String?         @db.VarChar(100)
+  country          String?         @db.VarChar(10)
+  targetIndustries String?         @db.Text
+  targetCountries  String?         @db.Text
+  targetRoles      String?         @db.Text
+  plan             String          @default("Self-Serve") @db.VarChar(50)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  campaigns        Campaign[]
+  favorites        Favorite[]
+  collaborations   Collaboration[]
+}
+
+model Creator {
+  id             String             @id @default(cuid()) @db.VarChar(36)
+  userId         String             @unique @db.VarChar(36)
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  headline       String?            @db.VarChar(255)
+  bio            String?            @db.Text
+  niche          String             @db.VarChar(100)
+  industry       String             @db.VarChar(100)
+  country        String             @db.VarChar(10)
+  linkedinUrl    String?            @db.VarChar(255)
+  followersCount Int                @default(5000)
+  engagementRate Float              @default(3.8)
+  pricePerPost   Int                @default(150)
+  badge          String?            @db.VarChar(50)
+  featured       Boolean            @default(false)
+  stripeConnected Boolean           @default(true)
+  avatarUrl      String?            @db.Text
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  collaborations Collaboration[]
+  favorites      Favorite[]
+  analytics      CreatorAnalytics[]
+}
+
+model Campaign {
+  id             String              @id @default(cuid()) @db.VarChar(36)
+  companyId      String              @db.VarChar(36)
+  company        Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  title          String              @db.VarChar(191)
+  objective      String              @db.VarChar(100)
+  description    String              @db.Text
+  deliverables   String?             @db.Text
+  targetAudience String?             @db.VarChar(255)
+  budgetPerPost  Int                 @default(200)
+  status         CampaignStatus      @default(ACTIVE)
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  collaborations Collaboration[]
+  brief          CampaignBrief?
+  analytics      CampaignAnalytics[]
+}
+
+model CampaignBrief {
+  id               String    @id @default(cuid()) @db.VarChar(36)
+  campaignId       String    @unique @db.VarChar(36)
+  campaign         Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  angle            String    @db.Text
+  suggestedHooks   String    @db.Text
+  keyTalkingPoints String    @db.Text
+  dosAndDonts      String?   @db.Text
+  trackingUrl      String?   @db.VarChar(255)
+  callToAction     String?   @db.VarChar(255)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model Collaboration {
+  id               String        @id @default(cuid()) @db.VarChar(36)
+  campaignId       String        @db.VarChar(36)
+  campaign         Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  companyId        String        @db.VarChar(36)
+  company          Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  creatorId        String        @db.VarChar(36)
+  creator          Creator       @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  status           CollabStatus  @default(INVITED)
+  fixedRate        Int
+  pitchMessage     String?       @db.Text
+  submittedPostUrl String?       @db.Text
+  postProofText    String?       @db.Text
+  publishedAt      DateTime?
+  clicksCount      Int           @default(0)
+  leadsCount       Int           @default(0)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  conversation     Conversation?
+  payment          Payment?
+}
+
+model Conversation {
+  id              String        @id @default(cuid()) @db.VarChar(36)
+  collaborationId String        @unique @db.VarChar(36)
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  messages        Message[]
+}
+
+model Message {
+  id             String       @id @default(cuid()) @db.VarChar(36)
+  conversationId String       @db.VarChar(36)
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String       @db.VarChar(36)
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  content        String       @db.Text
+  createdAt      DateTime     @default(now())
+}
+
+model Payment {
+  id              String        @id @default(cuid()) @db.VarChar(36)
+  collaborationId String        @unique @db.VarChar(36)
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade)
+  amount          Int
+  currency        String        @default("EUR") @db.VarChar(10)
+  status          PayoutStatus  @default(PENDING)
+  stripePayoutId  String?       @db.VarChar(100)
+  paidAt          DateTime?
+  createdAt       DateTime      @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid()) @db.VarChar(36)
+  userId    String   @db.VarChar(36)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String   @db.VarChar(191)
+  message   String   @db.Text
+  link      String?  @db.VarChar(255)
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Favorite {
+  id        String   @id @default(cuid()) @db.VarChar(36)
+  companyId String   @db.VarChar(36)
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  creatorId String   @db.VarChar(36)
+  creator   Creator  @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([companyId, creatorId])
+}
+
+model CampaignAnalytics {
+  id            String   @id @default(cuid()) @db.VarChar(36)
+  campaignId    String   @db.VarChar(36)
+  campaign      Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  date          DateTime
+  clicks        Int      @default(0)
+  leads         Int      @default(0)
+  pipelineValue Float    @default(0.0)
+}
+
+model CreatorAnalytics {
+  id          String   @id @default(cuid()) @db.VarChar(36)
+  creatorId   String   @db.VarChar(36)
+  creator     Creator  @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  date        DateTime
+  impressions Int      @default(0)
+  clicks      Int      @default(0)
+}
