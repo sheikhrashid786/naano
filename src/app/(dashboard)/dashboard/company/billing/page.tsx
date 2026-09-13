@@ -131,7 +131,7 @@ export default function CompanyBillingPage() {
 
   return (
     <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC] min-h-screen pb-24 relative">
-      <Header balance={walletBalance} user={{ name: currentUser?.name }} />
+      <Header balance={walletBalance} user={currentUser} />
 
       <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-6">
         {/* Toast Notification */}
