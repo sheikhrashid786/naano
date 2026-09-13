@@ -54,7 +54,7 @@ export default function CreatorApplicationsPage() {
         subtitle="Review brand invitations and track applications you have sent to SaaS companies."
       />
 
-      <main className="p-8 max-w-5xl w-full mx-auto space-y-8">
+      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-8">
         {/* Section 1: Invitations Received from Brands */}
         <div className="space-y-4">
           <h3 className="text-base font-bold text-[#111827]">

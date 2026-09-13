@@ -14,6 +14,13 @@ export async function GET() {
       const campaigns = await prisma.campaign.findMany({
         where: { companyId: user.companyId },
         include: {
+          company: {
+            select: {
+              id: true,
+              name: true,
+              logoUrl: true,
+            },
+          },
           brief: true,
           collaborations: {
             include: {
@@ -121,6 +128,36 @@ export async function POST(req: Request) {
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || 'Failed to create campaign' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const user = await getCurrentUser();
+    if (!user || user.role !== 'COMPANY' || !user.companyId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'Campaign ID required' }, { status: 400 });
+    }
+
+    await prisma.campaign.delete({
+      where: {
+        id,
+        companyId: user.companyId,
+      },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || 'Failed to delete campaign' },
       { status: 500 }
     );
   }
