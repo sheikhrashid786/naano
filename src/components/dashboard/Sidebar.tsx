@@ -16,6 +16,7 @@ import {
   MessageSquare,
   Briefcase,
 } from 'lucide-react';
+import UserProfileDropdown from './UserProfileDropdown';
 
 interface SidebarProps {
   user: {
@@ -23,14 +24,17 @@ interface SidebarProps {
     name: string;
     email: string;
     role: 'COMPANY' | 'CREATOR' | 'ADMIN';
+    avatarUrl?: string | null;
     company?: {
       name: string;
       industry?: string | null;
       targetIndustries?: string | null;
+      logoUrl?: string | null;
     } | null;
     creator?: {
       headline?: string | null;
       niche?: string | null;
+      avatarUrl?: string | null;
     } | null;
   };
 }
@@ -139,7 +143,18 @@ export default function Sidebar({ user }: SidebarProps) {
         </nav>
       </div>
 
-      <div className="h-6" />
+      {/* Bottom User Profile Section */}
+      <div
+        className={`border-t border-[#E2E8F0] ${
+          isHovered ? 'p-2.5' : 'py-3 flex justify-center'
+        }`}
+      >
+        <UserProfileDropdown
+          user={user}
+          align="sidebar"
+          showName={isHovered}
+        />
+      </div>
     </aside>
   );
 }
