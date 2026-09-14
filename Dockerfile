@@ -1,10 +1,13 @@
 # -------------------------------------------------------------------
-# Base Stage: Alpine Linux with Node.js 20 and system libraries
+# Base Stage: Debian Slim with Node.js 20, glibc, and OpenSSL
+# Matches @next/swc-linux-x64-gnu in package-lock.json
 # -------------------------------------------------------------------
-FROM node:20-alpine AS base
+FROM node:20-slim AS base
 
-# libc6-compat and openssl are required for Prisma engine on Alpine
-RUN apk add --no-cache libc6-compat openssl
+# Install openssl, ca-certificates, and netcat for database host reachability checks
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends openssl ca-certificates netcat-openbsd && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -19,7 +22,7 @@ COPY prisma ./prisma/
 # Install dependencies strictly matching package-lock.json
 RUN npm ci
 
-# Generate Prisma client for linux-musl
+# Generate Prisma client for linux-glibc
 RUN npx prisma generate
 
 # -------------------------------------------------------------------
@@ -58,8 +61,8 @@ ENV PRISMA_AUTO_MIGRATE="true"
 ENV PRISMA_SEED="false"
 
 # Create non-root system user for security
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs && \
+    useradd --system --uid 1001 -g nodejs nextjs
 
 # Copy static assets and public files
 COPY --from=builder /app/public ./public
