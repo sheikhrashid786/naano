@@ -273,7 +273,7 @@ export default function CreatorProfilePage() {
                   <img
                     src={avatarUrl}
                     alt={name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
 

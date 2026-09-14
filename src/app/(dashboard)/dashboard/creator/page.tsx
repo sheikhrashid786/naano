@@ -24,6 +24,23 @@ function ChatBubbleIcon({ className = 'w-5 h-5' }: { className?: string }) {
   );
 }
 
+function optimizeAvatarUrl(url?: string | null): string {
+  if (!url) return '/lp/avatar-umar.jpg';
+  if (url.includes('images.unsplash.com')) {
+    try {
+      const parsed = new URL(url);
+      parsed.searchParams.set('crop', 'faces');
+      parsed.searchParams.set('fit', 'crop');
+      parsed.searchParams.set('w', '300');
+      parsed.searchParams.set('h', '300');
+      return parsed.toString();
+    } catch {
+      return url;
+    }
+  }
+  return url;
+}
+
 function formatFollowers(count: number): string {
   if (!count || count <= 0) return '0';
   if (count >= 1000000) {
@@ -92,8 +109,9 @@ export default async function CreatorOverviewPage() {
   const firstName = rawName.split(' ')[0] || 'Umar';
   const fullName = rawName;
   const creatorNiche = creator?.niche || 'Software';
-  const creatorCountry = creator?.country || 'PK';
-  const avatarUrl = creator?.user?.avatarUrl || creator?.avatarUrl || '/lp/avatar-umar.jpg';
+  const creatorCountry = creator?.country || 'FR';
+  const rawAvatar = creator?.user?.avatarUrl || creator?.avatarUrl || '/lp/avatar-umar.jpg';
+  const avatarUrl = optimizeAvatarUrl(rawAvatar);
   const headline =
     creator?.headline ||
     'Full-Stack Developer | Technical Lead & Business Growth Manager | React.js | Next.js | Node.js | Laravel...';
@@ -267,11 +285,11 @@ export default async function CreatorOverviewPage() {
 
               {/* Creator Profile Avatar */}
               <div className="-mt-10 flex justify-center">
-                <div className="w-20 h-20 rounded-full border-4 border-white shadow-md bg-slate-900 text-white font-bold flex items-center justify-center text-xl overflow-hidden">
+                <div className="w-20 h-20 rounded-full border-4 border-white shadow-md bg-gradient-to-tr from-[#2563EB] to-[#3B82F6] text-white font-bold flex items-center justify-center text-xl overflow-hidden relative">
                   <img
                     src={avatarUrl}
                     alt={fullName}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
               </div>
