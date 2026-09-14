@@ -30,9 +30,12 @@ RUN npx prisma generate
 # -------------------------------------------------------------------
 FROM base AS builder
 
+# Copy application source code
+COPY . .
+
+# Ensure clean Linux dependencies and Prisma from deps stage are used
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/prisma ./prisma
-COPY . .
 
 # Baked-in environment variables for build time
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -40,8 +43,10 @@ ENV NODE_ENV=production
 ENV DATABASE_URL="mysql://root:@127.0.0.1:3306/naano"
 ENV JWT_SECRET="naano_super_secret_session_jwt_key_2026_b2b_marketplace"
 ENV NEXT_PUBLIC_APP_URL="http://localhost:3000"
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-# Build Next.js standalone bundle
+# Ensure Prisma client is in sync and build Next.js standalone bundle
+RUN npx prisma generate
 RUN npm run build
 
 # -------------------------------------------------------------------
