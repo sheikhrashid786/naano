@@ -97,8 +97,7 @@ function RegisterContent() {
         throw new Error(data.error || 'Failed to create account');
       }
 
-      router.push(data.redirectUrl || (roleType === 'COMPANY' ? '/dashboard/company' : '/dashboard/creator'));
-      router.refresh();
+      window.location.href = data.redirectUrl || (roleType === 'COMPANY' ? '/dashboard/company' : '/dashboard/creator');
     } catch (err: any) {
       setError(err.message);
       setLoading(false);

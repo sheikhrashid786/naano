@@ -76,8 +76,7 @@ export default function LoginPage() {
         throw new Error(data.error || 'Failed to login');
       }
 
-      router.push(data.redirectUrl || '/dashboard/company');
-      router.refresh();
+      window.location.href = data.redirectUrl || '/dashboard/company';
     } catch (err: any) {
       setError(err.message);
       setLoading(false);
