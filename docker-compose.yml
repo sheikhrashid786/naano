@@ -5,10 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: naano-app
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
@@ -23,15 +22,14 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: naano-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: naano_root_password
       MYSQL_DATABASE: naano_db
       MYSQL_USER: naano_user
       MYSQL_PASSWORD: naano_password
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
