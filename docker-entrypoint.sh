@@ -21,7 +21,9 @@ if [ -n "$DATABASE_URL" ]; then
   # 1. Automatically run prisma db push on startup
   if [ "${PRISMA_AUTO_MIGRATE:-true}" = "true" ]; then
     echo "==> [Coolify] Synchronizing database schema with Prisma..."
-    if [ -f "./node_modules/.bin/prisma" ]; then
+    if [ -f "./node_modules/prisma/build/index.js" ]; then
+      node ./node_modules/prisma/build/index.js db push --skip-generate || echo "==> [Coolify] Warning: prisma db push encountered an issue, proceeding..."
+    elif [ -f "./node_modules/.bin/prisma" ]; then
       ./node_modules/.bin/prisma db push --skip-generate || echo "==> [Coolify] Warning: prisma db push encountered an issue, proceeding..."
     fi
 
