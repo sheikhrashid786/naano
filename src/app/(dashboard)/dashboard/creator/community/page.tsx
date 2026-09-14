@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import Header from '@/components/dashboard/Header';
 import MiniCreatorCard from '@/components/dashboard/MiniCreatorCard';
