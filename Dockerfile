@@ -31,14 +31,12 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/prisma ./prisma
 COPY . .
 
+# Baked-in environment variables for build time
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-
-# Provide dummy build-time values to allow static page pre-rendering
-ARG DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy"
-ENV DATABASE_URL=$DATABASE_URL
-ARG JWT_SECRET="dummy-build-secret-key"
-ENV JWT_SECRET=$JWT_SECRET
+ENV DATABASE_URL="mysql://root:@127.0.0.1:3306/naano"
+ENV JWT_SECRET="naano_super_secret_session_jwt_key_2026_b2b_marketplace"
+ENV NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 # Build Next.js standalone bundle
 RUN npm run build
@@ -48,10 +46,16 @@ RUN npm run build
 # -------------------------------------------------------------------
 FROM base AS runner
 
+# Baked-in environment variables for runtime in Coolify (no manual entry needed)
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+ENV DATABASE_URL="mysql://root:@127.0.0.1:3306/naano"
+ENV JWT_SECRET="naano_super_secret_session_jwt_key_2026_b2b_marketplace"
+ENV NEXT_PUBLIC_APP_URL="http://localhost:3000"
+ENV PRISMA_AUTO_MIGRATE="true"
+ENV PRISMA_SEED="false"
 
 # Create non-root system user for security
 RUN addgroup --system --gid 1001 nodejs && \
