@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface LiveLandingPageProps {
   html: string;
@@ -8,6 +9,7 @@ interface LiveLandingPageProps {
 
 export default function LiveLandingPage({ html }: LiveLandingPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const root = containerRef.current;
@@ -94,11 +96,62 @@ export default function LiveLandingPage({ html }: LiveLandingPageProps) {
     }
     document.addEventListener('click', handleDocClick);
 
+    // 6. Seamless SPA Client-Side Transitions (prevents full page reload)
+    function handleLinkClick(e: MouseEvent) {
+      const target = (e.target as HTMLElement).closest('a');
+      if (!target) return;
+
+      const href = target.getAttribute('href');
+      if (!href) return;
+
+      if (
+        href.startsWith('http://') ||
+        href.startsWith('https://') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        target.getAttribute('target') === '_blank' ||
+        target.hasAttribute('download')
+      ) {
+        return;
+      }
+
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) {
+        return;
+      }
+
+      if (href.startsWith('#')) {
+        const id = href.slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
+
+      if (href.startsWith('/')) {
+        e.preventDefault();
+        router.push(href);
+      }
+    }
+
+    root.addEventListener('click', handleLinkClick);
+
+    // Prefetch key landing routes for instant transitions
+    router.prefetch('/');
+    router.prefetch('/creators');
+    router.prefetch('/agencies');
+    router.prefetch('/blog');
+    router.prefetch('/case-studies/blogseo');
+    router.prefetch('/login');
+    router.prefetch('/register');
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('click', handleDocClick);
+      root.removeEventListener('click', handleLinkClick);
     };
-  }, []);
+  }, [router]);
 
   return (
     <div

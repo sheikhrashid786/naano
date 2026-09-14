@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { X, Send, Loader2, Sparkles } from 'lucide-react';
 
 interface Creator {
@@ -132,9 +133,9 @@ export default function InviteCreatorModal({
             ) : campaigns.length === 0 ? (
               <div className="text-xs text-amber-800 bg-amber-50 p-3 rounded-xl border border-amber-200">
                 You do not have any active campaigns yet.{' '}
-                <a href="/dashboard/company/campaigns/new" className="font-bold underline">
+                <Link href="/dashboard/company/campaigns/new" className="font-bold underline">
                   Create one first →
-                </a>
+                </Link>
               </div>
             ) : (
               <select
