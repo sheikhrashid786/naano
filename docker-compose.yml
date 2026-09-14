@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: naano-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - DATABASE_URL=mysql://naano_user:naano_password@db:3306/naano_db
+      - JWT_SECRET=change-this-to-a-secure-random-secret-key-in-production
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+      - PRISMA_AUTO_MIGRATE=true
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: naano-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_here
+      MYSQL_DATABASE: naano_db
+      MYSQL_USER: naano_user
+      MYSQL_PASSWORD: naano_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "naano_user", "-pnaano_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mysql_data:
