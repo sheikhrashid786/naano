@@ -14,7 +14,7 @@ services:
       - HOSTNAME=0.0.0.0
       - DATABASE_URL=mysql://naano_user:naano_password@db:3306/naano_db
       - JWT_SECRET=naano_super_secret_session_jwt_key_2026_b2b_marketplace
-      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+      - NEXT_PUBLIC_APP_URL=${COOLIFY_FQDN:-http://localhost:3000}
       - PRISMA_AUTO_MIGRATE=true
     depends_on:
       db:
