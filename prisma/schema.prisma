@@ -234,3 +234,69 @@ model CreatorAnalytics {
   impressions Int      @default(0)
   clicks      Int      @default(0)
 }
+
+model CaseStudyItem {
+  id            String   @id @default(cuid()) @db.VarChar(36)
+  slug          String   @unique @db.VarChar(100)
+  company       String   @db.VarChar(191)
+  logo          String?  @db.Text
+  tagline       String   @db.VarChar(255)
+  industry      String   @db.VarChar(100)
+  metric        String   @db.VarChar(50)
+  metricLabel   String   @db.VarChar(100)
+  quote         String   @db.Text
+  author        String   @db.VarChar(191)
+  role          String   @db.VarChar(191)
+  creatorsUsed  String   @db.VarChar(191)
+  pipelineAdded String   @db.VarChar(100)
+  impressions   String   @db.VarChar(100)
+  clicks        String   @db.VarChar(100)
+  readTime      String   @default("5 min read") @db.VarChar(50)
+  date          String   @default("Sep 2026") @db.VarChar(50)
+  summary       String   @db.Text
+  challenge     String   @db.Text
+  strategy      String   @db.Text
+  results       String   @db.Text
+  keyTakeaways  String   @db.Text
+  creatorsJson  String?  @db.Text
+  published     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model BlogItem {
+  id           String   @id @default(cuid()) @db.VarChar(36)
+  slug         String   @unique @db.VarChar(100)
+  title        String   @db.VarChar(255)
+  topic        String   @db.VarChar(100)
+  readTime     String   @default("7 min read") @db.VarChar(50)
+  date         String   @default("Sep 2026") @db.VarChar(50)
+  author       String   @db.VarChar(191)
+  authorRole   String   @db.VarChar(191)
+  authorAvatar String?  @db.Text
+  gradient     String   @default("from-indigo-600 to-violet-600") @db.VarChar(100)
+  summary      String   @db.Text
+  takeaways    String   @db.Text
+  contentJson  String   @db.Text
+  published    Boolean  @default(true)
+  featured     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model PlatformSetting {
+  id          String   @id @default(cuid()) @db.VarChar(36)
+  key         String   @unique @db.VarChar(100)
+  value       String   @db.Text
+  description String?  @db.VarChar(255)
+  updatedAt   DateTime @updatedAt
+}
+
+model AdminAuditLog {
+  id        String   @id @default(cuid()) @db.VarChar(36)
+  adminId   String   @db.VarChar(36)
+  adminName String   @db.VarChar(191)
+  action    String   @db.VarChar(100)
+  details   String   @db.Text
+  createdAt DateTime @default(now())
+}

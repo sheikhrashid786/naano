@@ -17,6 +17,8 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import Link from 'next/link';
+import CreatorSyncButton from '@/components/dashboard/CreatorSyncButton';
+import EscrowMilestoneStepper from '@/components/dashboard/EscrowMilestoneStepper';
 
 function ChatBubbleIcon({ className = 'w-5 h-5' }: { className?: string }) {
   return (
@@ -158,101 +160,152 @@ export default async function CreatorOverviewPage() {
         user={{ name: fullName, avatarUrl }}
       />
 
-      <main className="w-full px-6 sm:px-8 lg:px-10 pt-6 space-y-6">
+      <main className="w-full px-6 sm:px-8 lg:px-10 pt-6 space-y-6 sm:space-y-8">
         {/* Welcome Section */}
-        <div>
-          <span className="text-xs font-semibold text-[#4B5563] block mb-1">
-            Creator workspace
-          </span>
-          <h1 className="text-3xl font-extrabold text-[#111827] tracking-tight">
-            Good to see you, {firstName}
-          </h1>
-          <p className="text-sm text-[#6B7280] mt-1">
-            Your creator activity, at a glance.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-bold mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Creator Workspace & Network</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Good to see you, {firstName} 👋
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
+              Track your audience reach, public creator profile, and verified brand sponsorship pipeline in real-time.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/dashboard/creator/profile"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200/90 text-xs sm:text-sm font-bold text-slate-800 shadow-xs hover:border-slate-300 transition-all cursor-pointer"
+            >
+              <span>Edit Card & Rates</span>
+            </Link>
+            <Link
+              href="/dashboard/creator/collaborations"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-xs sm:text-sm font-bold text-white shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all cursor-pointer"
+            >
+              <span>View Collaborations</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
-        {/* 4 Metrics Cards: Strictly 4 in a single line */}
-        <div className="grid grid-cols-4 gap-3.5 sm:gap-4 w-full">
+        {/* 4 Forecaster Luxury Metric Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full">
           {/* 1. PUBLIC POST REACH */}
-          <div className="min-w-0 bg-white border border-[#E2E8F0] rounded-[20px] p-4 sm:p-5 flex flex-col justify-between min-h-[135px] shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-            <div className="flex items-center gap-1.5 text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider truncate">
-              <Eye className="w-3.5 h-3.5 text-[#8C95A6] shrink-0" strokeWidth={1.8} />
-              <span className="truncate">Public Post Reach</span>
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 transition-all flex flex-col justify-between group">
+            <div className="border-l-2 border-blue-500 pl-3.5 py-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Public Post Reach
+                </span>
+                <div className="w-7 h-7 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center">
+                  <Eye className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono mt-2">
+                {publicReachDisplay}
+              </div>
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight leading-none">
-              {publicReachDisplay}
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 mt-2">
+              <span>Audience impressions</span>
+              <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">Live</span>
             </div>
-            <p className="mt-3 text-[11px] sm:text-xs text-[#8C95A6] font-normal leading-snug">
-              Waiting for public post data
-            </p>
           </div>
 
           {/* 2. PUBLIC POSTS */}
-          <div className="min-w-0 bg-white border border-[#E2E8F0] rounded-[20px] p-4 sm:p-5 flex flex-col justify-between min-h-[135px] shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-            <div className="flex items-center gap-1.5 text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider truncate">
-              <FileText className="w-3.5 h-3.5 text-[#8C95A6] shrink-0" strokeWidth={1.8} />
-              <span className="truncate">Public Posts</span>
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 transition-all flex flex-col justify-between group">
+            <div className="border-l-2 border-indigo-500 pl-3.5 py-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Public Posts
+                </span>
+                <div className="w-7 h-7 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center">
+                  <FileText className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono mt-2">
+                {publicPostsCount}
+              </div>
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight leading-none">
-              {publicPostsCount}
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 mt-2">
+              <span>Original posts found</span>
+              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">Synced</span>
             </div>
-            <p className="mt-3 text-[11px] sm:text-xs text-[#8C95A6] font-normal leading-snug">
-              Original LinkedIn posts found
-            </p>
           </div>
 
           {/* 3. PUBLIC ENGAGEMENTS */}
-          <div className="min-w-0 bg-white border border-[#E2E8F0] rounded-[20px] p-4 sm:p-5 flex flex-col justify-between min-h-[135px] shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-            <div className="flex items-center gap-1.5 text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider truncate">
-              <Activity className="w-3.5 h-3.5 text-[#8C95A6] shrink-0" strokeWidth={1.8} />
-              <span className="truncate">Public Engagements</span>
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 transition-all flex flex-col justify-between group">
+            <div className="border-l-2 border-violet-500 pl-3.5 py-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Public Engagements
+                </span>
+                <div className="w-7 h-7 rounded-xl bg-violet-50 text-violet-600 border border-violet-100 flex items-center justify-center">
+                  <Activity className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono mt-2">
+                {publicEngagementsCount}
+              </div>
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight leading-none">
-              {publicEngagementsCount}
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 mt-2">
+              <span>Reactions & comments</span>
+              <span className="text-[10px] font-bold text-violet-600 bg-violet-50 px-2 py-0.5 rounded-md">Indexed</span>
             </div>
-            <p className="mt-3 text-[11px] sm:text-xs text-[#8C95A6] font-normal leading-snug">
-              Reactions, comments and reposts
-            </p>
           </div>
 
           {/* 4. LINKEDIN FOLLOWERS */}
-          <div className="min-w-0 bg-white border border-[#E2E8F0] rounded-[20px] p-4 sm:p-5 flex flex-col justify-between min-h-[135px] shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-            <div className="flex items-center gap-1.5 text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider truncate">
-              <Users className="w-3.5 h-3.5 text-[#8C95A6] shrink-0" strokeWidth={1.8} />
-              <span className="truncate">LinkedIn Followers</span>
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 transition-all flex flex-col justify-between group">
+            <div className="border-l-2 border-emerald-500 pl-3.5 py-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  LinkedIn Followers
+                </span>
+                <div className="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center">
+                  <Users className="w-3.5 h-3.5" />
+                </div>
+              </div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono mt-2">
+                {followersDisplay}
+              </div>
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight leading-none">
-              {followersDisplay}
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 mt-2">
+              <span>Public profile verified</span>
+              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">Active</span>
             </div>
-            <p className="mt-3 text-[11px] sm:text-xs text-[#8C95A6] font-normal leading-snug">
-              Imported from the public profile
-            </p>
           </div>
         </div>
 
         {/* Middle Two Panels: Creator Card & Launch Guide */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left Panel: Your creator card (Column 1: 5 cols out of 12) */}
-          <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-[24px] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+          {/* Left Panel: Your creator card (5 cols) */}
+          <div className="lg:col-span-5 bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="text-base font-bold text-[#111827]">Your creator card</h3>
-                <p className="text-xs text-[#64748B] mt-1 leading-relaxed max-w-[180px]">
-                  This is how brands discover your positioning and collaboration offer.
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100 mb-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                  <span>Public Media Kit</span>
+                </div>
+                <h3 className="text-base font-black text-slate-900">Your Creator Card</h3>
+                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                  How verified brands view your audience & pricing.
                 </p>
               </div>
 
-              {/* Action Buttons Stack (Client Component: 3 vertically stacked buttons) */}
+              {/* Action Buttons Stack */}
               <CreatorCardActions creatorId={creator?.id} />
             </div>
 
             {/* LinkedIn Card Preview Mockup */}
-            <div className="mt-6 w-full border border-[#E2E8F0] rounded-[28px] shadow-[0_16px_40px_rgba(28,78,178,0.08)] bg-white relative pb-3">
+            <div className="mt-6 w-full border border-slate-200/90 rounded-3xl shadow-[0_12px_36px_-6px_rgba(28,78,178,0.1)] bg-white relative pb-3 overflow-hidden">
               {/* Blue Gradient Header */}
-              <div className="bg-gradient-to-r from-[#215fea] via-[#2864ea] to-[#3b82f6] h-24 p-3.5 flex items-start justify-between text-white relative rounded-t-[28px]">
-                {/* LinkedIn Badge (White box with blue in logo) */}
-                <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-[#0A66C2] font-bold text-xs shadow-xs">
+              <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 h-24 p-3.5 flex items-start justify-between text-white relative">
+                {/* LinkedIn Badge */}
+                <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-[#0A66C2] font-bold text-xs shadow-sm">
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.62 1.62 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63z" />
                   </svg>
@@ -271,14 +324,14 @@ export default async function CreatorOverviewPage() {
                     />
                     <circle cx="317" cy="242" r="17" fill="#60A5FA" />
                   </svg>
-                  <span className="font-extrabold text-lg tracking-tight text-white font-sans">
+                  <span className="font-extrabold text-base tracking-tight text-white font-sans">
                     naano
                   </span>
                 </div>
 
                 {/* Country Pill & Share Button */}
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-bold bg-white/20 backdrop-blur-xs px-2.5 py-1 rounded-xl border border-white/30 text-white uppercase">
+                  <span className="text-[10px] font-bold bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white/30 text-white uppercase tracking-wider">
                     {creatorCountry}
                   </span>
                   <CardShareIcon />
@@ -287,7 +340,7 @@ export default async function CreatorOverviewPage() {
 
               {/* Creator Profile Avatar */}
               <div className="-mt-10 flex justify-center">
-                <div className="w-20 h-20 rounded-full border-4 border-white shadow-md bg-gradient-to-tr from-[#2563EB] to-[#3B82F6] text-white font-bold flex items-center justify-center text-xl overflow-hidden relative">
+                <div className="w-20 h-20 rounded-full ring-4 ring-white shadow-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xl overflow-hidden relative">
                   <img
                     src={avatarUrl}
                     alt={fullName}
@@ -297,62 +350,65 @@ export default async function CreatorOverviewPage() {
               </div>
 
               {/* Creator Details */}
-              <div className="text-center px-4 pt-2 pb-3">
-                <h4 className="text-xl font-extrabold text-[#111827]">{fullName}</h4>
-                <p className="text-xs text-[#64748B] mt-0.5 font-medium">{creatorNiche}</p>
+              <div className="text-center px-5 pt-2 pb-3">
+                <h4 className="text-lg font-black text-slate-900">{fullName}</h4>
+                <div className="inline-block mt-0.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[11px] font-semibold">
+                  {creatorNiche}
+                </div>
 
-                <p className="mt-2.5 text-xs text-[#4B5563] leading-relaxed px-3 line-clamp-2">
+                <p className="mt-2.5 text-xs text-slate-600 leading-relaxed px-2 line-clamp-2">
                   {headline}
                 </p>
 
-                {/* Post status pill */}
-                <div className="flex justify-center mt-3.5">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#E2E8F0] bg-[#F8FAFC] text-[11px] font-medium text-[#4B5563]">
-                    <Calendar className="w-3.5 h-3.5 text-[#2864EA]" />
-                    <span>{hasPostData ? `${publicPostsCount} posts synced` : 'No post data available'}</span>
+                {/* Post status pill & manual sync trigger */}
+                <div className="flex items-center justify-center gap-2 mt-3.5 flex-wrap">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-slate-50 text-[11px] font-medium text-slate-700">
+                    <Calendar className="w-3.5 h-3.5 text-indigo-600" />
+                    <span>{hasPostData ? `${publicPostsCount} verified posts synced` : 'No post data available'}</span>
                   </div>
+                  <CreatorSyncButton />
                 </div>
               </div>
 
               {/* Data Progress Track */}
-              <div className="px-6 py-2.5 flex items-center justify-between text-xs text-[#9CA3AF] border-t border-[#F1F5F9]">
-                <span className="font-semibold text-[10px]">Data</span>
-                <div className="flex-1 mx-3 h-1.5 bg-[#E5E7EB] rounded-full overflow-hidden">
-                  <div className={`h-full bg-[#2864EA] rounded-full ${hasPostData ? 'w-full' : 'w-0'}`} />
+              <div className="px-6 py-2.5 flex items-center justify-between text-xs text-slate-400 border-t border-slate-100">
+                <span className="font-semibold text-[10px] uppercase tracking-wider">Profile Sync</span>
+                <div className="flex-1 mx-3 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div className={`h-full bg-indigo-600 rounded-full transition-all ${hasPostData ? 'w-full' : 'w-1/3'}`} />
                 </div>
-                <span className="font-semibold text-[10px]">{hasPostData ? 'Synced' : 'Pending'}</span>
+                <span className="font-semibold text-[10px] text-indigo-600">{hasPostData ? '100% Synced' : 'Ready'}</span>
               </div>
 
               {/* Bottom 3 Stats Grid */}
-              <div className="grid grid-cols-3 border-t border-[#F1F5F9] py-3.5 px-2 text-center bg-white rounded-b-[28px]">
+              <div className="grid grid-cols-3 border-t border-slate-100 py-3 px-2 text-center bg-slate-50/50">
                 <div className="px-2">
-                  <div className="text-xl font-bold text-[#111827] tracking-tight">
+                  <div className="text-lg font-black text-slate-900 font-mono tracking-tight">
                     {followersDisplay}
                   </div>
-                  <div className="text-[11px] text-[#6B7280] mt-0.5 font-medium">Followers</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mt-0.5">Followers</div>
                 </div>
-                <div className="px-2 border-x border-[#F1F5F9]">
-                  <div className="text-xl font-bold text-[#111827] tracking-tight">
+                <div className="px-2 border-x border-slate-200/80">
+                  <div className="text-lg font-black text-slate-900 font-mono tracking-tight">
                     {publicReachTotal > 0 ? publicReachDisplay : '—'}
                   </div>
-                  <div className="text-[11px] text-[#6B7280] mt-0.5 font-medium">Est. impressions</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mt-0.5">Est. Reach</div>
                 </div>
                 <div className="px-2">
-                  <div className="text-xl font-bold text-[#111827] tracking-tight">
+                  <div className="text-lg font-black text-slate-900 font-mono tracking-tight">
                     €{pricePerPost}
                   </div>
-                  <div className="text-[11px] text-[#6B7280] mt-0.5 font-medium">Chosen cost</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mt-0.5">Rate / Post</div>
                 </div>
               </div>
 
               {/* Floating "More details" Pill Button overlapping bottom */}
-              <div className="flex justify-center -mb-7 relative z-20">
+              <div className="flex justify-center -mb-5 mt-2 relative z-20">
                 <Link
                   href="/dashboard/creator/profile"
-                  className="inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 bg-white rounded-full border border-[#E2E8F0] shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all cursor-pointer group"
+                  className="inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 bg-white rounded-full border border-slate-200 shadow-md hover:shadow-lg transition-all cursor-pointer group text-xs font-bold text-slate-800"
                 >
-                  <span className="text-xs font-bold text-[#111827]">More details</span>
-                  <div className="w-6 h-6 rounded-full bg-[#2864EA] group-hover:bg-[#1e52c8] text-white flex items-center justify-center transition-colors">
+                  <span>Edit profile details</span>
+                  <div className="w-6 h-6 rounded-full bg-indigo-600 group-hover:bg-indigo-700 text-white flex items-center justify-center transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </Link>
@@ -360,63 +416,227 @@ export default async function CreatorOverviewPage() {
             </div>
           </div>
 
-          {/* Right Panel: Your launch guide (Column 2: 7 cols out of 12) */}
-          <div className="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-[24px] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.02)] min-h-[420px]">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-base font-bold text-[#111827]">Your launch guide</h3>
-                <p className="text-xs text-[#64748B] mt-0.5">
-                  {completedSteps} of {totalSteps} steps complete
-                </p>
-              </div>
-
-              <Link
-                href="/dashboard/creator/profile"
-                className="text-xs font-semibold text-[#2864EA] hover:underline"
-              >
-                Open card
-              </Link>
-            </div>
-
-            {/* Checklist Item: Card and price ready */}
-            <div className="mt-5 border border-[#E2E8F0]/80 bg-white rounded-2xl p-4 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className={`w-6 h-6 rounded-full text-white flex items-center justify-center shrink-0 ${isProfileReady ? 'bg-[#10B981]' : 'bg-slate-300'}`}>
-                  <CheckCircle2 className="w-4 h-4" />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-sm font-bold text-[#111827]">Card and price ready</h4>
-                  <p className="text-xs text-[#64748B] mt-0.5">
-                    Your positioning and offer are ready to review.
+          {/* Right Panel: Your launch guide & collaborations pipeline (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Checklist & Launch Guide */}
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-100 mb-1.5">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span>Profile Readiness Checklist</span>
+                  </div>
+                  <h3 className="text-base font-black text-slate-900">Your Launch Guide</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Complete these key milestones to maximize sponsor match rates.
                   </p>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-2 shrink-0">
-                <span className={`text-[11px] font-semibold px-3 py-1 rounded-full border ${
-                  isProfileReady
-                    ? 'bg-[#ECFDF5] text-[#059669] border-[#A7F3D0]'
-                    : 'bg-slate-100 text-slate-600 border-slate-200'
-                }`}>
-                  {isProfileReady ? 'Complete' : 'In progress'}
-                </span>
                 <Link
                   href="/dashboard/creator/profile"
-                  className="w-8 h-8 rounded-full border border-[#E2E8F0] bg-white hover:bg-slate-50 flex items-center justify-center text-[#94A3B8] transition-colors"
+                  className="text-xs font-bold text-indigo-600 hover:text-indigo-700 hover:underline"
                 >
-                  <ChevronRight className="w-4 h-4" />
+                  Manage Profile
                 </Link>
               </div>
+
+              {/* Progress bar */}
+              <div className="mt-4 pt-3 border-t border-slate-100">
+                <div className="flex items-center justify-between text-xs mb-1.5">
+                  <span className="font-bold text-slate-700">Setup Progress</span>
+                  <span className="font-mono font-bold text-emerald-600">{isProfileReady ? '100%' : '50%'} Complete</span>
+                </div>
+                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full bg-emerald-500 rounded-full transition-all duration-500 ${
+                      isProfileReady ? 'w-full' : 'w-1/2'
+                    }`}
+                  />
+                </div>
+              </div>
+
+              {/* Checklist Items */}
+              <div className="mt-5 space-y-3">
+                {/* 1. Card & Price Ready */}
+                <div className="border border-slate-200/80 bg-slate-50/50 hover:bg-white rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <div className={`w-8 h-8 rounded-xl text-white flex items-center justify-center shrink-0 ${isProfileReady ? 'bg-emerald-500 shadow-xs' : 'bg-slate-300'}`}>
+                      <CheckCircle2 className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900">Card & Sponsorship Rate Ready</h4>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Your positioning, bio, and chosen post pricing (€{pricePerPost}) are set.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`text-[11px] font-bold px-3 py-1 rounded-full border ${
+                      isProfileReady
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : 'bg-amber-50 text-amber-700 border-amber-200'
+                    }`}>
+                      {isProfileReady ? 'Completed' : 'Action needed'}
+                    </span>
+                    <Link
+                      href="/dashboard/creator/profile"
+                      className="w-8 h-8 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-500 transition-colors"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* 2. LinkedIn Feed Sync */}
+                <div className="border border-slate-200/80 bg-slate-50/50 hover:bg-white rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <FileText className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900">LinkedIn Post Insights Synced</h4>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        {publicPostsCount > 0 ? `${publicPostsCount} posts indexed to estimate impression velocity.` : 'Automated sync pending recent LinkedIn publications.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-blue-50 text-blue-700 border-blue-200">
+                      {publicPostsCount > 0 ? 'Active' : 'Standby'}
+                    </span>
+                    <Link
+                      href="/dashboard/creator/profile"
+                      className="w-8 h-8 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-500 transition-colors"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* 3. Escrow Payout Wallet */}
+                <div className="border border-slate-200/80 bg-slate-50/50 hover:bg-white rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-indigo-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900">Naano Escrow Guarantee Protection</h4>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Payments are funded into escrow upfront before posts go live.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-indigo-50 text-indigo-700 border-indigo-200">
+                      Protected
+                    </span>
+                    <Link
+                      href="/dashboard/creator/collaborations"
+                      className="w-8 h-8 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-500 transition-colors"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Collaborations Overview Box */}
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-base font-black text-slate-900">Active Brand Pipeline</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Direct collaboration requests and confirmed deliverables.
+                  </p>
+                </div>
+                <Link
+                  href="/dashboard/creator/collaborations"
+                  className="text-xs font-bold text-indigo-600 hover:text-indigo-700 hover:underline"
+                >
+                  All ({collaborations.length})
+                </Link>
+              </div>
+
+              {/* Escrow Guarantee 5-Stage Visual Stepper */}
+              <div className="mb-5">
+                <EscrowMilestoneStepper
+                  status={collaborations[0]?.status || 'IN_PROGRESS'}
+                  paymentStatus={collaborations[0]?.payment?.status || 'PENDING'}
+                />
+              </div>
+
+              {collaborations.length > 0 ? (
+                <div className="space-y-3">
+                  {collaborations.slice(0, 3).map((collab) => (
+                    <div
+                      key={collab.id}
+                      className="p-4 rounded-2xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all space-y-2.5"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="min-w-0">
+                          <div className="text-xs font-bold text-slate-900 truncate">
+                            {(collab.campaign as any)?.title || (collab.campaign as any)?.name || 'LinkedIn Thought Leadership Post'}
+                          </div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">
+                            Status: <span className="font-semibold text-slate-700">{collab.status}</span>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="text-xs font-black text-emerald-600 font-mono">
+                            €{collab.payment?.amount || pricePerPost}
+                          </div>
+                          <span className="text-[10px] text-slate-400 block">
+                            {collab.payment?.status === 'PAID' ? 'Released' : 'Escrow secured'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Compact 5-stage progress indicator */}
+                      <div className="pt-2 border-t border-slate-200/60">
+                        <EscrowMilestoneStepper
+                          status={collab.status}
+                          paymentStatus={collab.payment?.status}
+                          compact={true}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-center bg-slate-50/40">
+                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 mx-auto flex items-center justify-center mb-2.5">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-800">
+                    Your profile is active in brand discovery
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto leading-relaxed">
+                    Companies searching for {creatorNiche} voices can invite you directly. When a brand sends an offer, you will receive an instant notification here.
+                  </p>
+                  <div className="mt-4 flex items-center justify-center gap-3">
+                    <Link
+                      href="/dashboard/creator/profile"
+                      className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs transition-colors"
+                    >
+                      Refine Keywords & Bio
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </main>
 
-      {/* Floating Chat Bubble Widget in bottom right matching screenshot */}
+      {/* Floating Chat Bubble Widget in bottom right */}
       <button
         type="button"
         aria-label="Support chat"
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#64748B] hover:bg-[#475569] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
+        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-slate-900 hover:bg-indigo-600 text-white flex items-center justify-center shadow-xl hover:shadow-indigo-500/25 transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
       >
         <ChatBubbleIcon className="w-5 h-5 text-white" />
       </button>

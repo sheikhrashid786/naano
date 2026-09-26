@@ -1,17 +1,28 @@
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import type { Metadata } from 'next';
-import { creatorsHtml } from '@/data/creatorsHtml';
-import LiveLandingPage from '@/components/landing/LiveLandingPage';
+import Link from 'next/link';
+import { getCurrentUser } from '@/lib/auth';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/landing/Footer';
+import CreatorsPageClient from './CreatorsPageClient';
 
 export const metadata: Metadata = {
-  title: 'For LinkedIn Creators | Naano',
-  description: 'Get booked by top B2B companies for sponsored LinkedIn posts at your own fixed price. Zero outreach, guaranteed escrow payouts.',
+  title: 'For B2B LinkedIn Creators | Naano',
+  description: 'Get booked by top tech and B2B SaaS brands for sponsored LinkedIn posts at your own fixed price. Guaranteed escrow payouts.',
 };
 
-export default function CreatorsPage() {
+export default async function CreatorsPage() {
+  const session = await getCurrentUser();
+
   return (
-    <main className="w-full min-h-screen overflow-x-hidden bg-[#FCFCFB]">
-      <LiveLandingPage html={creatorsHtml} />
-    </main>
+    <div className="min-h-screen bg-[#FAFAFC] flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+      <Navbar initialUser={session} />
+      <main className="w-full flex-1">
+        <CreatorsPageClient />
+      </main>
+      <Footer />
+    </div>
   );
 }

@@ -1,27 +1,78 @@
 @import "tailwindcss";
 
 :root {
-  --bg-canvas: #FCFCFB;
-  --text-primary: #17181C;
-  --text-secondary: #43454C;
-  --text-muted: #6B6D74;
-  --border-subtle: #EBE9E5;
-  --border-strong: #E4E1DC;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-soft: rgba(220, 239, 250, 0.86);
-  --accent-dark: #315B7C;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --bg-canvas: #FAFAFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F1F5F9;
+  
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  
+  --border-light: #E2E8F0;
+  --border-subtle: #F1F5F9;
+  
+  --brand-primary: #4F46E5;
+  --brand-primary-hover: #4338CA;
+  --brand-secondary: #7C3AED;
+  --brand-accent: #06B6D4;
+  --brand-emerald: #10B981;
 }
 
 body {
   background-color: var(--bg-canvas);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes naanoMarquee {
+/* Modern Gradient Text */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #2563EB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-slate {
+  background: linear-gradient(180deg, #0F172A 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism & Surface Cards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 12px 32px -4px rgba(79, 70, 229, 0.04);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+/* Ambient Subtle Background Grid Pattern */
+.bg-grid-subtle {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(79, 70, 229, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Continuous Logo Marquee */
+@keyframes infiniteMarquee {
   0% {
     transform: translateX(0%);
   }
@@ -33,33 +84,26 @@ body {
 .animate-marquee {
   display: inline-flex;
   white-space: nowrap;
-  animation: naanoMarquee 32s linear infinite;
+  animation: infiniteMarquee 35s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
-/* Glass card styling */
-.glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(228, 225, 220, 0.8);
-  box-shadow: 0 4px 20px -2px rgba(23, 24, 28, 0.04), 0 12px 32px -4px rgba(56, 96, 128, 0.06);
-}
-
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
+  background: #CBD5E1;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: #94A3B8;
 }

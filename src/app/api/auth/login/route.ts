@@ -48,7 +48,11 @@ export async function POST(req: Request) {
     });
 
     const redirectUrl =
-      user.role === 'CREATOR' ? '/dashboard/creator' : '/dashboard/company';
+      user.role === 'ADMIN'
+        ? '/dashboard/admin'
+        : user.role === 'CREATOR'
+        ? '/dashboard/creator'
+        : '/dashboard/company';
 
     const res = NextResponse.json({
       success: true,

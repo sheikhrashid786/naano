@@ -12,6 +12,8 @@ import {
   AlertCircle,
   Loader2,
   X,
+  Sparkles,
+  ArrowUpRight,
 } from 'lucide-react';
 
 export default function CreatorEarningsPage() {
@@ -61,7 +63,6 @@ export default function CreatorEarningsPage() {
     fetchData();
   }, []);
 
-  // Compute last 6 months dynamically
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
   const last6Months = useMemo(() => {
     const now = new Date();
@@ -71,7 +72,6 @@ export default function CreatorEarningsPage() {
       const mIdx = d.getMonth();
       const yr = d.getFullYear();
 
-      // Sum earnings in this month from collabs
       let earnedInMonth = 0;
       if (data?.collaborations) {
         data.collaborations.forEach((c: any) => {
@@ -133,7 +133,7 @@ export default function CreatorEarningsPage() {
         amount: `+€${c.fixedRate}`,
         isPositive: true,
         status: 'Paid',
-        statusClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
+        statusClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60',
         invoiceUrl: `/api/invoices/${c.payment?.id || c.id}`,
       }));
     }
@@ -150,12 +150,11 @@ export default function CreatorEarningsPage() {
         amount: `€${c.fixedRate}`,
         isPositive: false,
         status: 'In escrow',
-        statusClass: 'bg-amber-50 text-amber-700 border border-amber-200',
+        statusClass: 'bg-amber-50 text-amber-700 border border-amber-200/60',
         invoiceUrl: null,
       }));
     }
 
-    // invoices tab
     return paidCollabs.map((c: any) => ({
       date: new Date(c.payment?.paidAt || c.updatedAt).toLocaleDateString('en-GB', {
         day: '2-digit',
@@ -167,7 +166,7 @@ export default function CreatorEarningsPage() {
       amount: `€${c.fixedRate}`,
       isPositive: false,
       status: 'Issued',
-      statusClass: 'bg-blue-50 text-blue-700 border border-blue-200',
+      statusClass: 'bg-indigo-50 text-indigo-700 border border-indigo-200/60',
       invoiceUrl: `/api/invoices/${c.payment?.id || c.id}`,
     }));
   }, [activeActivityTab, paidCollabs, awaitingCollabs]);
@@ -247,14 +246,13 @@ export default function CreatorEarningsPage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[500px]">
-        <Loader2 className="w-8 h-8 animate-spin text-[#2864EA]" />
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
       </div>
     );
   }
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC] min-h-screen pb-20">
-      {/* Sticky Top Header */}
+    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC] min-h-screen pb-24 font-sans">
       <Header
         balance={availableNow}
         user={{
@@ -263,11 +261,11 @@ export default function CreatorEarningsPage() {
         }}
       />
 
-      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-6">
+      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-8">
         {/* Toast Notification */}
         {toast && (
           <div
-            className={`p-4 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs border ${
+            className={`p-4 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs border animate-in fade-in ${
               toast.type === 'success'
                 ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
                 : 'bg-rose-50 border-rose-200 text-rose-800'
@@ -281,7 +279,7 @@ export default function CreatorEarningsPage() {
               )}
               <span>{toast.message}</span>
             </div>
-            <button onClick={() => setToast(null)} className="cursor-pointer">
+            <button onClick={() => setToast(null)} className="cursor-pointer text-slate-500 hover:text-slate-800">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -290,77 +288,74 @@ export default function CreatorEarningsPage() {
         {/* Page Heading & Status Pill */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-[#111827] tracking-tight">
-              Earnings
+            <div className="flex items-center gap-2 mb-1">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
+                <Wallet className="w-3 h-3 text-indigo-400" />
+                <span>Earnings &amp; Payouts</span>
+              </span>
+              <span className="text-xs font-semibold text-slate-500">
+                Stripe Connect Vault Payouts
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-slate-900 tracking-tight">
+              Creator Earnings &amp; Vault
             </h1>
-            <p className="text-xs sm:text-[13px] text-[#64748B] mt-1.5 font-normal">
-              Track revenue from your paid collaborations and withdraw available funds.
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5 font-normal">
+              Track settled collaboration revenues, monitor milestones in transit, and withdraw to Stripe or SEPA.
             </p>
-          </div>
-
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-700 shadow-2xs self-start sm:self-auto">
-            <span className="w-2 h-2 rounded-full bg-[#2864EA]" />
-            <span>Paid collaborations</span>
           </div>
         </div>
 
-        {/* Top Row: 3 Metric Cards */}
+        {/* Top Row: 3 Forecaster Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Total earned (with subtle sky clouds graphic) */}
-          <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0] shadow-2xs relative overflow-hidden flex flex-col justify-between min-h-[160px]">
-            {/* Background clouds texture */}
-            <div className="absolute inset-0 bg-[url('/images/hero-clouds.jpg')] bg-cover bg-center opacity-20 pointer-events-none" />
-
-            <div className="relative z-10">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#111827]">
-                <TrendingUp className="w-4 h-4 text-[#2864EA]" />
-                <span>Total earned</span>
+          {/* Card 1: Total earned */}
+          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-indigo-600 relative overflow-hidden flex flex-col justify-between min-h-[160px]">
+            <div>
+              <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase font-mono tracking-wider">
+                <span>Total Earned</span>
+                <TrendingUp className="w-4 h-4 text-indigo-600" />
               </div>
-              <div className="text-3xl sm:text-4xl font-black text-[#111827] tracking-tight mt-3">
-                €{totalEarned}
+              <div className="text-3xl sm:text-4xl font-black text-slate-900 font-mono tracking-tight mt-3">
+                €{totalEarned.toLocaleString()}
               </div>
             </div>
 
-            <div className="relative z-10 text-[11px] text-[#94A3B8] font-medium pt-3">
-              {paidCollabsCount} paid collaborations · €{averageEarned} average
+            <div className="text-[11px] text-slate-400 font-medium pt-3 border-t border-slate-100">
+              {paidCollabsCount} paid collaborations · €{averageEarned} avg/post
             </div>
           </div>
 
           {/* Card 2: In transit */}
-          <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0] shadow-2xs flex flex-col justify-between min-h-[160px]">
+          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-amber-500 flex flex-col justify-between min-h-[160px]">
             <div>
-              <div className="w-6 h-6 flex items-center justify-start text-[#111827]">
-                <ArrowRightLeft className="w-4 h-4 text-[#64748B]" />
+              <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase font-mono tracking-wider">
+                <span>Held in Escrow</span>
+                <ArrowRightLeft className="w-4 h-4 text-amber-500" />
               </div>
-              <div className="text-3xl sm:text-4xl font-black text-[#111827] tracking-tight mt-2">
-                €{inTransit}
-              </div>
-              <div className="text-xs font-bold text-[#111827] mt-1.5">
-                In transit
+              <div className="text-3xl sm:text-4xl font-black text-amber-600 font-mono tracking-tight mt-3">
+                €{inTransit.toLocaleString()}
               </div>
             </div>
 
-            <p className="text-[11px] text-[#94A3B8] leading-tight pt-2">
-              International transfers usually arrive within 1–7 days, depending on the destination and banking network.
+            <p className="text-[11px] text-slate-400 leading-tight pt-3 border-t border-slate-100 font-medium">
+              Funds locked in buyer escrow. Releases immediately upon post approval.
             </p>
           </div>
 
           {/* Card 3: Available now */}
-          <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0] shadow-2xs flex flex-col justify-between min-h-[160px]">
+          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-emerald-500 flex flex-col justify-between min-h-[160px]">
             <div>
-              <div className="w-6 h-6 flex items-center justify-start text-[#111827]">
-                <Wallet className="w-4 h-4 text-[#64748B]" />
+              <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase font-mono tracking-wider">
+                <span>Available Balance</span>
+                <Wallet className="w-4 h-4 text-emerald-500" />
               </div>
-              <div className="text-3xl sm:text-4xl font-black text-[#111827] tracking-tight mt-2">
-                €{availableNow}
-              </div>
-              <div className="text-xs font-bold text-[#111827] mt-1.5">
-                Available now
+              <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-mono tracking-tight mt-3">
+                €{availableNow.toLocaleString()}
               </div>
             </div>
 
-            <p className="text-[11px] text-[#94A3B8] leading-tight pt-2">
-              Ready to withdraw to your selected payout method.
+            <p className="text-[11px] text-slate-400 leading-tight pt-3 border-t border-slate-100 font-medium">
+              Settled balance ready to withdraw to your linked destination.
             </p>
           </div>
         </div>
@@ -368,25 +363,25 @@ export default function CreatorEarningsPage() {
         {/* Lower Section: 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* LEFT COLUMN: Earnings over time (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] flex flex-col justify-between">
             <div>
               {/* Header */}
-              <div className="flex items-start justify-between gap-4 pb-6">
+              <div className="flex items-start justify-between gap-4 pb-6 border-b border-slate-100">
                 <div>
-                  <h2 className="text-base font-bold text-[#111827]">
-                    Earnings over time
+                  <h2 className="text-base font-black text-slate-900">
+                    Earnings Over Time
                   </h2>
-                  <p className="text-xs text-[#64748B] mt-0.5">
-                    Net collaboration earnings from the last six months.
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Net monthly collaboration revenue over the last six months.
                   </p>
                 </div>
-                <span className="text-xs font-medium text-[#94A3B8] shrink-0">
-                  €{totalOver6Months} over 6 months
+                <span className="text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full shrink-0">
+                  €{totalOver6Months.toLocaleString()} (6-mo total)
                 </span>
               </div>
 
               {/* 6-Month Chart */}
-              <div className="pt-4 pb-2">
+              <div className="pt-6 pb-2">
                 <div className="grid grid-cols-6 gap-3 sm:gap-4 items-end">
                   {last6Months.map((m, idx) => {
                     const heightPct =
@@ -394,31 +389,26 @@ export default function CreatorEarningsPage() {
 
                     return (
                       <div key={idx} className="flex flex-col items-center">
-                        {/* Amount label on top */}
-                        <span className="text-xs font-semibold text-[#64748B] mb-2">
+                        <span className="text-xs font-mono font-bold text-slate-700 mb-2">
                           €{m.amount}
                         </span>
 
-                        {/* Tall Gray Container Column */}
-                        <div className="w-full h-48 sm:h-52 bg-[#F1F5F9] rounded-2xl flex flex-col justify-end p-1 relative overflow-hidden">
-                          {/* Filled bar if earnings exist */}
+                        <div className="w-full h-48 sm:h-52 bg-slate-50 rounded-2xl flex flex-col justify-end p-1 relative overflow-hidden border border-slate-200/60">
                           {heightPct > 0 && (
                             <div
-                              className="w-full bg-[#2864EA]/20 rounded-xl mb-1 transition-all duration-500"
+                              className="w-full bg-indigo-600/30 rounded-xl mb-1 transition-all duration-500"
                               style={{ height: `${heightPct}%` }}
                             />
                           )}
 
-                          {/* Solid Blue Baseline indicator matching reference */}
-                          <div className="h-1.5 w-full rounded-full bg-[#2864EA]" />
+                          <div className="h-1.5 w-full rounded-full bg-indigo-600" />
                         </div>
 
-                        {/* Month label below */}
                         <span
                           className={`text-xs mt-2.5 font-medium ${
                             m.isCurrent
-                              ? 'text-[#2864EA] font-bold'
-                              : 'text-[#64748B]'
+                              ? 'text-indigo-600 font-black'
+                              : 'text-slate-500'
                           }`}
                         >
                           {m.label}
@@ -432,86 +422,35 @@ export default function CreatorEarningsPage() {
           </div>
 
           {/* RIGHT COLUMN: Withdraw earnings (5 cols) */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-[#E2E8F0] shadow-2xs flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] flex flex-col justify-between">
             <div className="space-y-4">
-              {/* Header */}
               <div>
-                <h2 className="text-base font-bold text-[#111827]">
-                  Withdraw earnings
+                <h2 className="text-base font-black text-slate-900">
+                  Withdraw Balance
                 </h2>
-                <p className="text-xs text-[#64748B] mt-0.5">
-                  Choose where your available balance should be sent.
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Select destination and initiate payout to your bank or Stripe.
                 </p>
               </div>
 
-              <span className="text-[10px] font-black tracking-wider text-[#94A3B8] uppercase block pt-1">
-                PAYOUT METHOD
+              <span className="text-[10px] font-bold tracking-wider text-slate-400 uppercase block pt-1 font-mono">
+                PAYOUT DESTINATION
               </span>
 
-              {/* Method 1: Bank transfer */}
-              <div
-                onClick={() => setSelectedMethod('bank')}
-                className={`rounded-2xl border p-4 transition-all cursor-pointer ${
-                  selectedMethod === 'bank'
-                    ? 'border-[#2864EA] bg-[#F0F5FF]'
-                    : 'border-[#E2E8F0] bg-white hover:border-slate-300'
-                }`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <div
-                    className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      selectedMethod === 'bank'
-                        ? 'border-[#2864EA] bg-[#2864EA]'
-                        : 'border-slate-300 bg-white'
-                    }`}
-                  >
-                    {selectedMethod === 'bank' && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                    )}
-                  </div>
-                  <Landmark className="w-4 h-4 text-[#111827]" />
-                  <span className="text-xs sm:text-sm font-bold text-[#111827]">
-                    Bank transfer
-                  </span>
-                </div>
-
-                <div className="mt-2.5 pl-6 text-xs text-[#64748B] space-y-0.5">
-                  <p className="font-medium text-[#64748B]">
-                    {bankDetails.accountHolder || 'No account holder on file'}
-                  </p>
-                  <p className="text-[#94A3B8]">
-                    {bankDetails.iban ? `IBAN: ${bankDetails.iban}` : 'No bank details on file'}
-                  </p>
-                </div>
-
-                <div className="mt-3 pl-6">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsBankModalOpen(true);
-                    }}
-                    className="px-3.5 py-1 text-xs font-semibold text-[#111827] bg-white border border-[#E2E8F0] hover:bg-slate-50 rounded-lg shadow-2xs transition-colors cursor-pointer"
-                  >
-                    Edit
-                  </button>
-                </div>
-              </div>
-
-              {/* Method 2: Stripe */}
+              {/* Method 1: Stripe */}
               <div
                 onClick={() => setSelectedMethod('stripe')}
                 className={`rounded-2xl border p-4 transition-all cursor-pointer ${
                   selectedMethod === 'stripe'
-                    ? 'border-[#2864EA] bg-[#F0F5FF]'
-                    : 'border-[#E2E8F0] bg-white hover:border-slate-300'
+                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-500/20'
+                    : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
                   <div
                     className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                       selectedMethod === 'stripe'
-                        ? 'border-[#2864EA] bg-[#2864EA]'
+                        ? 'border-indigo-600 bg-indigo-600'
                         : 'border-slate-300 bg-white'
                     }`}
                   >
@@ -519,27 +458,21 @@ export default function CreatorEarningsPage() {
                       <div className="w-1.5 h-1.5 rounded-full bg-white" />
                     )}
                   </div>
-                  <CreditCard className="w-4 h-4 text-[#111827]" />
-                  <span className="text-xs sm:text-sm font-bold text-[#111827]">
-                    Stripe
+                  <CreditCard className="w-4 h-4 text-indigo-600" />
+                  <span className="text-xs sm:text-sm font-bold text-slate-900">
+                    Stripe Connect
                   </span>
                 </div>
 
-                <div className="mt-2.5 pl-6 text-xs text-[#64748B] space-y-0.5">
+                <div className="mt-2.5 pl-6 text-xs text-slate-500 space-y-0.5">
                   <p>
-                    <span className="font-semibold text-[#64748B]">Status:</span>{' '}
-                    <span
-                      className={
-                        stripeConnected
-                          ? 'text-emerald-600 font-bold'
-                          : 'text-[#64748B]'
-                      }
-                    >
-                      {stripeConnected ? 'Connected' : 'Not connected'}
+                    <span className="font-semibold text-slate-700">Status:</span>{' '}
+                    <span className={stripeConnected ? 'text-emerald-600 font-bold' : 'text-slate-500'}>
+                      {stripeConnected ? 'Connected & Verified' : 'Not Connected'}
                     </span>
                   </p>
-                  <p className="text-[#64748B]">
-                    Instant transfer to your connected Stripe account.
+                  <p className="text-[11px] text-slate-400">
+                    Instant or next-day transfer to your linked Stripe account.
                   </p>
                 </div>
 
@@ -551,9 +484,59 @@ export default function CreatorEarningsPage() {
                       handleToggleStripe();
                     }}
                     disabled={actionLoading}
-                    className="px-4 py-1.5 text-xs font-bold text-[#111827] bg-white border border-[#E2E8F0] hover:bg-slate-50 rounded-xl shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
+                    className="px-3.5 py-1.5 text-xs font-bold text-slate-800 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
                   >
                     {actionLoading ? 'Updating...' : stripeConnected ? 'Disconnect Stripe' : 'Connect Stripe'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Method 2: Bank transfer */}
+              <div
+                onClick={() => setSelectedMethod('bank')}
+                className={`rounded-2xl border p-4 transition-all cursor-pointer ${
+                  selectedMethod === 'bank'
+                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-500/20'
+                    : 'border-slate-200 bg-white hover:border-slate-300'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <div
+                    className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                      selectedMethod === 'bank'
+                        ? 'border-indigo-600 bg-indigo-600'
+                        : 'border-slate-300 bg-white'
+                    }`}
+                  >
+                    {selectedMethod === 'bank' && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                    )}
+                  </div>
+                  <Landmark className="w-4 h-4 text-slate-700" />
+                  <span className="text-xs sm:text-sm font-bold text-slate-900">
+                    SEPA Bank Wire
+                  </span>
+                </div>
+
+                <div className="mt-2.5 pl-6 text-xs text-slate-500 space-y-0.5">
+                  <p className="font-medium text-slate-700">
+                    {bankDetails.accountHolder || 'No account holder recorded'}
+                  </p>
+                  <p className="text-slate-400 font-mono text-[11px]">
+                    {bankDetails.iban ? `IBAN: ${bankDetails.iban}` : 'No IBAN on file'}
+                  </p>
+                </div>
+
+                <div className="mt-3 pl-6">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsBankModalOpen(true);
+                    }}
+                    className="px-3.5 py-1.5 text-xs font-bold text-slate-800 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl shadow-2xs transition-colors cursor-pointer"
+                  >
+                    Edit Bank Details
                   </button>
                 </div>
               </div>
@@ -562,7 +545,7 @@ export default function CreatorEarningsPage() {
             {/* Bottom Controls: Amount & Withdraw Button */}
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
               <div className="relative flex-1">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#94A3B8]">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
                   €
                 </span>
                 <input
@@ -571,7 +554,7 @@ export default function CreatorEarningsPage() {
                   onChange={(e) => setWithdrawAmount(e.target.value)}
                   placeholder="Amount"
                   max={availableNow}
-                  className="w-full pl-7 pr-3 py-2.5 text-xs font-bold text-[#111827] bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl focus:outline-none focus:border-[#2864EA]"
+                  className="w-full pl-8 pr-3 py-2.5 text-xs font-mono font-bold text-slate-900 bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white"
                 />
               </div>
 
@@ -579,134 +562,125 @@ export default function CreatorEarningsPage() {
                 type="button"
                 onClick={handleWithdraw}
                 disabled={actionLoading || availableNow <= 0}
-                className="px-5 py-2.5 bg-[#2864EA] hover:bg-blue-700 disabled:bg-slate-200 text-white disabled:text-slate-400 text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer disabled:cursor-not-allowed shrink-0"
+                className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 text-white disabled:text-slate-400 text-xs font-bold rounded-xl shadow-md shadow-indigo-500/20 transition-all cursor-pointer disabled:cursor-not-allowed shrink-0 active:scale-95"
               >
-                {actionLoading ? 'Processing...' : 'Withdraw all'}
+                {actionLoading ? 'Processing...' : 'Withdraw All'}
               </button>
             </div>
           </div>
         </div>
 
         {/* RECENT ACTIVITY SECTION */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E2E8F0] shadow-2xs">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
           <div>
-            <h2 className="text-base sm:text-lg font-bold text-[#111827]">
-              Recent activity
+            <h2 className="text-base sm:text-lg font-black text-slate-900">
+              Vault Activity &amp; Invoices
             </h2>
-            <p className="text-xs text-[#64748B] mt-0.5">
-              Collaboration earnings, withdrawals and invoices in one place.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Collaboration earnings, withdrawals and tax invoices in one audit ledger.
             </p>
           </div>
 
-          {/* 3 Tabs with active blue underline and count badges */}
-          <div className="flex items-center gap-6 border-b border-[#E2E8F0] mt-6">
+          {/* 3 Tabs with Forecaster styling */}
+          <div className="bg-white border border-slate-200/90 p-1.5 rounded-2xl shadow-2xs inline-flex items-center gap-1.5 mt-6">
             <button
               type="button"
               onClick={() => setActiveActivityTab('earnings')}
-              className={`pb-3 text-xs font-semibold relative transition-colors cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeActivityTab === 'earnings'
-                  ? 'text-[#2864EA]'
-                  : 'text-[#64748B] hover:text-[#111827]'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              <span>Earnings and withdrawals</span>
-              {activeActivityTab === 'earnings' && (
-                <div className="absolute -bottom-px left-0 right-0 h-0.5 bg-[#2864EA] rounded-full" />
-              )}
+              <span>Earnings &amp; Payouts</span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveActivityTab('awaiting')}
-              className={`pb-3 text-xs font-semibold relative flex items-center gap-1.5 transition-colors cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeActivityTab === 'awaiting'
-                  ? 'text-[#2864EA]'
-                  : 'text-[#64748B] hover:text-[#111827]'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              <span>Awaiting release</span>
-              <span className="w-5 h-5 rounded-full bg-[#F1F5F9] text-[#64748B] text-[10px] font-bold flex items-center justify-center">
+              <span>Awaiting Escrow Release</span>
+              <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-md ${activeActivityTab === 'awaiting' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>
                 {awaitingCollabs.length}
               </span>
-              {activeActivityTab === 'awaiting' && (
-                <div className="absolute -bottom-px left-0 right-0 h-0.5 bg-[#2864EA] rounded-full" />
-              )}
             </button>
 
             <button
               type="button"
               onClick={() => setActiveActivityTab('invoices')}
-              className={`pb-3 text-xs font-semibold relative flex items-center gap-1.5 transition-colors cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeActivityTab === 'invoices'
-                  ? 'text-[#2864EA]'
-                  : 'text-[#64748B] hover:text-[#111827]'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              <span>Invoices</span>
-              <span className="w-5 h-5 rounded-full bg-[#F1F5F9] text-[#64748B] text-[10px] font-bold flex items-center justify-center">
+              <span>Tax Invoices</span>
+              <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-md ${activeActivityTab === 'invoices' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>
                 {paidCollabs.length}
               </span>
-              {activeActivityTab === 'invoices' && (
-                <div className="absolute -bottom-px left-0 right-0 h-0.5 bg-[#2864EA] rounded-full" />
-              )}
             </button>
           </div>
 
           {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs mt-3">
+          <div className="overflow-x-auto mt-4">
+            <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-[#F1F5F9] text-[#64748B] text-xs font-medium">
-                  <th className="py-3.5 px-4 font-medium">Date</th>
-                  <th className="py-3.5 px-4 font-medium">Type</th>
-                  <th className="py-3.5 px-4 font-medium">Detail</th>
-                  <th className="py-3.5 px-4 font-medium">Amount</th>
-                  <th className="py-3.5 px-4 font-medium">Status</th>
-                  <th className="py-3.5 px-4 font-medium">Invoice</th>
+                <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 uppercase tracking-wider font-bold text-[11px]">
+                  <th className="py-4 px-5">Date</th>
+                  <th className="py-4 px-5">Movement Type</th>
+                  <th className="py-4 px-5">Campaign / Brand</th>
+                  <th className="py-4 px-5">Amount</th>
+                  <th className="py-4 px-5">Status</th>
+                  <th className="py-4 px-5 text-right">Invoice</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-slate-100 text-slate-700">
                 {currentActivityList.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-14 text-center text-xs text-[#64748B]">
-                      No movements yet. Your first payment will appear here.
+                    <td colSpan={6} className="py-16 text-center text-slate-400">
+                      No movements found in this category.
                     </td>
                   </tr>
                 ) : (
                   currentActivityList.map((item: any, i: number) => (
                     <tr
                       key={i}
-                      className="border-b border-[#F8FAFC] hover:bg-[#F8FAFC]/60 transition-colors"
+                      className="hover:bg-slate-50/60 transition-colors"
                     >
-                      <td className="py-3.5 px-4 text-[#64748B]">{item.date}</td>
-                      <td className="py-3.5 px-4 font-medium text-[#111827]">{item.type}</td>
-                      <td className="py-3.5 px-4 text-[#4B5563]">{item.detail}</td>
+                      <td className="py-4 px-5 text-slate-500 font-mono text-[11px]">{item.date}</td>
+                      <td className="py-4 px-5 font-bold text-slate-900">{item.type}</td>
+                      <td className="py-4 px-5 text-slate-600">{item.detail}</td>
                       <td
-                        className={`py-3.5 px-4 font-bold ${
-                          item.isPositive ? 'text-emerald-600' : 'text-[#111827]'
+                        className={`py-4 px-5 font-black font-mono text-sm ${
+                          item.isPositive ? 'text-emerald-600' : 'text-slate-900'
                         }`}
                       >
                         {item.amount}
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td className="py-4 px-5">
                         <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${item.statusClass}`}
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold ${item.statusClass}`}
                         >
                           {item.status}
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 text-[#64748B]">
+                      <td className="py-4 px-5 text-right">
                         {item.invoiceUrl ? (
                           <a
                             href={item.invoiceUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-[#2864EA] hover:underline font-semibold text-[11px]"
+                            className="text-indigo-600 hover:underline font-bold text-[11px]"
                           >
-                            Download
+                            Download PDF
                           </a>
                         ) : (
-                          '—'
+                          <span className="text-slate-300">—</span>
                         )}
                       </td>
                     </tr>
@@ -720,12 +694,17 @@ export default function CreatorEarningsPage() {
 
       {/* Bank Details Modal */}
       {isBankModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 max-w-md w-full shadow-2xl border border-slate-100 space-y-4 animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#111827]">
-                Bank Account Details
-              </h3>
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div>
+                <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider block">
+                  Wire Details
+                </span>
+                <h3 className="text-lg font-black text-slate-900 mt-0.5">
+                  Bank Account Information
+                </h3>
+              </div>
               <button
                 onClick={() => setIsBankModalOpen(false)}
                 className="text-slate-400 hover:text-slate-600 cursor-pointer"
@@ -734,13 +713,13 @@ export default function CreatorEarningsPage() {
               </button>
             </div>
 
-            <p className="text-xs text-[#64748B]">
-              Enter your European or international bank account details for SEPA and wire payouts.
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Enter your verified European or international bank account details for SEPA and wire payouts.
             </p>
 
-            <div className="space-y-3 pt-2">
+            <div className="space-y-4 pt-1 text-xs">
               <div>
-                <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                <label className="text-slate-700 font-bold block mb-1">
                   Account Holder Name
                 </label>
                 <input
@@ -750,12 +729,12 @@ export default function CreatorEarningsPage() {
                     setBankDetails({ ...bankDetails, accountHolder: e.target.value })
                   }
                   placeholder="e.g. Umar Draz"
-                  className="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-[#2864EA]"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                <label className="text-slate-700 font-bold block mb-1">
                   IBAN / Account Number
                 </label>
                 <input
@@ -765,16 +744,16 @@ export default function CreatorEarningsPage() {
                     setBankDetails({ ...bankDetails, iban: e.target.value })
                   }
                   placeholder="e.g. FR76 3000 6000 0112 3456 7890 189"
-                  className="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-[#2864EA]"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900 font-mono"
                 />
               </div>
             </div>
 
-            <div className="pt-3 flex items-center justify-end gap-2">
+            <div className="pt-4 flex items-center justify-end gap-2.5 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setIsBankModalOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
+                className="px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer"
               >
                 Cancel
               </button>
@@ -784,7 +763,7 @@ export default function CreatorEarningsPage() {
                   setIsBankModalOpen(false);
                   setToast({ type: 'success', message: 'Bank details saved.' });
                 }}
-                className="px-4 py-2 text-xs font-bold text-white bg-[#2864EA] hover:bg-blue-700 rounded-xl transition cursor-pointer"
+                className="px-5 py-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md shadow-indigo-500/20 transition cursor-pointer"
               >
                 Save Details
               </button>

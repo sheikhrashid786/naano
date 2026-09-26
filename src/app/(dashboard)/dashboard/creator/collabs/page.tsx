@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Header from '@/components/dashboard/Header';
+import EscrowMilestoneStepper from '@/components/dashboard/EscrowMilestoneStepper';
 import {
   ExternalLink,
   CheckCircle2,
@@ -9,7 +10,10 @@ import {
   X,
   Loader2,
   Send,
-  FileText
+  FileText,
+  Layers,
+  Sparkles,
+  ShieldCheck,
 } from 'lucide-react';
 
 type TabType = 'all' | 'active' | 'needs_action' | 'applications_sent' | 'declined' | 'completed';
@@ -230,8 +234,7 @@ export default function CreatorCollabsPage() {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC]">
-      {/* Sticky Header with Dynamic User Avatar matching reference screenshot */}
+    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC] min-h-screen pb-16 font-sans">
       <Header
         user={{
           name: creator?.user?.name,
@@ -244,17 +247,17 @@ export default function CreatorCollabsPage() {
         {/* Toast Alert */}
         {toastMsg && (
           <div
-            className={`p-4 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs border ${
+            className={`p-4 rounded-2xl text-xs font-bold flex items-center justify-between shadow-2xs border ${
               toastMsg.type === 'success'
-                ? 'bg-[#ECFDF5] border-[#A7F3D0] text-[#065F46]'
-                : 'bg-red-50 border-red-200 text-red-700'
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                : 'bg-rose-50 border-rose-200 text-rose-800'
             }`}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               {toastMsg.type === 'success' ? (
-                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               ) : (
-                <AlertCircle className="w-4 h-4 text-red-500" />
+                <AlertCircle className="w-4 h-4 text-rose-600" />
               )}
               <span>{toastMsg.text}</span>
             </div>
@@ -265,187 +268,91 @@ export default function CreatorCollabsPage() {
         )}
 
         {/* Page Title & Subtitle */}
-        <div>
-          <h1 className="text-3xl font-extrabold text-[#111827] tracking-tight">
-            Collaborations
-          </h1>
-          <p className="text-xs sm:text-[13px] text-[#64748B] mt-1.5 font-normal">
-            Every step tells you where you stand, what to do, and what happens if you do nothing.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-bold mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Sponsorship Deliverables &amp; Escrow Pipeline</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Collaborations Studio
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
+              Track contract status, submit live draft URLs for brand approval, and monitor escrow payout disbursements.
+            </p>
+          </div>
         </div>
 
-        {/* Dynamic Filter Tabs with Pill Counts matching screenshot */}
-        <div className="flex items-center gap-6 sm:gap-8 border-b border-[#E2E8F0] mt-6 overflow-x-auto whitespace-nowrap scrollbar-none">
-          {/* Tab 1: All */}
-          <button
-            type="button"
-            onClick={() => setActiveTab('all')}
-            className={`flex items-center pb-3 transition-colors cursor-pointer text-xs sm:text-[13px] ${
-              activeTab === 'all'
-                ? 'text-[#2864EA] font-bold border-b-2 border-[#2864EA] -mb-[2px]'
-                : 'text-[#475569] hover:text-[#111827] font-medium'
-            }`}
-          >
-            <span>All</span>
-            <span
-              className={`ml-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold leading-none ${
-                activeTab === 'all'
-                  ? 'bg-[#2864EA] text-white'
-                  : 'bg-[#F1F5F9] text-[#64748B] border border-slate-200/60'
+        {/* Dynamic Filter Tabs with Luxury Pill Styling */}
+        <div className="bg-white border border-slate-200/90 p-1.5 rounded-2xl shadow-2xs inline-flex items-center gap-1.5 overflow-x-auto max-w-full">
+          {[
+            { id: 'all', label: 'All', count: counts.all },
+            { id: 'active', label: 'Active', count: counts.active },
+            { id: 'needs_action', label: 'Needs Action', count: counts.needsAction },
+            { id: 'applications_sent', label: 'Applied', count: counts.applicationsSent },
+            { id: 'declined', label: 'Declined', count: counts.declined },
+            { id: 'completed', label: 'Completed', count: counts.completed },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id as TabType)}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
+                activeTab === tab.id
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              {counts.all}
-            </span>
-          </button>
-
-          {/* Tab 2: Active */}
-          <button
-            type="button"
-            onClick={() => setActiveTab('active')}
-            className={`flex items-center pb-3 transition-colors cursor-pointer text-xs sm:text-[13px] ${
-              activeTab === 'active'
-                ? 'text-[#2864EA] font-bold border-b-2 border-[#2864EA] -mb-[2px]'
-                : 'text-[#475569] hover:text-[#111827] font-medium'
-            }`}
-          >
-            <span>Active</span>
-            <span
-              className={`ml-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold leading-none ${
-                activeTab === 'active'
-                  ? 'bg-[#2864EA] text-white'
-                  : 'bg-[#F1F5F9] text-[#64748B] border border-slate-200/60'
-              }`}
-            >
-              {counts.active}
-            </span>
-          </button>
-
-          {/* Tab 3: Needs action */}
-          <button
-            type="button"
-            onClick={() => setActiveTab('needs_action')}
-            className={`flex items-center pb-3 transition-colors cursor-pointer text-xs sm:text-[13px] ${
-              activeTab === 'needs_action'
-                ? 'text-[#2864EA] font-bold border-b-2 border-[#2864EA] -mb-[2px]'
-                : 'text-[#475569] hover:text-[#111827] font-medium'
-            }`}
-          >
-            <span>Needs action</span>
-            <span
-              className={`ml-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold leading-none ${
-                activeTab === 'needs_action'
-                  ? 'bg-[#2864EA] text-white'
-                  : 'bg-[#F1F5F9] text-[#64748B] border border-slate-200/60'
-              }`}
-            >
-              {counts.needsAction}
-            </span>
-          </button>
-
-          {/* Tab 4: Applications sent */}
-          <button
-            type="button"
-            onClick={() => setActiveTab('applications_sent')}
-            className={`flex items-center pb-3 transition-colors cursor-pointer text-xs sm:text-[13px] ${
-              activeTab === 'applications_sent'
-                ? 'text-[#2864EA] font-bold border-b-2 border-[#2864EA] -mb-[2px]'
-                : 'text-[#475569] hover:text-[#111827] font-medium'
-            }`}
-          >
-            <span>Applications sent</span>
-            <span
-              className={`ml-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold leading-none ${
-                activeTab === 'applications_sent'
-                  ? 'bg-[#2864EA] text-white'
-                  : 'bg-[#F1F5F9] text-[#64748B] border border-slate-200/60'
-              }`}
-            >
-              {counts.applicationsSent}
-            </span>
-          </button>
-
-          {/* Tab 5: Declined */}
-          <button
-            type="button"
-            onClick={() => setActiveTab('declined')}
-            className={`flex items-center pb-3 transition-colors cursor-pointer text-xs sm:text-[13px] ${
-              activeTab === 'declined'
-                ? 'text-[#2864EA] font-bold border-b-2 border-[#2864EA] -mb-[2px]'
-                : 'text-[#475569] hover:text-[#111827] font-medium'
-            }`}
-          >
-            <span>Declined</span>
-            <span
-              className={`ml-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold leading-none ${
-                activeTab === 'declined'
-                  ? 'bg-[#2864EA] text-white'
-                  : 'bg-[#F1F5F9] text-[#64748B] border border-slate-200/60'
-              }`}
-            >
-              {counts.declined}
-            </span>
-          </button>
-
-          {/* Tab 6: Completed */}
-          <button
-            type="button"
-            onClick={() => setActiveTab('completed')}
-            className={`flex items-center pb-3 transition-colors cursor-pointer text-xs sm:text-[13px] ${
-              activeTab === 'completed'
-                ? 'text-[#2864EA] font-bold border-b-2 border-[#2864EA] -mb-[2px]'
-                : 'text-[#475569] hover:text-[#111827] font-medium'
-            }`}
-          >
-            <span>Completed</span>
-            <span
-              className={`ml-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold leading-none ${
-                activeTab === 'completed'
-                  ? 'bg-[#2864EA] text-white'
-                  : 'bg-[#F1F5F9] text-[#64748B] border border-slate-200/60'
-              }`}
-            >
-              {counts.completed}
-            </span>
-          </button>
+              <span>{tab.label}</span>
+              <span
+                className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono leading-none ${
+                  activeTab === tab.id
+                    ? 'bg-white/20 text-white'
+                    : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
+          ))}
         </div>
 
-        {/* Collaborations Table Card matching screenshot */}
-        <div className="bg-white border border-[#E2E8F0] rounded-[24px] overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.02)] mt-6">
+        {/* Collaborations Table Card */}
+        <div className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
           {loading ? (
-            <div className="py-20 flex justify-center">
-              <Loader2 className="w-8 h-8 animate-spin text-[#2864EA]" />
+            <div className="py-24 flex flex-col items-center justify-center gap-3">
+              <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+              <span className="text-xs font-bold text-slate-500">Loading collaborations...</span>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse min-w-[760px]">
-                {/* Table Header */}
+              <table className="w-full text-left border-collapse min-w-[850px]">
                 <thead>
-                  <tr className="border-b border-[#F1F5F9] text-xs font-medium text-[#64748B]">
-                    <th className="py-4 px-6 font-medium">Brand</th>
-                    <th className="py-4 px-4 font-medium">Campaign</th>
-                    <th className="py-4 px-4 font-medium">Status</th>
-                    <th className="py-4 px-4 font-medium">Performance</th>
-                    <th className="py-4 px-4 font-medium">Next action</th>
-                    <th className="py-4 px-4 font-medium">Due date</th>
-                    <th className="py-4 px-6 font-medium text-right sm:text-left">Your net</th>
+                  <tr className="border-b border-slate-100 bg-slate-50/50 text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
+                    <th className="py-4 px-6">Brand</th>
+                    <th className="py-4 px-4">Campaign Brief</th>
+                    <th className="py-4 px-4">Status &amp; Milestones</th>
+                    <th className="py-4 px-4">Proof</th>
+                    <th className="py-4 px-4">Action</th>
+                    <th className="py-4 px-4">Due Date</th>
+                    <th className="py-4 px-6 text-right sm:text-left">Your Net</th>
                   </tr>
                 </thead>
 
-                {/* Table Body */}
-                <tbody>
+                <tbody className="divide-y divide-slate-100">
                   {filteredCollabs.length === 0 ? (
                     <tr>
                       <td
                         colSpan={7}
-                        className="py-14 text-center text-xs sm:text-[13px] text-[#64748B] border-b border-[#F1F5F9]"
+                        className="py-16 text-center text-xs text-slate-400"
                       >
-                        No collaborations yet. Brand invitations and your accepted applications land here.
+                        No collaborations found for this filter tab.
                       </td>
                     </tr>
                   ) : (
                     filteredCollabs.map((collab) => {
                       const companyName = collab.company?.name || collab.campaign?.company?.name || 'Brand';
-                      const campaignTitle = collab.campaign?.title || 'Main Campaign';
+                      const campaignTitle = collab.campaign?.title || 'LinkedIn Sponsorship';
                       const rate = collab.fixedRate || collab.payment?.amount || 240;
                       const dueDate = formatDueDate(collab);
                       const isUpdating = updatingId === collab.id;
@@ -453,19 +360,19 @@ export default function CreatorCollabsPage() {
                       return (
                         <tr
                           key={collab.id}
-                          className="border-b border-[#F1F5F9] hover:bg-[#F8FAFC]/70 transition-colors text-xs text-[#111827]"
+                          className="hover:bg-slate-50/60 transition-colors text-xs text-slate-900"
                         >
                           {/* 1. Brand */}
                           <td className="py-4 px-6">
-                            <div className="flex items-center gap-2.5">
-                              <div className="w-8 h-8 rounded-xl bg-[#111827] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs">
+                            <div className="flex items-center gap-3">
+                              <div className="w-9 h-9 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center font-black text-xs shrink-0 shadow-2xs">
                                 {companyName.slice(0, 2).toUpperCase()}
                               </div>
                               <div className="min-w-0">
-                                <div className="font-bold text-xs text-[#111827] truncate">
+                                <div className="font-bold text-xs text-slate-900 truncate">
                                   {companyName}
                                 </div>
-                                <div className="text-[10.5px] text-[#64748B] truncate">
+                                <div className="text-[10.5px] text-slate-400 truncate">
                                   {collab.company?.industry || 'B2B SaaS'}
                                 </div>
                               </div>
@@ -474,33 +381,40 @@ export default function CreatorCollabsPage() {
 
                           {/* 2. Campaign */}
                           <td className="py-4 px-4">
-                            <div className="font-semibold text-xs text-[#111827] line-clamp-1 max-w-[180px]">
+                            <div className="font-bold text-xs text-slate-900 line-clamp-1 max-w-[200px]">
                               {campaignTitle}
                             </div>
-                            <div className="text-[10.5px] text-[#64748B] line-clamp-1 max-w-[180px]">
+                            <div className="text-[11px] text-slate-400 line-clamp-1 max-w-[200px] mt-0.5">
                               {collab.campaign?.deliverables || 'Sponsored LinkedIn post'}
                             </div>
                           </td>
 
-                          {/* 3. Status */}
+                          {/* 3. Status & Milestones */}
                           <td className="py-4 px-4 whitespace-nowrap">
-                            {renderStatusBadge(collab.status)}
+                            <div className="space-y-1.5 w-44">
+                              <div>{renderStatusBadge(collab.status)}</div>
+                              <EscrowMilestoneStepper
+                                status={collab.status}
+                                paymentStatus={collab.payment?.status}
+                                compact={true}
+                              />
+                            </div>
                           </td>
 
-                          {/* 4. Performance */}
+                          {/* 4. Proof */}
                           <td className="py-4 px-4 whitespace-nowrap">
                             {collab.submittedPostUrl ? (
                               <a
                                 href={collab.submittedPostUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-[#2864EA] font-semibold hover:underline"
+                                className="inline-flex items-center gap-1 text-xs text-indigo-600 font-bold hover:underline"
                               >
-                                <span>Live post</span>
+                                <span>Live Post</span>
                                 <ExternalLink className="w-3 h-3" />
                               </a>
                             ) : (
-                              <span className="text-xs text-[#94A3B8]">—</span>
+                              <span className="text-xs text-slate-400 font-mono">—</span>
                             )}
                           </td>
 
@@ -512,7 +426,7 @@ export default function CreatorCollabsPage() {
                                   type="button"
                                   disabled={isUpdating}
                                   onClick={() => handleStatusChange(collab.id, 'ACCEPTED')}
-                                  className="px-3 py-1 bg-[#2864EA] hover:bg-[#1e52c8] text-white rounded-lg text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50"
+                                  className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50 active:scale-95"
                                 >
                                   {isUpdating ? <Loader2 className="w-3 h-3 animate-spin" /> : 'Accept'}
                                 </button>
@@ -520,7 +434,7 @@ export default function CreatorCollabsPage() {
                                   type="button"
                                   disabled={isUpdating}
                                   onClick={() => handleStatusChange(collab.id, 'DECLINED')}
-                                  className="px-2.5 py-1 bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#111827] rounded-lg text-xs font-semibold transition-all cursor-pointer disabled:opacity-50"
+                                  className="px-3 py-1.5 bg-white border border-slate-200 text-slate-600 hover:text-slate-900 rounded-xl text-xs font-bold transition-all cursor-pointer disabled:opacity-50"
                                 >
                                   Decline
                                 </button>
@@ -529,35 +443,35 @@ export default function CreatorCollabsPage() {
                               <button
                                 type="button"
                                 onClick={() => setSelectedCollabForSubmit(collab)}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#2864EA] hover:bg-[#1e52c8] text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
+                                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
                               >
                                 <Send className="w-3 h-3" />
-                                <span>Submit post URL</span>
+                                <span>Submit URL</span>
                               </button>
                             ) : collab.status === 'CONTENT_SUBMITTED' ? (
-                              <span className="text-xs text-[#D97706] font-medium">
-                                Awaiting approval
+                              <span className="text-xs text-amber-600 font-bold">
+                                Under review
                               </span>
                             ) : collab.status === 'COMPLETED' ? (
-                              <span className="text-xs text-[#10B981] font-medium">
+                              <span className="text-xs text-emerald-600 font-bold">
                                 Payout released
                               </span>
                             ) : collab.status === 'APPLIED' ? (
-                              <span className="text-xs text-[#64748B] font-medium">
+                              <span className="text-xs text-slate-500 font-bold">
                                 Under review
                               </span>
                             ) : (
-                              <span className="text-xs text-[#94A3B8]">—</span>
+                              <span className="text-xs text-slate-400 font-mono">—</span>
                             )}
                           </td>
 
                           {/* 6. Due Date */}
-                          <td className="py-4 px-4 text-xs text-[#64748B] whitespace-nowrap">
+                          <td className="py-4 px-4 text-xs text-slate-500 whitespace-nowrap">
                             {dueDate}
                           </td>
 
                           {/* 7. Your Net */}
-                          <td className="py-4 px-6 text-xs sm:text-sm font-bold text-[#111827] whitespace-nowrap text-right sm:text-left">
+                          <td className="py-4 px-6 text-xs sm:text-sm font-black text-slate-900 font-mono whitespace-nowrap text-right sm:text-left">
                             €{rate}
                           </td>
                         </tr>
@@ -567,17 +481,14 @@ export default function CreatorCollabsPage() {
                 </tbody>
               </table>
 
-              {/* Table Footer matching reference screenshot */}
-              <div className="px-6 py-4 flex items-center justify-between">
-                <span className="text-xs text-[#64748B] font-medium">
-                  {filteredCollabs.length} {filteredCollabs.length === 1 ? 'collaboration' : 'collaborations'}
+              {/* Table Footer */}
+              <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span className="font-semibold">
+                  Showing {filteredCollabs.length} {filteredCollabs.length === 1 ? 'collaboration' : 'collaborations'}
                 </span>
-
-                <div className="flex items-center gap-1">
-                  <span className="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2864EA] font-bold text-xs flex items-center justify-center border border-[#DBEAFE]">
-                    1
-                  </span>
-                </div>
+                <span className="font-mono text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">
+                  Escrow Protected
+                </span>
               </div>
             </div>
           )}
@@ -586,20 +497,20 @@ export default function CreatorCollabsPage() {
 
       {/* Submit Post URL Modal */}
       {selectedCollabForSubmit && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] border border-[#E2E8F0] shadow-xl max-w-md w-full p-6 space-y-4 animate-in fade-in zoom-in-95">
-            <div className="flex items-start justify-between border-b border-[#E2E8F0] pb-3">
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full p-6 space-y-4 animate-in fade-in zoom-in-95">
+            <div className="flex items-start justify-between border-b border-slate-100 pb-3">
               <div>
-                <h3 className="text-base font-bold text-[#111827]">
-                  Submit LinkedIn Post
+                <h3 className="text-base font-black text-slate-900">
+                  Submit Live LinkedIn Post
                 </h3>
-                <p className="text-xs text-[#64748B] mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   {selectedCollabForSubmit.campaign?.title}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedCollabForSubmit(null)}
-                className="p-1 rounded-full hover:bg-slate-100 text-[#64748B] transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 flex items-center justify-center transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -607,7 +518,7 @@ export default function CreatorCollabsPage() {
 
             <form onSubmit={handleSubmitPost} className="space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-[#374151] mb-1.5">
+                <label className="block font-bold text-slate-800 mb-1.5">
                   Live LinkedIn Post URL
                 </label>
                 <input
@@ -616,42 +527,42 @@ export default function CreatorCollabsPage() {
                   placeholder="https://www.linkedin.com/posts/username_..."
                   value={postUrl}
                   onChange={(e) => setPostUrl(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA]"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-[#374151] mb-1.5">
-                  Proof / Comments (Optional)
+                <label className="block font-bold text-slate-800 mb-1.5">
+                  Proof &amp; Tracking Confirmation (Optional)
                 </label>
                 <textarea
                   rows={3}
                   placeholder="e.g. Added the tracked link in the first comment as requested..."
                   value={proofText}
                   onChange={(e) => setProofText(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA]"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20"
                 />
               </div>
 
-              <div className="flex items-center gap-2.5 pt-2 border-t border-[#E2E8F0]">
+              <div className="flex items-center gap-2.5 pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setSelectedCollabForSubmit(null)}
-                  className="flex-1 py-2.5 bg-white border border-[#E2E8F0] rounded-xl font-semibold text-[#64748B] hover:bg-slate-50 transition-colors cursor-pointer"
+                  className="flex-1 py-2.5 bg-white border border-slate-200 rounded-xl font-bold text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 py-2.5 bg-[#2864EA] hover:bg-[#1e52c8] text-white rounded-xl font-bold transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-1.5 disabled:opacity-50"
+                  className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-all cursor-pointer shadow-md shadow-indigo-500/20 flex items-center justify-center gap-1.5 disabled:opacity-50 active:scale-95"
                 >
                   {submitting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
                     <>
                       <Send className="w-3.5 h-3.5" />
-                      <span>Submit Post</span>
+                      <span>Submit for Review</span>
                     </>
                   )}
                 </button>
@@ -660,17 +571,6 @@ export default function CreatorCollabsPage() {
           </div>
         </div>
       )}
-
-      {/* Floating Chat Bubble Widget in bottom right matching screenshot */}
-      <button
-        type="button"
-        aria-label="Support chat"
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#64748B] hover:bg-[#475569] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
-      >
-        <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3C6.477 3 2 6.94 2 11.8c0 2.76 1.44 5.22 3.7 6.8-.24 1.42-.98 2.68-1.02 2.75-.12.22-.05.49.16.63.1.07.22.1.34.1.1 0 .2-.03.29-.08 2.1-1.22 3.8-2.22 4.34-2.54.71.16 1.45.24 2.19.24 5.523 0 10-3.94 10-8.8S17.523 3 12 3z" />
-        </svg>
-      </button>
     </div>
   );
 }

@@ -1,121 +1,93 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, HelpCircle, ShieldCheck } from 'lucide-react';
+
+interface FaqItem {
+  q: string;
+  a: string;
+  category: string;
+}
 
 export default function FaqSection() {
-  const [tab, setTab] = useState<'brands' | 'creators'>('brands');
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const brandFaqs = [
+  const faqs: FaqItem[] = [
     {
-      q: 'What is Naano?',
-      a: 'Naano is the B2B LinkedIn creator marketplace connecting B2B companies with vetted creators (from about 1,000 to 500,000 followers) who publish LinkedIn content that drives measurable traffic, leads, and pipeline.'
+      category: 'Protection',
+      q: 'How does escrow protection guarantee our campaign budget?',
+      a: 'When you invite a creator, your campaign funds are secured in an escrow holding vault. The creator does not receive payout until they submit the live LinkedIn post URL and proof of publication for your review and approval. If a creator fails to publish, you receive a 100% refund immediately.',
     },
     {
-      q: 'How does per-post pricing work?',
-      a: 'Each creator sets a fixed price per post, shown with deliverables before you book. You only pay for posts that go live — no surprise retainers or CPM spikes. Platform plans range from Self-Serve (€0/month) to Managed Campaigns (€700/month).'
+      category: 'Creators',
+      q: 'How are creators vetted before appearing on Naano?',
+      a: 'We review LinkedIn creator accounts across 4 key criteria: organic engagement authenticity (no automated pods), verified professional background in B2B tech, historical post consistency, and audience ICP overlap. Only ~12% of applicants pass our vetting process.',
     },
     {
-      q: 'What counts as a qualified click?',
-      a: 'To protect your budget and data quality, Naano automatically filters out crawlers, scrapers, and bots, and deduplicates visits (one counted visit per IP address per hour).'
+      category: 'Attribution',
+      q: 'How does attribution and UTM tracking work on LinkedIn?',
+      a: 'LinkedIn’s algorithm penalizes external links inside the main post body. Naano creators follow B2B best practices by sharing authentic insights in the post and placing your tracked link with custom UTM parameters in the first comment, driving 3-5x higher engagement and clear attribution in your analytics.',
     },
     {
-      q: 'What happens if a post overperforms?',
-      a: 'The price you agreed to is the price you pay. A post that drives 10x more impressions, clicks, or signups costs nothing extra — the fixed per-post fee already covers it.'
+      category: 'Pricing',
+      q: 'Are rates fixed or negotiable?',
+      a: 'Every creator on Naano defines their own transparent, fixed rate per post (typically €150 to €500 depending on audience size and seniority). You can also propose custom rates when creating targeted campaign briefs.',
     },
     {
-      q: 'How does attribution work?',
-      a: 'Naano provides tracked links and integration hooks at every stage of your funnel, so each visitor, demo lead, and pipeline opportunity is credited back to the exact creator post that generated it.'
-    }
+      category: 'Compliance',
+      q: 'Do sponsored posts comply with LinkedIn guidelines?',
+      a: 'Yes. All collaborations follow standard commercial influencer disclosures (#ad / #sponsored / #partnership), ensuring full compliance with LinkedIn terms of service and European/US advertising standards.',
+    },
   ];
-
-  const creatorFaqs = [
-    {
-      q: 'How do I earn money on Naano?',
-      a: 'You get paid a flat fee per post. You set your own rate based on your niche and audience quality, and you see the exact payout amount before accepting any collaboration.'
-    },
-    {
-      q: 'How and when do I get paid?',
-      a: 'Once your post is published and the deliverables are approved by the brand, your payout is automatically processed via Stripe Connect directly to your bank account.'
-    },
-    {
-      q: 'Is there a minimum follower requirement?',
-      a: 'No high barriers. We care about niche engagement, credibility, and professional audience fit rather than raw vanity follower counts. Many top performers have between 2,000 and 25,000 targeted followers.'
-    },
-    {
-      q: 'Am I free to choose what I post on Naano?',
-      a: 'Yes. You maintain full editorial control. Brands provide a brief with angles and hooks, but you write the post in your authentic voice. You can decline any collaboration that does not align with your audience.'
-    }
-  ];
-
-  const currentList = tab === 'brands' ? brandFaqs : creatorFaqs;
 
   return (
-    <section id="faq" className="py-24 sm:py-32 bg-[#FCFCFB] border-b border-[#EBE9E5]/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="text-xs uppercase tracking-wider font-bold text-blue-600 bg-blue-50 border border-blue-100 rounded-full py-1 px-3 inline-block mb-3">
-            FAQs
+    <section id="faq" className="py-24 bg-[#FAFAFC] border-b border-slate-200/80 scroll-mt-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200 uppercase tracking-wider mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
+            <span>Got Questions?</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#17181C]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="mt-3 text-base text-[#55575E]">
+          <p className="mt-3 text-slate-600 text-sm sm:text-base">
             Everything you need to know about working with B2B LinkedIn creators on Naano.
           </p>
-
-          {/* Toggle */}
-          <div className="mt-8 inline-flex p-1 bg-[#F0EFEB] rounded-full border border-[#E4E1DC]">
-            <button
-              onClick={() => {
-                setTab('brands');
-                setOpenIdx(0);
-              }}
-              className={`px-6 py-2 rounded-full text-xs font-semibold transition-all ${
-                tab === 'brands' ? 'bg-white text-[#17181C] shadow-xs' : 'text-[#6B6D74] hover:text-[#17181C]'
-              }`}
-            >
-              For Brands
-            </button>
-            <button
-              onClick={() => {
-                setTab('creators');
-                setOpenIdx(0);
-              }}
-              className={`px-6 py-2 rounded-full text-xs font-semibold transition-all ${
-                tab === 'creators' ? 'bg-white text-[#17181C] shadow-xs' : 'text-[#6B6D74] hover:text-[#17181C]'
-              }`}
-            >
-              For Creators
-            </button>
-          </div>
         </div>
 
-        {/* Accordions */}
-        <div className="space-y-3">
-          {currentList.map((item, idx) => {
-            const isOpen = openIdx === idx;
+        {/* Accordion List */}
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => {
+            const isOpen = openIndex === idx;
             return (
               <div
                 key={idx}
-                className="bg-white border border-[#E8E6E2] rounded-2xl overflow-hidden transition-all shadow-xs"
+                className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200"
               >
                 <button
-                  onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-semibold text-base text-[#17181C] hover:text-blue-600 transition-colors"
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 transition-colors"
                 >
-                  <span>{item.q}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100 uppercase tracking-wider">
+                      {faq.category}
+                    </span>
+                    <span className="text-sm sm:text-base font-bold text-slate-900">
+                      {faq.q}
+                    </span>
+                  </div>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#888] shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-blue-600' : ''
+                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-indigo-600' : ''
                     }`}
                   />
                 </button>
+
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-sm text-[#55575E] leading-relaxed border-t border-[#F5F4F0]">
-                    {item.a}
+                  <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/40 animate-in fade-in duration-150">
+                    {faq.a}
                   </div>
                 )}
               </div>

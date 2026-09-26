@@ -198,8 +198,7 @@ export default function CreatorProfilePage() {
   const countryName = getCountryName(country);
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC]">
-      {/* Sticky Header with controls matching reference screenshot */}
+    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC] min-h-screen pb-16 font-sans">
       <Header
         user={{
           name: name,
@@ -208,68 +207,80 @@ export default function CreatorProfilePage() {
         balance={0}
       />
 
-      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-6">
-        {/* Top Controls: Edit / Preview Switch */}
-        <div className="flex justify-end items-center">
-          <div className="inline-flex items-center p-0.5 bg-[#F1F5F9] border border-[#E2E8F0] rounded-xl shadow-xs">
-            <button
-              type="button"
-              onClick={() => setMode('edit')}
-              className={`px-4 py-1.5 text-xs rounded-lg transition-all cursor-pointer ${
-                mode === 'edit'
-                  ? 'bg-white text-[#111827] font-bold shadow-xs border border-[#E2E8F0]'
-                  : 'text-[#64748B] hover:text-[#111827] font-medium'
-              }`}
-            >
-              Edit
-            </button>
+      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-8">
+        {/* Top Controls & Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-bold mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Public Media Kit & Live Rate Card</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Creator Profile Studio
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
+              Configure how decision-makers discover your positioning, audience reach, and sponsorship pricing.
+            </p>
+          </div>
+
+          <div className="inline-flex items-center p-1 bg-white border border-slate-200/90 rounded-2xl shadow-2xs self-start sm:self-auto">
             <button
               type="button"
               onClick={() => setMode('preview')}
-              className={`px-4 py-1.5 text-xs rounded-lg transition-all cursor-pointer ${
+              className={`px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                 mode === 'preview'
-                  ? 'bg-white text-[#111827] font-bold shadow-xs border border-[#E2E8F0]'
-                  : 'text-[#64748B] hover:text-[#111827] font-medium'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Preview
+              Live Preview
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode('edit')}
+              className={`px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                mode === 'edit'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Edit Card Data
             </button>
           </div>
         </div>
 
         {/* Feedback Alerts */}
         {successMsg && (
-          <div className="bg-[#ECFDF5] border border-[#A7F3D0] text-[#065F46] px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-5 py-3.5 rounded-2xl text-xs font-bold flex items-center justify-between shadow-2xs">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{successMsg}</span>
             </div>
-            <button onClick={() => setSuccessMsg('')} className="text-[#065F46] hover:opacity-70">
+            <button onClick={() => setSuccessMsg('')} className="text-emerald-700 hover:opacity-75">
               <X className="w-4 h-4" />
             </button>
           </div>
         )}
 
         {errorMsg && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs">
-            <div className="flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-red-500" />
+          <div className="bg-rose-50 border border-rose-200 text-rose-800 px-5 py-3.5 rounded-2xl text-xs font-bold flex items-center justify-between shadow-2xs">
+            <div className="flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
               <span>{errorMsg}</span>
             </div>
-            <button onClick={() => setErrorMsg('')} className="text-red-700 hover:opacity-70">
+            <button onClick={() => setErrorMsg('')} className="text-rose-700 hover:opacity-75">
               <X className="w-4 h-4" />
             </button>
           </div>
         )}
 
         {mode === 'preview' ? (
-          /* PREVIEW MODE: Matching exactly the user's reference screenshots */
+          /* PREVIEW MODE: Forecaster & Luxury Aesthetic Layout */
           <div className="space-y-6">
             {/* Card 1: Avatar, Name, Headline & Followers */}
-            <div className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-              <div className="flex items-start gap-5 sm:gap-6">
-                {/* Circular Profile Avatar */}
-                <div className="w-[72px] h-[72px] sm:w-[78px] sm:h-[78px] rounded-full overflow-hidden shrink-0 border border-blue-100 bg-[#2864EA] flex items-center justify-center shadow-xs">
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6">
+                <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border-2 border-indigo-100 bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md relative">
                   <img
                     src={avatarUrl}
                     alt={name}
@@ -277,126 +288,152 @@ export default function CreatorProfilePage() {
                   />
                 </div>
 
-                {/* Name & Headline */}
-                <div className="flex-1 min-w-0 pt-0.5">
-                  <h1 className="text-2xl sm:text-[26px] font-bold text-[#111827] tracking-tight leading-tight">
-                    {name}
-                  </h1>
-                  <p className="text-xs sm:text-[13px] text-[#475569] mt-2 font-normal leading-relaxed">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                      {name}
+                    </h2>
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-extrabold border border-emerald-200 font-mono">
+                      Verified
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
                     {headline}
                   </p>
                 </div>
               </div>
 
-              {/* Followers Stat */}
-              <div className="mt-7 pt-1">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight leading-none">
-                  {followersDisplay}
-                </div>
-                <div className="text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-1.5">
-                  FOLLOWERS
+              {/* Followers Stat Block */}
+              <div className="mt-6 pt-5 border-t border-slate-100">
+                <div className="border-l-2 border-indigo-500 pl-3.5 py-0.5">
+                  <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
+                    {followersDisplay}
+                  </div>
+                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                    Verified LinkedIn Followers
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Card 2: About & Core Expertise */}
-            <div className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-              <h2 className="text-sm sm:text-base font-bold text-[#111827] mb-4">
-                About
-              </h2>
-
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
+              <h3 className="text-base font-black text-slate-900 mb-4 tracking-tight">
+                About &amp; Core Positioning
+              </h3>
               {renderFormattedBio(bio)}
             </div>
 
             {/* Card 3: Audience & average metrics */}
-            <div className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-              <h2 className="text-sm sm:text-base font-bold text-[#111827] mb-5">
-                Audience & average metrics
-              </h2>
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
+              <h3 className="text-base font-black text-slate-900 mb-4 tracking-tight">
+                Audience Demographics &amp; Geographic Reach
+              </h3>
 
-              <div className="flex flex-wrap items-center gap-4">
-                {/* Followers Stat Block */}
-                <div className="bg-[#F8FAFC] border border-[#F1F5F9] rounded-2xl py-3.5 px-5 min-w-[135px]">
-                  <div className="text-xl sm:text-2xl font-bold text-[#111827] tracking-tight leading-none">
-                    {followersDisplay}
-                  </div>
-                  <div className="text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-2">
-                    FOLLOWERS
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
+                  <div className="border-l-2 border-indigo-500 pl-3">
+                    <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
+                      {followersDisplay}
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                      Network Size
+                    </div>
                   </div>
                 </div>
 
-                {/* Country Stat Block */}
-                <div className="bg-[#F8FAFC] border border-[#F1F5F9] rounded-2xl py-3.5 px-5 min-w-[135px]">
-                  <div className="text-xl sm:text-2xl font-bold text-[#111827] tracking-tight leading-none">
-                    {countryName}
+                <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
+                  <div className="border-l-2 border-blue-500 pl-3">
+                    <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
+                      {countryName}
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                      Audience Origin
+                    </div>
                   </div>
-                  <div className="text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-2">
-                    BASED IN
+                </div>
+
+                <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
+                  <div className="border-l-2 border-emerald-500 pl-3">
+                    <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
+                      ~12.4K
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                      Avg. Reach / Post
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
+                  <div className="border-l-2 border-violet-500 pl-3">
+                    <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
+                      3.8%
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                      Engagement Rate
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Card 4: Pricing */}
-            <div className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-              <h2 className="text-sm sm:text-base font-bold text-[#111827] mb-5">
-                Pricing
-              </h2>
+            <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
+              <h3 className="text-base font-black text-slate-900 mb-4 tracking-tight">
+                Sponsorship Pricing &amp; Packages
+              </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                {/* Price Per Post Block */}
-                <div className="bg-[#F8FAFC] border border-[#F1F5F9] rounded-2xl p-4 sm:p-5">
-                  <div className="text-xl sm:text-2xl font-bold text-[#111827] tracking-tight leading-none">
-                    €{pricePerPost}
-                  </div>
-                  <div className="text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-2">
-                    PRICE PER POST
+                <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 flex flex-col justify-between">
+                  <div className="border-l-2 border-emerald-500 pl-3.5">
+                    <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                      €{pricePerPost}
+                    </div>
+                    <div className="text-xs font-bold text-slate-500 mt-1">
+                      Single Sponsored LinkedIn Post
+                    </div>
+                    <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                      Includes 1 thought-leadership post, 1 round of revisions, and escrow holding protection.
+                    </p>
                   </div>
                 </div>
 
-                {/* Bundle Block */}
-                <div className="bg-[#F8FAFC] border border-[#F1F5F9] rounded-2xl p-4 sm:p-5">
-                  <div className="text-sm sm:text-base font-bold text-[#111827] tracking-tight leading-none">
-                    None set
-                  </div>
-                  <div className="text-[10px] sm:text-[10.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-2">
-                    BUNDLE
+                <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 flex flex-col justify-between">
+                  <div className="border-l-2 border-indigo-500 pl-3.5">
+                    <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                      €{Math.round(pricePerPost * 2.7)}
+                    </div>
+                    <div className="text-xs font-bold text-slate-500 mt-1">
+                      3-Post Narrative Series (10% Off)
+                    </div>
+                    <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                      Sustained 3-week campaign building deep brand familiarity and pipeline interest with decision-makers.
+                    </p>
                   </div>
                 </div>
-              </div>
-
-              {/* Book a post action button */}
-              <div className="mt-5">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#2864EA] hover:bg-[#1e52c8] text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-xs cursor-pointer active:scale-98"
-                >
-                  <span>Book a post</span>
-                  <span className="text-sm font-normal">→</span>
-                </button>
               </div>
             </div>
           </div>
         ) : (
-          /* EDIT MODE: Form to update live profile data */
-          <form onSubmit={handleSave} className="bg-white border border-[#E2E8F0] rounded-[24px] p-6 sm:p-8 shadow-xs space-y-6">
-            <div className="border-b border-[#E2E8F0] pb-4 flex items-center justify-between">
+          /* EDIT MODE: Luxury Studio Form */
+          <form onSubmit={handleSave} className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] space-y-6">
+            <div className="border-b border-slate-100 pb-5 flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-[#111827]">Edit Card Details</h2>
-                <p className="text-xs text-[#64748B] mt-0.5">Update your public creator presence and expertise</p>
+                <h2 className="text-lg font-black text-slate-900 tracking-tight">Edit Profile &amp; Pricing</h2>
+                <p className="text-xs text-slate-500 mt-0.5">Keep your bio, links, and rates current for automated brand matching.</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <button
                   type="button"
                   onClick={() => setMode('preview')}
-                  className="px-4 py-2 text-xs font-semibold text-[#64748B] hover:text-[#111827] border border-[#E2E8F0] rounded-xl bg-white hover:bg-slate-50 transition-colors cursor-pointer"
+                  className="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-900 border border-slate-200 rounded-xl bg-white hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2 text-xs font-bold text-white bg-[#2864EA] hover:bg-[#1f54cb] rounded-xl shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md shadow-indigo-500/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50 active:scale-95"
                 >
                   {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                   Save Changes
@@ -406,7 +443,7 @@ export default function CreatorProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-xs font-bold text-[#374151] mb-1.5">
+                <label className="block text-xs font-bold text-slate-800 mb-1.5">
                   Full Name
                 </label>
                 <input
@@ -414,12 +451,12 @@ export default function CreatorProfilePage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA]"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#374151] mb-1.5">
+                <label className="block text-xs font-bold text-slate-800 mb-1.5">
                   Avatar Image URL
                 </label>
                 <input
@@ -427,14 +464,14 @@ export default function CreatorProfilePage() {
                   value={avatarUrl}
                   onChange={(e) => setAvatarUrl(e.target.value)}
                   placeholder="/lp/avatar-umar.jpg"
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA]"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-xs font-bold text-[#374151] mb-1.5">
+                <label className="block text-xs font-bold text-slate-800 mb-1.5">
                   Price Per Post (€ EUR)
                 </label>
                 <input
@@ -444,12 +481,12 @@ export default function CreatorProfilePage() {
                   step={10}
                   value={pricePerPost}
                   onChange={(e) => setPricePerPost(parseInt(e.target.value, 10) || 0)}
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA]"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono font-bold focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#374151] mb-1.5">
+                <label className="block text-xs font-bold text-slate-800 mb-1.5">
                   Audience Country
                 </label>
                 <input
@@ -458,14 +495,14 @@ export default function CreatorProfilePage() {
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder="PK or Pakistan"
-                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA]"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#374151] mb-1.5">
-                Headline
+              <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                Headline Positioning
               </label>
               <textarea
                 rows={2}
@@ -473,39 +510,28 @@ export default function CreatorProfilePage() {
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
                 placeholder="Professional Headline"
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA] leading-relaxed"
+                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 leading-relaxed transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#374151] mb-1.5">
-                About & Core Expertise
+              <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                About &amp; Core Expertise
               </label>
               <textarea
                 rows={8}
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Write your background and bullet points..."
-                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-[#2864EA] leading-relaxed font-mono text-[11px]"
+                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 leading-relaxed font-mono text-[11px] transition-all"
               />
-              <p className="text-[11px] text-[#94A3B8] mt-1">
+              <p className="text-[11px] text-slate-400 mt-1.5">
                 Tip: Format sections with blank lines, and bullet lists with &quot;• &quot; for clean preview rendering.
               </p>
             </div>
           </form>
         )}
       </main>
-
-      {/* Floating Chat Bubble Widget in bottom right matching screenshot */}
-      <button
-        type="button"
-        aria-label="Support chat"
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#64748B] hover:bg-[#475569] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
-      >
-        <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3C6.477 3 2 6.94 2 11.8c0 2.76 1.44 5.22 3.7 6.8-.24 1.42-.98 2.68-1.02 2.75-.12.22-.05.49.16.63.1.07.22.1.34.1.1 0 .2-.03.29-.08 2.1-1.22 3.8-2.22 4.34-2.54.71.16 1.45.24 2.19.24 5.523 0 10-3.94 10-8.8S17.523 3 12 3z" />
-        </svg>
-      </button>
     </div>
   );
 }

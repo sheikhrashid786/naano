@@ -15,6 +15,8 @@ import {
   Percent,
   MessageSquare,
   Briefcase,
+  BookOpen,
+  Settings,
 } from 'lucide-react';
 import UserProfileDropdown from './UserProfileDropdown';
 
@@ -39,65 +41,86 @@ interface SidebarProps {
   };
 }
 
+const creatorNav = [
+  { label: 'Overview', href: '/dashboard/creator', icon: LayoutGrid },
+  { label: 'My card', href: '/dashboard/creator/profile', icon: Contact },
+  { label: 'Opportunities', href: '/dashboard/creator/marketplace', icon: Store },
+  { label: 'Collaborations', href: '/dashboard/creator/collabs', icon: Layers },
+  { label: 'Analytics', href: '/dashboard/creator/analytics', icon: TrendingUp },
+  { label: 'Community', href: '/dashboard/creator/community', icon: Users },
+  { label: 'Earnings', href: '/dashboard/creator/gains', icon: CreditCard },
+  { label: 'Affiliate program', href: '/dashboard/creator/affiliate', icon: Percent },
+  { label: 'Messages', href: '/dashboard/creator/messages', icon: MessageSquare },
+];
+
+const companyNav = [
+  { label: 'Overview', href: '/dashboard/company', icon: LayoutGrid },
+  { label: 'Browse Creators', href: '/dashboard/company/marketplace', icon: Users },
+  { label: 'Campaigns', href: '/dashboard/company/campaigns', icon: Briefcase },
+  { label: 'Collaborations', href: '/dashboard/company/collabs', icon: Layers },
+  { label: 'Results', href: '/dashboard/company/results', icon: TrendingUp },
+  { label: 'Messages', href: '/dashboard/company/messages', icon: MessageSquare },
+  { label: 'Billing', href: '/dashboard/company/billing', icon: CreditCard },
+];
+
+const adminNav = [
+  { label: 'Overview', href: '/dashboard/admin', icon: LayoutGrid },
+  { label: 'Users & Roles', href: '/dashboard/admin/users', icon: Users },
+  { label: 'Creators', href: '/dashboard/admin/creators', icon: Contact },
+  { label: 'Companies', href: '/dashboard/admin/companies', icon: Briefcase },
+  { label: 'Campaigns', href: '/dashboard/admin/campaigns', icon: Store },
+  { label: 'Collaborations', href: '/dashboard/admin/collabs', icon: Layers },
+  { label: 'Escrow & Payouts', href: '/dashboard/admin/finances', icon: CreditCard },
+  { label: 'Journal & Blogs', href: '/dashboard/admin/blogs', icon: BookOpen },
+  { label: 'Settings', href: '/dashboard/admin/settings', icon: Settings },
+];
+
+export function getNavLinks(role?: string) {
+  if (role === 'ADMIN') return adminNav;
+  if (role === 'COMPANY') return companyNav;
+  return creatorNav;
+}
+
 export default function Sidebar({ user }: SidebarProps) {
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState(false);
   const isCompany = user.role === 'COMPANY';
-
-  const creatorNav = [
-    { label: 'Overview', href: '/dashboard/creator', icon: LayoutGrid },
-    { label: 'My card', href: '/dashboard/creator/profile', icon: Contact },
-    { label: 'Opportunities', href: '/dashboard/creator/marketplace', icon: Store },
-    { label: 'Collaborations', href: '/dashboard/creator/collabs', icon: Layers },
-    { label: 'Analytics', href: '/dashboard/creator/analytics', icon: TrendingUp },
-    { label: 'Community', href: '/dashboard/creator/community', icon: Users },
-    { label: 'Earnings', href: '/dashboard/creator/gains', icon: CreditCard },
-    { label: 'Affiliate program', href: '/dashboard/creator/affiliate', icon: Percent },
-    { label: 'Messages', href: '/dashboard/creator/messages', icon: MessageSquare },
-  ];
-
-  const companyNav = [
-    { label: 'Overview', href: '/dashboard/company', icon: LayoutGrid },
-    { label: 'Browse Creators', href: '/dashboard/company/marketplace', icon: Users },
-    { label: 'Campaigns', href: '/dashboard/company/campaigns', icon: Briefcase },
-    { label: 'Collaborations', href: '/dashboard/company/collabs', icon: Layers },
-    { label: 'Results', href: '/dashboard/company/results', icon: TrendingUp },
-    { label: 'Messages', href: '/dashboard/company/messages', icon: MessageSquare },
-    { label: 'Billing', href: '/dashboard/company/billing', icon: CreditCard },
-  ];
-
-  const links = isCompany ? companyNav : creatorNav;
+  const links = getNavLinks(user.role);
 
   return (
     <aside
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`bg-white border-r border-[#E2E8F0] flex flex-col justify-between shrink-0 h-screen sticky top-0 z-40 transition-all duration-200 ease-in-out ${
-        isHovered ? 'w-60 shadow-xl' : 'w-[68px]'
+      className={`hidden md:flex bg-white/95 backdrop-blur-md border-r border-slate-200/80 flex-col justify-between shrink-0 h-screen sticky top-0 z-40 transition-all duration-200 ease-in-out ${
+        isHovered ? 'w-64 shadow-xl' : 'w-[72px]'
       }`}
     >
       <div className="w-full">
-        {/* Brand Logo Header matching Header height (58px) and border */}
+        {/* Brand Logo Header */}
         <div
-          className={`h-[58px] flex items-center border-b border-[#E2E8F0] ${
-            isHovered ? 'px-6 justify-start' : 'justify-center px-0'
+          className={`h-[60px] flex items-center border-b border-slate-200/80 ${
+            isHovered ? 'px-6 justify-between' : 'justify-center px-0'
           }`}
         >
-          <Link href="/" className="inline-flex items-center transition-opacity hover:opacity-85">
+          <Link href="/" className="inline-flex items-center transition-all hover:opacity-90">
             {isHovered ? (
               <NaanoLogo />
             ) : (
-              <img
-                src="/lp/naano-mark.png"
-                alt="naano"
-                className="h-6 w-auto object-contain shrink-0"
-              />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-indigo-500/20">
+                N
+              </div>
             )}
           </Link>
+
+          {isHovered && (
+            <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-mono">
+              {user.role === 'ADMIN' ? 'Admin' : isCompany ? 'Brand' : 'Creator'}
+            </span>
+          )}
         </div>
 
         {/* Navigation Links */}
-        <nav className={`py-3 space-y-1 ${isHovered ? 'px-3.5' : 'px-2.5 flex flex-col items-center'}`}>
+        <nav className={`py-4 space-y-1 ${isHovered ? 'px-3' : 'px-2.5 flex flex-col items-center'}`}>
           {links.map((link) => {
             const Icon = link.icon;
             const active = pathname === link.href;
@@ -108,10 +131,10 @@ export default function Sidebar({ user }: SidebarProps) {
                   key={link.href + link.label}
                   href={link.href}
                   title={link.label}
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all ${
                     active
-                      ? 'bg-[#EFF6FF] text-[#2864EA]'
-                      : 'text-[#64748B] hover:text-[#111827] hover:bg-slate-50'
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/70'
                   }`}
                 >
                   <Icon className="w-5 h-5" strokeWidth={active ? 2.2 : 1.8} />
@@ -123,15 +146,17 @@ export default function Sidebar({ user }: SidebarProps) {
               <Link
                 key={link.href + link.label}
                 href={link.href}
-                className={`flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm transition-all group ${
                   active
-                    ? 'text-[#2864EA] font-bold'
-                    : 'text-[#4B5563] hover:text-[#111827] hover:bg-slate-50/80 font-medium'
+                    ? 'text-indigo-700 font-bold bg-indigo-50/80 border-l-2 border-indigo-600 shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60 font-semibold'
                 }`}
               >
                 <div
-                  className={`flex items-center justify-center w-8 h-8 rounded-xl transition-all ${
-                    active ? 'bg-[#EFF6FF] text-[#2864EA]' : 'text-[#64748B]'
+                  className={`flex items-center justify-center w-7 h-7 rounded-xl transition-all ${
+                    active
+                      ? 'bg-indigo-600 text-white shadow-xs'
+                      : 'text-slate-400 group-hover:text-slate-700 group-hover:scale-105'
                   }`}
                 >
                   <Icon className="w-4 h-4" strokeWidth={active ? 2.2 : 1.8} />
@@ -145,8 +170,8 @@ export default function Sidebar({ user }: SidebarProps) {
 
       {/* Bottom User Profile Section */}
       <div
-        className={`border-t border-[#E2E8F0] ${
-          isHovered ? 'p-2.5' : 'py-3 flex justify-center'
+        className={`border-t border-slate-200/80 bg-slate-50/40 ${
+          isHovered ? 'p-3' : 'py-3 flex justify-center'
         }`}
       >
         <UserProfileDropdown

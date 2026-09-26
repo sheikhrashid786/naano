@@ -114,10 +114,12 @@ export default function UserProfileDropdown({
   };
 
   // Determine user mode / role
+  const isAdminView = user?.role === 'ADMIN' || pathname.startsWith('/dashboard/admin');
   const isCreatorView =
-    user?.role === 'CREATOR' ||
-    Boolean(user?.creator) ||
-    pathname.startsWith('/dashboard/creator');
+    !isAdminView &&
+    (user?.role === 'CREATOR' ||
+      Boolean(user?.creator) ||
+      pathname.startsWith('/dashboard/creator'));
 
   const activeAvatar =
     user?.avatarUrl ||
@@ -125,10 +127,49 @@ export default function UserProfileDropdown({
     user?.company?.logoUrl ||
     null;
 
-  const activeName = user?.name || (isCreatorView ? 'Creator' : 'Brand');
-  const activeEmail = user?.email || (isCreatorView ? 'creator@naano.io' : 'brand@naano.io');
+  const activeName = user?.name || (isAdminView ? 'Super Admin' : isCreatorView ? 'Creator' : 'Brand');
+  const activeEmail = user?.email || (isAdminView ? 'admin@naano.io' : isCreatorView ? 'creator@naano.io' : 'brand@naano.io');
 
   // Navigation options based on current dashboard context
+  const adminLinks = [
+    {
+      label: 'Admin Overview',
+      desc: 'Platform master console & GMV',
+      href: '/dashboard/admin',
+      icon: LayoutGrid,
+    },
+    {
+      label: 'User Management',
+      desc: 'Manage roles and accounts',
+      href: '/dashboard/admin/users',
+      icon: Users,
+    },
+    {
+      label: 'Creators Curation',
+      desc: 'Badges, rates & featured',
+      href: '/dashboard/admin/creators',
+      icon: User,
+    },
+    {
+      label: 'Companies & Plans',
+      desc: 'Manage client subscriptions',
+      href: '/dashboard/admin/companies',
+      icon: Briefcase,
+    },
+    {
+      label: 'Campaigns & Briefs',
+      desc: 'Moderate active campaigns',
+      href: '/dashboard/admin/campaigns',
+      icon: Store,
+    },
+    {
+      label: 'Escrow & Payouts',
+      desc: 'Release deliverable funds',
+      href: '/dashboard/admin/finances',
+      icon: CreditCard,
+    },
+  ];
+
   const creatorLinks = [
     {
       label: 'My Public Card',
@@ -201,7 +242,7 @@ export default function UserProfileDropdown({
     },
   ];
 
-  const links = isCreatorView ? creatorLinks : companyLinks;
+  const links = isAdminView ? adminLinks : isCreatorView ? creatorLinks : companyLinks;
 
   return (
     <div
@@ -329,17 +370,19 @@ export default function UserProfileDropdown({
             <div className="mt-3 flex items-center justify-between gap-2 pt-2.5 border-t border-slate-100/80">
               <span
                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold tracking-tight border ${
-                  isCreatorView
+                  isAdminView
+                    ? 'bg-slate-900 text-white border-slate-800'
+                    : isCreatorView
                     ? 'bg-purple-50/80 text-purple-700 border-purple-200/70'
                     : 'bg-blue-50/80 text-blue-700 border-blue-200/70'
                 }`}
               >
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
-                    isCreatorView ? 'bg-purple-600' : 'bg-blue-600'
+                    isAdminView ? 'bg-indigo-400' : isCreatorView ? 'bg-purple-600' : 'bg-blue-600'
                   }`}
                 />
-                {isCreatorView ? 'Creator Account' : 'Brand Account'}
+                {isAdminView ? 'Super Admin' : isCreatorView ? 'Creator Account' : 'Brand Account'}
               </span>
 
               <Link

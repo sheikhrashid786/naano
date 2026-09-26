@@ -10,7 +10,11 @@ import {
   FileText, 
   Loader2, 
   CheckCircle2, 
-  X
+  X,
+  Store,
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
 } from 'lucide-react';
 
 function getChannel(camp: any): string {
@@ -76,9 +80,9 @@ function renderCompanyLogo(company: { name: string; logoUrl?: string | null }) {
 
   if (nameLower.includes('premium')) {
     return (
-      <div className="w-full h-full bg-[#111827] flex items-center justify-center">
+      <div className="w-full h-full bg-slate-900 flex items-center justify-center">
         <span className="text-white font-black text-lg tracking-tight">PI</span>
-        <span className="w-1.5 h-3.5 bg-[#F59E0B] ml-0.5 rounded-xs" />
+        <span className="w-1.5 h-3.5 bg-amber-500 ml-0.5 rounded-xs" />
       </div>
     );
   }
@@ -86,14 +90,14 @@ function renderCompanyLogo(company: { name: string; logoUrl?: string | null }) {
   if (nameLower.includes('orbi')) {
     return (
       <div className="w-full h-full bg-white flex items-center justify-center">
-        <div className="w-5 h-5 rounded-full border-[2.5px] border-[#111827] flex items-center justify-center" />
+        <div className="w-5 h-5 rounded-full border-[2.5px] border-slate-900 flex items-center justify-center" />
       </div>
     );
   }
 
   if (nameLower.includes('attio')) {
     return (
-      <div className="w-full h-full bg-[#111827] flex items-center justify-center">
+      <div className="w-full h-full bg-slate-900 flex items-center justify-center">
         <span className="text-white font-black text-xl tracking-tight">A</span>
       </div>
     );
@@ -101,121 +105,115 @@ function renderCompanyLogo(company: { name: string; logoUrl?: string | null }) {
 
   const initials = name
     .split(' ')
-    .filter(Boolean)
-    .map((w) => w[0])
+    .map((w: string) => w[0])
     .join('')
-    .slice(0, 2)
+    .substring(0, 2)
     .toUpperCase();
 
-  const colors = [
-    'bg-gradient-to-br from-blue-600 to-indigo-700 text-white',
-    'bg-gradient-to-br from-violet-600 to-purple-800 text-white',
-    'bg-gradient-to-br from-emerald-600 to-teal-700 text-white',
-    'bg-gradient-to-br from-amber-500 to-orange-600 text-white',
-    'bg-gradient-to-br from-slate-800 to-slate-900 text-white',
-  ];
-  const colorIndex = (name.charCodeAt(0) || 0) % colors.length;
-
   return (
-    <div className={`w-full h-full ${colors[colorIndex]} flex items-center justify-center font-black text-base tracking-tight`}>
-      {initials}
+    <div className="w-full h-full bg-indigo-50 flex items-center justify-center">
+      <span className="text-indigo-600 font-black text-base">{initials}</span>
     </div>
   );
 }
 
 export default function CreatorMarketplacePage() {
   const [campaigns, setCampaigns] = useState<any[]>([]);
-  const [creator, setCreator] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [creator, setCreator] = useState<any>(null);
+
+  // Filters & Search
   const [activeChannel, setActiveChannel] = useState<'all' | 'linkedin'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndustry, setSelectedIndustry] = useState('all');
   const [selectedCountry, setSelectedCountry] = useState('all');
   const [sortBy, setSortBy] = useState('relevance');
-  
-  const [selectedCampaignForApply, setSelectedCampaignForApply] = useState<any | null>(null);
+
+  // Modals & User Feedback
   const [selectedBrief, setSelectedBrief] = useState<any | null>(null);
+  const [selectedCampaignForApply, setSelectedCampaignForApply] = useState<any | null>(null);
   const [successToast, setSuccessToast] = useState('');
 
+  // Fetch current creator profile & campaigns
   useEffect(() => {
-    async function fetchData() {
+    async function loadData() {
       try {
-        const [campsRes, profileRes] = await Promise.all([
+        setLoading(true);
+        const [authRes, campRes] = await Promise.all([
+          fetch('/api/auth/me'),
           fetch('/api/campaigns'),
-          fetch('/api/creator/profile'),
         ]);
 
-        if (campsRes.ok) {
-          const data = await campsRes.json();
-          setCampaigns(data.campaigns || []);
+        if (authRes.ok) {
+          const authData = await authRes.json();
+          if (authData?.user?.creator) {
+            setCreator({
+              ...authData.user.creator,
+              user: {
+                name: authData.user.name,
+                avatarUrl: authData.user.avatarUrl,
+              },
+            });
+          }
         }
 
-        if (profileRes.ok) {
-          const pData = await profileRes.json();
-          setCreator(pData.creator || null);
+        if (campRes.ok) {
+          const campData = await campRes.json();
+          setCampaigns(campData.campaigns || []);
         }
-      } catch (e) {
-        console.error('Failed to load marketplace data:', e);
+      } catch (err) {
       } finally {
         setLoading(false);
       }
     }
 
-    fetchData();
+    loadData();
   }, []);
 
-  // Dynamically extract unique industries from active campaigns
   const availableIndustries = useMemo(() => {
-    const list = campaigns.map((c) => c.company?.industry).filter(Boolean);
-    return Array.from(new Set(list));
-  }, [campaigns]);
-
-  // Dynamically extract target audience countries/regions from active campaigns
-  const availableCountries = useMemo(() => {
     const set = new Set<string>();
     campaigns.forEach((c) => {
-      if (c.targetAudience) {
-        c.targetAudience.split('·').forEach((item: string) => {
-          const trimmed = item.trim();
-          if (trimmed) set.add(trimmed);
-        });
-      }
+      if (c.company?.industry) set.add(c.company.industry);
     });
     return Array.from(set);
   }, [campaigns]);
 
-  // Dynamically calculate counts per channel
-  const linkedinCampaignsCount = useMemo(() => {
-    return campaigns.filter((c) => getChannel(c).toLowerCase() === 'linkedin').length;
+  const availableCountries = useMemo(() => {
+    const set = new Set<string>();
+    campaigns.forEach((c) => {
+      if (c.targetAudience) set.add(c.targetAudience);
+    });
+    return Array.from(set);
   }, [campaigns]);
 
-  // Filter and sort campaigns dynamically
+  const linkedinCampaignsCount = useMemo(() => {
+    return campaigns.filter((c) => getChannel(c) === 'LinkedIn').length;
+  }, [campaigns]);
+
   const filteredCampaigns = useMemo(() => {
     return campaigns
       .filter((camp) => {
-        // Channel filter
-        if (activeChannel === 'linkedin' && getChannel(camp).toLowerCase() !== 'linkedin') {
+        if (activeChannel === 'linkedin' && getChannel(camp) !== 'LinkedIn') {
           return false;
         }
 
-        // Search text
-        const titleMatch = camp.title?.toLowerCase().includes(searchQuery.toLowerCase());
-        const companyMatch = camp.company?.name?.toLowerCase().includes(searchQuery.toLowerCase());
-        const descMatch = camp.description?.toLowerCase().includes(searchQuery.toLowerCase());
-        const audienceMatch = camp.targetAudience?.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesSearch = !searchQuery || titleMatch || companyMatch || descMatch || audienceMatch;
+        if (searchQuery.trim()) {
+          const q = searchQuery.toLowerCase();
+          const matchTitle = camp.title?.toLowerCase().includes(q);
+          const matchCompany = camp.company?.name?.toLowerCase().includes(q);
+          const matchDesc = camp.description?.toLowerCase().includes(q);
+          if (!matchTitle && !matchCompany && !matchDesc) return false;
+        }
 
-        // Industry filter
-        const matchesIndustry =
-          selectedIndustry === 'all' ||
-          camp.company?.industry?.toLowerCase() === selectedIndustry.toLowerCase();
+        if (selectedIndustry !== 'all' && camp.company?.industry !== selectedIndustry) {
+          return false;
+        }
 
-        // Country / Region filter
-        const matchesCountry =
-          selectedCountry === 'all' ||
-          camp.targetAudience?.toLowerCase().includes(selectedCountry.toLowerCase());
+        if (selectedCountry !== 'all' && camp.targetAudience !== selectedCountry) {
+          return false;
+        }
 
-        return matchesSearch && matchesIndustry && matchesCountry;
+        return true;
       })
       .sort((a, b) => {
         if (sortBy === 'budget') {
@@ -224,7 +222,6 @@ export default function CreatorMarketplacePage() {
         if (sortBy === 'name') {
           return (a.company?.name || '').localeCompare(b.company?.name || '');
         }
-        // default relevance: higher match score first
         const matchA = computeMatchScore(creator, a).percentage;
         const matchB = computeMatchScore(creator, b).percentage;
         return matchB - matchA;
@@ -232,8 +229,7 @@ export default function CreatorMarketplacePage() {
   }, [campaigns, activeChannel, searchQuery, selectedIndustry, selectedCountry, sortBy, creator]);
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC]">
-      {/* Sticky Header with dynamic user info */}
+    <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAFC] min-h-screen pb-24 relative font-sans">
       <Header
         user={{
           name: creator?.user?.name,
@@ -242,43 +238,54 @@ export default function CreatorMarketplacePage() {
         balance={0}
       />
 
-      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-6">
+      <main className="w-full px-6 sm:px-8 lg:px-10 py-8 space-y-8">
         {/* Success Toast */}
         {successToast && (
-          <div className="p-4 bg-[#ECFDF5] border border-[#A7F3D0] text-[#065F46] text-xs font-semibold rounded-2xl flex items-center justify-between shadow-xs">
+          <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-2xl flex items-center justify-between shadow-xs animate-in fade-in">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               <span>{successToast}</span>
             </div>
-            <button onClick={() => setSuccessToast('')} className="text-[#065F46] hover:opacity-75">
+            <button onClick={() => setSuccessToast('')} className="text-emerald-700 hover:text-emerald-900">
               <X className="w-4 h-4" />
             </button>
           </div>
         )}
 
         {/* Page Heading & Subtitle */}
-        <div>
-          <h1 className="text-3xl font-extrabold text-[#111827] tracking-tight">
-            Opportunities
-          </h1>
-          <p className="text-xs sm:text-[13px] text-[#64748B] mt-1.5 font-normal">
-            Open brand campaigns - apply, the brand accepts, and the booking is created on your terms.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
+                <Store className="w-3 h-3 text-indigo-400" />
+                <span>Campaign Marketplace</span>
+              </span>
+              <span className="text-xs font-semibold text-slate-500">
+                {campaigns.length} Open Opportunities
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-slate-900 tracking-tight">
+              Brand Opportunities
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+              Apply to active brand campaigns with verified escrow funding on your own rate terms.
+            </p>
+          </div>
         </div>
 
-        {/* Dynamic Channel Filter Pills */}
-        <div className="flex items-center gap-2 pt-1">
+        {/* Channel Filter Pills */}
+        <div className="bg-white border border-slate-200/90 p-1.5 rounded-2xl shadow-2xs inline-flex items-center gap-1.5 self-start">
           <button
             type="button"
             onClick={() => setActiveChannel('all')}
-            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeChannel === 'all'
-                ? 'bg-[#2864EA] text-white shadow-xs'
-                : 'bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#111827]'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <span>All channels</span>
-            <span className={`text-[10px] font-bold ${activeChannel === 'all' ? 'text-white/80' : 'text-[#94A3B8]'}`}>
+            <span>All Channels</span>
+            <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-md ${activeChannel === 'all' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>
               {campaigns.length}
             </span>
           </button>
@@ -286,95 +293,92 @@ export default function CreatorMarketplacePage() {
           <button
             type="button"
             onClick={() => setActiveChannel('linkedin')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeChannel === 'linkedin'
-                ? 'bg-[#2864EA] text-white shadow-xs'
-                : 'bg-white border border-[#E2E8F0] text-[#64748B] hover:text-[#111827]'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <svg className="w-3.5 h-3.5 fill-[#0A66C2]" viewBox="0 0 24 24">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.62 1.62 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63z" />
-            </svg>
+            <span className="font-bold text-[11px] text-[#0A66C2]">in</span>
             <span>LinkedIn</span>
-            <span className="text-[10px] font-bold text-[#94A3B8]">{linkedinCampaignsCount}</span>
+            <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-md ${activeChannel === 'linkedin' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>
+              {linkedinCampaignsCount}
+            </span>
           </button>
         </div>
 
         {/* Dynamic Search & Dropdown Filters Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
-          {/* Search Input */}
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] flex flex-col md:flex-row items-stretch md:items-center gap-3">
           <div className="flex-1 relative">
-            <Search className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for a campaign or a brand..."
-              className="w-full pl-10 pr-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#111827] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#2864EA] shadow-2xs"
+              placeholder="Search for a campaign brief or a brand..."
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white transition-all"
             />
           </div>
 
-          {/* Dynamic Industry Filter */}
           <div className="relative">
             <select
               value={selectedIndustry}
               onChange={(e) => setSelectedIndustry(e.target.value)}
-              className="appearance-none bg-white border border-[#E2E8F0] rounded-xl px-4 py-2 pr-8 text-xs font-medium text-[#475569] hover:bg-slate-50 focus:outline-none cursor-pointer shadow-2xs"
+              className="appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2.5 pr-8 text-xs font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none cursor-pointer shadow-2xs"
             >
-              <option value="all">All industries</option>
+              <option value="all">All Industries</option>
               {availableIndustries.map((ind) => (
                 <option key={ind} value={ind}>
                   {ind}
                 </option>
               ))}
             </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[#64748B] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
-          {/* Dynamic Country/Region Filter */}
           <div className="relative">
             <select
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
-              className="appearance-none bg-white border border-[#E2E8F0] rounded-xl px-4 py-2 pr-8 text-xs font-medium text-[#475569] hover:bg-slate-50 focus:outline-none cursor-pointer shadow-2xs"
+              className="appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2.5 pr-8 text-xs font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none cursor-pointer shadow-2xs"
             >
-              <option value="all">All countries</option>
+              <option value="all">All Regions</option>
               {availableCountries.map((c) => (
                 <option key={c} value={c}>
                   {c}
                 </option>
               ))}
             </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[#64748B] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
-          {/* Sort Filter */}
           <div className="relative">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="appearance-none bg-white border border-[#E2E8F0] rounded-xl px-4 py-2 pr-8 text-xs font-medium text-[#475569] hover:bg-slate-50 focus:outline-none cursor-pointer shadow-2xs"
+              className="appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2.5 pr-8 text-xs font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none cursor-pointer shadow-2xs"
             >
-              <option value="relevance">Relevance (default)</option>
-              <option value="budget">Highest Budget</option>
-              <option value="name">Brand Name</option>
+              <option value="relevance">Relevance (Match Score)</option>
+              <option value="budget">Highest Budget First</option>
+              <option value="name">Brand Name A-Z</option>
             </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[#64748B] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
         </div>
 
         {/* Dynamic Campaign Cards Grid */}
         {loading ? (
-          <div className="py-24 flex justify-center">
-            <Loader2 className="w-8 h-8 animate-spin text-[#2864EA]" />
+          <div className="py-24 flex flex-col items-center justify-center gap-3 text-slate-400">
+            <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+            <span className="text-xs font-semibold">Loading brand campaigns...</span>
           </div>
         ) : filteredCampaigns.length === 0 ? (
-          <div className="bg-white border border-[#E2E8F0] rounded-[24px] p-12 text-center shadow-xs">
-            <p className="text-sm font-bold text-[#111827]">No opportunities match your search</p>
-            <p className="text-xs text-[#64748B] mt-1">Try resetting the search bar or filters.</p>
+          <div className="bg-white border border-slate-200/90 rounded-3xl p-12 text-center shadow-2xs">
+            <p className="text-sm font-bold text-slate-900">No opportunities match your filter</p>
+            <p className="text-xs text-slate-500 mt-1">Try resetting the search terms or filters.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {filteredCampaigns.map((camp) => {
               const companyName = camp.company?.name || 'Brand';
               const channelName = getChannel(camp);
@@ -384,109 +388,111 @@ export default function CreatorMarketplacePage() {
               return (
                 <div
                   key={camp.id}
-                  className="bg-white border border-[#E2E8F0] rounded-[28px] overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.02)] p-4 sm:p-5 flex flex-col justify-between hover:shadow-md transition-shadow"
+                  className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-lg transition-all flex flex-col justify-between group"
                 >
-                  {/* Top Cloud Graphic Banner */}
-                  <div className="h-28 rounded-t-[20px] relative p-3 flex items-start justify-between overflow-hidden">
-                    <img
-                      src="/images/hero-clouds.jpg"
-                      alt="Clouds banner"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-white/10" />
-
-                    {/* Top Left: LinkedIn Pill Badge */}
-                    <span className="relative z-10 inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/95 backdrop-blur-xs rounded-full border border-slate-200/60 text-[10px] font-bold text-[#1E293B] shadow-2xs">
-                      {channelName === 'LinkedIn' ? (
-                        <svg className="w-3 h-3 fill-[#0A66C2]" viewBox="0 0 24 24">
-                          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.62 1.62 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63z" />
-                        </svg>
-                      ) : (
-                        <Globe className="w-3 h-3 text-[#2864EA]" />
-                      )}
-                      <span>{channelName}</span>
-                    </span>
-
-                    {/* Top Right: Match Percentage Badge */}
-                    <span className="relative z-10 inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/95 backdrop-blur-xs rounded-full border border-slate-200/60 text-[10px] font-bold text-[#2563EB] shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
-                      <span>{match.percentage}% match</span>
-                    </span>
-                  </div>
-
-                  {/* Dynamic Company Logo Overlapping Banner */}
-                  <div className="-mt-8 flex justify-center relative z-20">
-                    <div className="w-15 h-15 rounded-2xl bg-white border-4 border-white shadow-md flex items-center justify-center overflow-hidden">
-                      {renderCompanyLogo(camp.company)}
-                    </div>
-                  </div>
-
-                  {/* Company Title & Details */}
-                  <div className="text-center mt-3">
-                    <h3 className="text-base font-bold text-[#111827] tracking-tight">
-                      {companyName}
-                    </h3>
-                    <p className="text-xs text-[#64748B] mt-0.5 font-medium">
-                      {camp.title}
-                    </p>
-                    <div className="inline-flex items-center gap-1 px-3 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-full text-[10.5px] font-medium text-[#475569] mt-2.5">
-                      <Globe className="w-3 h-3 text-[#64748B]" />
-                      <span>{camp.targetAudience || 'Europe · North America'}</span>
-                    </div>
-                  </div>
-
-                  {/* Audience Relevance Progress Bar */}
-                  <div className="mt-5 px-2">
-                    <div className="flex items-center justify-between text-[11px] mb-1.5">
-                      <span className="text-[#64748B] font-medium italic">Audience relevance</span>
-                      <span className="text-[#2864EA] font-bold">{match.score}</span>
-                    </div>
-                    <div className="h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-[#2864EA] rounded-full transition-all duration-500" 
-                        style={{ width: `${match.percentage}%` }}
+                  <div>
+                    {/* Top Atmospheric Graphic Banner */}
+                    <div className="h-32 bg-gradient-to-r from-slate-900 to-indigo-950 p-4 flex items-start justify-between relative overflow-hidden">
+                      <img
+                        src="/images/hero-clouds.jpg"
+                        alt="Clouds banner"
+                        className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay pointer-events-none"
                       />
-                    </div>
-                  </div>
 
-                  {/* 3 Metrics Block (Dynamic Match, Channel & Deadline) */}
-                  <div className="bg-[#F8FAFC] border border-[#F1F5F9] rounded-2xl p-3.5 mt-4 grid grid-cols-3 text-center">
-                    <div className="px-1">
-                      <div className="text-xs sm:text-sm font-bold text-[#111827]">{match.score}</div>
-                      <div className="text-[9.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-0.5">
-                        MATCH
+                      {/* Top Left: Channel Pill Badge */}
+                      <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-[10px] font-bold text-white shadow-2xs">
+                        <span>{channelName}</span>
+                      </span>
+
+                      {/* Top Right: Match Percentage Badge */}
+                      <span className="relative z-10 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/20 backdrop-blur-md rounded-full border border-emerald-400/30 text-[11px] font-bold text-emerald-300 shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>{match.percentage}% match</span>
+                      </span>
+                    </div>
+
+                    {/* Dynamic Company Logo Overlapping Banner */}
+                    <div className="-mt-9 flex justify-center relative z-20">
+                      <div className="w-16 h-16 rounded-2xl bg-white border-4 border-white shadow-md flex items-center justify-center overflow-hidden">
+                        {renderCompanyLogo(camp.company)}
                       </div>
                     </div>
-                    <div className="px-1 border-x border-[#E2E8F0]/60">
-                      <div className="text-xs sm:text-sm font-bold text-[#111827]">{channelName}</div>
-                      <div className="text-[9.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-0.5">
-                        CHANNEL
+
+                    {/* Company Title & Details */}
+                    <div className="text-center px-5 pt-3 pb-1">
+                      <h3 className="text-base font-black text-slate-900 tracking-tight">
+                        {companyName}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5 line-clamp-1 font-medium">
+                        {camp.title}
+                      </p>
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-50 border border-slate-200 rounded-full text-[10.5px] font-medium text-slate-600 mt-2.5">
+                        <Globe className="w-3 h-3 text-slate-400" />
+                        <span>{camp.targetAudience || 'Europe · North America'}</span>
                       </div>
                     </div>
-                    <div className="px-1">
-                      <div className="text-xs sm:text-sm font-bold text-[#111827]">{daysLeft}</div>
-                      <div className="text-[9.5px] font-bold text-[#8C95A6] uppercase tracking-wider mt-0.5">
-                        POST DEADLINE
+
+                    {/* Audience Relevance Progress Bar */}
+                    <div className="mt-4 px-6">
+                      <div className="flex items-center justify-between text-[11px] mb-1.5">
+                        <span className="text-slate-500 font-medium">Audience match</span>
+                        <span className="text-indigo-600 font-bold font-mono">{match.score}</span>
+                      </div>
+                      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-indigo-600 rounded-full transition-all duration-500" 
+                          style={{ width: `${match.percentage}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Forecaster 3-Metric Chips Bar */}
+                    <div className="mx-6 my-4 p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 grid grid-cols-3 gap-2 text-left">
+                      <div className="border-l-2 border-indigo-500 pl-2.5">
+                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+                          BUDGET
+                        </div>
+                        <div className="text-xs sm:text-sm font-black text-slate-900 font-mono mt-0.5">
+                          €{camp.budgetPerPost || 240}
+                        </div>
+                      </div>
+
+                      <div className="border-l-2 border-emerald-500 pl-2.5">
+                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+                          CHANNEL
+                        </div>
+                        <div className="text-xs sm:text-sm font-black text-slate-900 font-mono mt-0.5">
+                          {channelName}
+                        </div>
+                      </div>
+
+                      <div className="border-l-2 border-amber-500 pl-2.5">
+                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+                          CLOSES
+                        </div>
+                        <div className="text-xs sm:text-sm font-black text-slate-900 font-mono mt-0.5">
+                          {daysLeft}
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Action Buttons Row */}
-                  <div className="flex items-center gap-2.5 mt-4 pt-1">
+                  <div className="p-6 pt-0 flex items-center gap-3">
                     <button
                       type="button"
                       onClick={() => setSelectedBrief(camp)}
-                      className="flex-1 py-2.5 px-3 bg-white border border-[#E2E8F0] rounded-xl text-xs font-bold text-[#334155] hover:bg-slate-50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs active:scale-98"
+                      className="flex-1 py-2.5 px-3 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs active:scale-95"
                     >
-                      <FileText className="w-3.5 h-3.5 text-[#475569]" />
-                      <span>View the brief</span>
+                      <FileText className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Inspect Brief</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => setSelectedCampaignForApply(camp)}
-                      className="flex-1 py-2.5 px-3 bg-[#2864EA] hover:bg-[#1e52c8] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs text-center flex items-center justify-center active:scale-98"
+                      className="flex-1 py-2.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md shadow-indigo-500/20 text-center flex items-center justify-center active:scale-95"
                     >
-                      Apply
+                      Apply Now
                     </button>
                   </div>
                 </div>
@@ -496,57 +502,57 @@ export default function CreatorMarketplacePage() {
         )}
       </main>
 
-      {/* Campaign Brief Modal (Dynamic details) */}
+      {/* Campaign Brief Modal */}
       {selectedBrief && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] border border-[#E2E8F0] shadow-xl max-w-lg w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95">
-            <div className="flex items-start justify-between border-b border-[#E2E8F0] pb-4">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95">
+            <div className="flex items-start justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[10.5px] font-bold uppercase tracking-wider text-[#2864EA] bg-[#EFF6FF] px-2.5 py-1 rounded-full">
-                  Campaign Brief
+                <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full">
+                  Verified Brand Brief
                 </span>
-                <h3 className="text-lg font-bold text-[#111827] mt-2">
+                <h3 className="text-lg font-black text-slate-900 mt-2">
                   {selectedBrief.company?.name}: {selectedBrief.title}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedBrief(null)}
-                className="p-1.5 rounded-full hover:bg-slate-100 text-[#64748B] transition-colors cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="space-y-4 text-xs text-[#475569]">
+            <div className="space-y-4 text-xs text-slate-600">
               <div>
-                <h4 className="font-bold text-[#111827] mb-1">Campaign Objective</h4>
-                <p className="leading-relaxed">{selectedBrief.description || selectedBrief.objective}</p>
+                <h4 className="font-bold text-slate-900 mb-1">Campaign Objective</h4>
+                <p className="leading-relaxed bg-slate-50 p-3.5 rounded-2xl border border-slate-200">{selectedBrief.description || selectedBrief.objective}</p>
               </div>
 
               {selectedBrief.deliverables && (
-                <div className="p-3.5 bg-[#F8FAFC] border border-[#F1F5F9] rounded-xl">
-                  <h4 className="font-bold text-[#111827] mb-1">Deliverables</h4>
-                  <p className="leading-relaxed">{selectedBrief.deliverables}</p>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-1">Deliverables Required</h4>
+                  <p className="leading-relaxed bg-slate-50 p-3.5 rounded-2xl border border-slate-200">{selectedBrief.deliverables}</p>
                 </div>
               )}
 
               <div className="grid grid-cols-2 gap-3 pt-1">
-                <div className="p-3 bg-[#F8FAFC] border border-[#F1F5F9] rounded-xl">
-                  <span className="text-[10px] text-[#8C95A6] font-bold uppercase">Budget per post</span>
-                  <div className="text-sm font-bold text-[#111827] mt-0.5">€{selectedBrief.budgetPerPost || 240}</div>
+                <div className="p-3.5 bg-indigo-50/60 border border-indigo-100 border-l-4 border-l-indigo-600 rounded-2xl">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase font-mono">Budget per post</span>
+                  <div className="text-lg font-black text-indigo-700 mt-0.5 font-mono">€{selectedBrief.budgetPerPost || 240}</div>
                 </div>
-                <div className="p-3 bg-[#F8FAFC] border border-[#F1F5F9] rounded-xl">
-                  <span className="text-[10px] text-[#8C95A6] font-bold uppercase">Target Audience</span>
-                  <div className="text-sm font-bold text-[#111827] mt-0.5 truncate">{selectedBrief.targetAudience || 'Europe · North America'}</div>
+                <div className="p-3.5 bg-slate-50 border border-slate-200 border-l-4 border-l-emerald-500 rounded-2xl">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase font-mono">Target Audience</span>
+                  <div className="text-xs font-bold text-slate-900 mt-1 truncate">{selectedBrief.targetAudience || 'Europe · North America'}</div>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 pt-3 border-t border-[#E2E8F0]">
+            <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setSelectedBrief(null)}
-                className="flex-1 py-2.5 bg-white border border-[#E2E8F0] rounded-xl text-xs font-semibold text-[#64748B] hover:bg-slate-50 transition-colors cursor-pointer"
+                className="flex-1 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
               >
                 Close
               </button>
@@ -557,7 +563,7 @@ export default function CreatorMarketplacePage() {
                   setSelectedBrief(null);
                   setSelectedCampaignForApply(camp);
                 }}
-                className="flex-1 py-2.5 bg-[#2864EA] hover:bg-[#1e52c8] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
+                className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md shadow-indigo-500/20"
               >
                 Apply for Campaign
               </button>
@@ -577,17 +583,6 @@ export default function CreatorMarketplacePage() {
           }}
         />
       )}
-
-      {/* Floating Chat Bubble Widget in bottom right matching screenshot */}
-      <button
-        type="button"
-        aria-label="Support chat"
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#64748B] hover:bg-[#475569] text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
-      >
-        <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3C6.477 3 2 6.94 2 11.8c0 2.76 1.44 5.22 3.7 6.8-.24 1.42-.98 2.68-1.02 2.75-.12.22-.05.49.16.63.1.07.22.1.34.1.1 0 .2-.03.29-.08 2.1-1.22 3.8-2.22 4.34-2.54.71.16 1.45.24 2.19.24 5.523 0 10-3.94 10-8.8S17.523 3 12 3z" />
-        </svg>
-      </button>
     </div>
   );
 }

@@ -8,7 +8,9 @@ export default async function DashboardDispatcher() {
     redirect('/login');
   }
 
-  if (user.role === 'CREATOR') {
+  if (user.role === 'ADMIN') {
+    redirect('/dashboard/admin');
+  } else if (user.role === 'CREATOR') {
     redirect('/dashboard/creator');
   } else {
     redirect('/dashboard/company');
