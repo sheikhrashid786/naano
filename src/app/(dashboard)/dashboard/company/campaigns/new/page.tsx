@@ -119,7 +119,7 @@ export default function NewCampaignPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Q3 Growth: AI Outbound Launch"
-                className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
               />
             </div>
 
@@ -131,7 +131,7 @@ export default function NewCampaignPage() {
                 <select
                   value={objective}
                   onChange={(e) => setObjective(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 >
                   <option value="Brand Awareness & Reach">Brand Awareness &amp; Reach</option>
                   <option value="Lead Generation & Demos">Lead Generation &amp; Demos</option>
@@ -149,7 +149,7 @@ export default function NewCampaignPage() {
                   required
                   value={budgetPerPost}
                   onChange={(e) => setBudgetPerPost(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
             </div>
@@ -164,7 +164,7 @@ export default function NewCampaignPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe what product or feature you are promoting and the key context creators should know..."
-                className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600 resize-none"
+                className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 resize-none"
               />
             </div>
 
@@ -177,7 +177,7 @@ export default function NewCampaignPage() {
                   type="text"
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
               <div>
@@ -188,7 +188,7 @@ export default function NewCampaignPage() {
                   type="text"
                   value={deliverables}
                   onChange={(e) => setDeliverables(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
             </div>
@@ -204,9 +204,9 @@ export default function NewCampaignPage() {
               <button
                 type="button"
                 onClick={generateAIHooks}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 hover:bg-emerald-100/80 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5" />
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Regenerate AI Hooks</span>
               </button>
             </div>
@@ -219,7 +219,7 @@ export default function NewCampaignPage() {
                 rows={2}
                 value={angle}
                 onChange={(e) => setAngle(e.target.value)}
-                className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600 resize-none"
+                className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 resize-none"
               />
             </div>
 
@@ -239,7 +239,7 @@ export default function NewCampaignPage() {
                         updated[idx] = e.target.value;
                         setHooks(updated);
                       }}
-                      className="flex-1 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-3 py-2 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-blue-600"
+                      className="flex-1 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-3 py-2 text-xs text-[#111827] focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                     />
                   </div>
                 ))}
@@ -255,7 +255,7 @@ export default function NewCampaignPage() {
                   rows={3}
                   value={keyTalkingPoints}
                   onChange={(e) => setKeyTalkingPoints(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600 resize-none"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 resize-none"
                 />
               </div>
 
@@ -267,7 +267,7 @@ export default function NewCampaignPage() {
                   rows={3}
                   value={dosAndDonts}
                   onChange={(e) => setDosAndDonts(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600 resize-none"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 resize-none"
                 />
               </div>
             </div>
@@ -281,7 +281,7 @@ export default function NewCampaignPage() {
                   type="text"
                   value={trackingUrl}
                   onChange={(e) => setTrackingUrl(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
               <div>
@@ -292,7 +292,7 @@ export default function NewCampaignPage() {
                   type="text"
                   value={callToAction}
                   onChange={(e) => setCallToAction(e.target.value)}
-                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+                  className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
             </div>
@@ -308,7 +308,7 @@ export default function NewCampaignPage() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-3 rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-3 rounded-xl shadow-sm shadow-emerald-600/20 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
               <span>Save &amp; Invite Creators</span>

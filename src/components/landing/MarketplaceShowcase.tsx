@@ -8,8 +8,8 @@ export default function MarketplaceShowcase() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-100 rounded-full py-1 px-3 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200/80 rounded-full py-1 px-3 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
             <span>The Naano creator marketplace</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#17181C]">

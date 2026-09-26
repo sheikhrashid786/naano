@@ -308,7 +308,7 @@ export default function CompanyMessagesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search conversations"
-                className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-800 placeholder:text-slate-400 shadow-2xs focus:outline-none focus:border-[#2563EB]"
+                className="w-full bg-white border border-[#E2E8F0] rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-800 placeholder:text-slate-400 shadow-2xs focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
               />
             </div>
           </div>
@@ -324,7 +324,7 @@ export default function CompanyMessagesPage() {
                 }}
                 className={`flex-1 sm:flex-initial px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   filterMode === 'all'
-                    ? 'bg-white text-[#2563EB] shadow-2xs'
+                    ? 'bg-white text-emerald-700 shadow-2xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -359,7 +359,7 @@ export default function CompanyMessagesPage() {
               onClick={() => setSelectedChatId('naanobot')}
               className={`rounded-2xl p-3.5 transition-all cursor-pointer flex items-center gap-3 relative border ${
                 selectedChatId === 'naanobot'
-                  ? 'bg-[#F0F5FA] border-blue-200/80 shadow-2xs'
+                  ? 'bg-emerald-50/60 border-emerald-200/80 shadow-2xs'
                   : 'bg-white hover:bg-slate-50/80 border-transparent'
               }`}
             >
@@ -384,7 +384,7 @@ export default function CompanyMessagesPage() {
               </div>
 
               {/* Unread Counter Badge */}
-              <span className="w-5 h-5 rounded-full bg-[#2563EB] text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[11px] font-bold flex items-center justify-center shrink-0">
                 1
               </span>
             </div>
@@ -392,7 +392,7 @@ export default function CompanyMessagesPage() {
             {/* 2. Other Creator Conversations */}
             {loading ? (
               <div className="py-10 flex flex-col items-center justify-center text-slate-400 gap-2">
-                <Loader2 className="w-5 h-5 animate-spin text-[#2563EB]" />
+                <Loader2 className="w-5 h-5 animate-spin text-emerald-600" />
                 <span className="text-xs font-semibold">Loading messages...</span>
               </div>
             ) : filteredConversations.length === 0 ? (
@@ -415,7 +415,7 @@ export default function CompanyMessagesPage() {
                     onClick={() => setSelectedChatId(conv.collaborationId)}
                     className={`rounded-2xl p-3.5 transition-all cursor-pointer flex items-center gap-3 relative border ${
                       isSelected
-                        ? 'bg-[#F0F5FA] border-blue-200/80 shadow-2xs'
+                        ? 'bg-emerald-50/60 border-emerald-200/80 shadow-2xs'
                         : 'bg-white hover:bg-slate-50/80 border-transparent'
                     }`}
                   >
@@ -494,7 +494,7 @@ export default function CompanyMessagesPage() {
                       <div
                         className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-2xs ${
                           msg.sender === 'user'
-                            ? 'bg-[#2563EB] text-white rounded-br-none'
+                            ? 'bg-emerald-600 text-white rounded-br-none'
                             : 'bg-white border border-[#E2E8F0] text-[#0F172A] rounded-bl-none'
                         }`}
                       >
@@ -509,7 +509,7 @@ export default function CompanyMessagesPage() {
 
                 {botTyping && (
                   <div className="flex items-center gap-2 text-xs text-slate-400 pl-9">
-                    <Loader2 className="w-3.5 h-3.5 animate-spin text-[#2563EB]" />
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-600" />
                     <span>NaanoBot is thinking...</span>
                   </div>
                 )}
@@ -521,21 +521,21 @@ export default function CompanyMessagesPage() {
                 <button
                   type="button"
                   onClick={() => setNewMessage('How do creator bookings work?')}
-                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs text-slate-700 hover:border-blue-400 hover:text-blue-600 transition-colors shrink-0 shadow-2xs cursor-pointer"
+                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs text-slate-700 hover:border-emerald-400 hover:text-emerald-700 hover:bg-emerald-50/50 transition-colors shrink-0 shadow-2xs cursor-pointer"
                 >
                   ⚡ How do creator bookings work?
                 </button>
                 <button
                   type="button"
                   onClick={() => setNewMessage('How do I create a campaign brief?')}
-                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs text-slate-700 hover:border-blue-400 hover:text-blue-600 transition-colors shrink-0 shadow-2xs cursor-pointer"
+                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs text-slate-700 hover:border-emerald-400 hover:text-emerald-700 hover:bg-emerald-50/50 transition-colors shrink-0 shadow-2xs cursor-pointer"
                 >
                   🎯 How to set up a brief?
                 </button>
                 <button
                   type="button"
                   onClick={() => setNewMessage('How are creator payouts handled?')}
-                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs text-slate-700 hover:border-blue-400 hover:text-blue-600 transition-colors shrink-0 shadow-2xs cursor-pointer"
+                  className="px-3 py-1 bg-white border border-slate-200 rounded-full text-xs text-slate-700 hover:border-emerald-400 hover:text-emerald-700 hover:bg-emerald-50/50 transition-colors shrink-0 shadow-2xs cursor-pointer"
                 >
                   💰 How do payouts work?
                 </button>
@@ -551,12 +551,12 @@ export default function CompanyMessagesPage() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Ask NaanoBot anything about campaigns or creators..."
-                  className="flex-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB]"
+                  className="flex-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
                 <button
                   type="submit"
                   disabled={!newMessage.trim()}
-                  className="px-4 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-xl text-xs font-bold shadow-2xs transition-all disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                  className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm shadow-emerald-600/20 transition-all disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
                 >
                   <span>Send</span>
                   <Send className="w-3.5 h-3.5" />
@@ -590,7 +590,7 @@ export default function CompanyMessagesPage() {
                     </span>
                     <span className="text-[11px] text-slate-400 block">
                       Campaign:{' '}
-                      <span className="text-[#2563EB] font-semibold">
+                      <span className="text-emerald-700 font-semibold">
                         {activeConversation.collaboration?.campaign?.title}
                       </span>
                     </span>
@@ -624,7 +624,7 @@ export default function CompanyMessagesPage() {
                         <div
                           className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-2xs ${
                             isMe
-                              ? 'bg-[#2563EB] text-white rounded-br-none'
+                              ? 'bg-emerald-600 text-white rounded-br-none'
                               : 'bg-white border border-[#E2E8F0] text-[#0F172A] rounded-bl-none'
                           }`}
                         >
@@ -653,12 +653,12 @@ export default function CompanyMessagesPage() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type a message or review note..."
-                  className="flex-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB]"
+                  className="flex-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-xs text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
                 <button
                   type="submit"
                   disabled={sending || !newMessage.trim()}
-                  className="px-4 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-xl text-xs font-bold shadow-2xs transition-all disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                  className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm shadow-emerald-600/20 transition-all disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
                 >
                   {sending ? (
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -706,7 +706,7 @@ export default function CompanyMessagesPage() {
             <div className="max-h-60 overflow-y-auto space-y-2">
               {allCreators.length === 0 ? (
                 <div className="py-6 text-center text-xs text-slate-400">
-                  <Loader2 className="w-4 h-4 animate-spin text-[#2563EB] mx-auto mb-1" />
+                  <Loader2 className="w-4 h-4 animate-spin text-emerald-600 mx-auto mb-1" />
                   Loading creators...
                 </div>
               ) : (
@@ -754,7 +754,7 @@ export default function CompanyMessagesPage() {
                         </span>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-[#2563EB]">Message &rarr;</span>
+                    <span className="text-xs font-bold text-emerald-700">Message &rarr;</span>
                   </div>
                 ))
               )}

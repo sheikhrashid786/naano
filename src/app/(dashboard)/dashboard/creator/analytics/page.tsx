@@ -170,12 +170,12 @@ export default async function CreatorAnalyticsPage() {
         {/* 4 Metric Cards with Forecaster border-l-2 styling */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           {/* 1. Public posts */}
-          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-indigo-600">
+          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-emerald-600">
             <div className="flex items-center justify-between gap-2">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono truncate">
                 Public Posts
               </span>
-              <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                 <FileText className="w-4 h-4" />
               </div>
             </div>
@@ -230,12 +230,12 @@ export default async function CreatorAnalyticsPage() {
           </div>
 
           {/* 4. LinkedIn followers */}
-          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-violet-500">
+          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-teal-500">
             <div className="flex items-center justify-between gap-2">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono truncate">
                 Followers
               </span>
-              <div className="w-8 h-8 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
                 <Users className="w-4 h-4" />
               </div>
             </div>
@@ -269,7 +269,7 @@ export default async function CreatorAnalyticsPage() {
 
               {recentPosts.length === 0 ? (
                 <div className="py-16 text-center">
-                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-2">
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto mb-2">
                     <FileText className="w-5 h-5" />
                   </div>
                   <h4 className="text-xs sm:text-sm font-bold text-slate-700">
@@ -308,7 +308,7 @@ export default async function CreatorAnalyticsPage() {
                           href={post.submittedPostUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="px-3.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-indigo-600 hover:bg-indigo-50 transition-colors flex items-center gap-1.5 shrink-0 shadow-2xs"
+                          className="px-3.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-emerald-700 hover:bg-emerald-50 transition-colors flex items-center gap-1.5 shrink-0 shadow-2xs"
                         >
                           <span>Inspect</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -357,8 +357,8 @@ export default async function CreatorAnalyticsPage() {
         </div>
 
         {/* Bottom Info Bar */}
-        <div className="bg-white border border-indigo-100 rounded-3xl p-5 sm:p-6 flex items-center gap-4 shadow-2xs">
-          <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
+        <div className="bg-white border border-emerald-200/80 rounded-3xl p-5 sm:p-6 flex items-center gap-4 shadow-2xs">
+          <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200/80">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>

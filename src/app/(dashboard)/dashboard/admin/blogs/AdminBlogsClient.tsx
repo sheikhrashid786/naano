@@ -209,7 +209,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <ShieldCheck className="w-3 h-3 text-indigo-400" />
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 <span>Editorial CMS</span>
               </span>
               <span className="text-xs font-semibold text-[#64748B]">
@@ -226,7 +226,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
 
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="self-start sm:self-auto px-4 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs sm:text-sm font-bold rounded-xl shadow-2xs flex items-center gap-2 transition-all active:scale-95 shrink-0 cursor-pointer"
+            className="self-start sm:self-auto px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all active:scale-95 shrink-0 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
             <span>Publish New Article</span>
@@ -242,7 +242,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                 onClick={() => setSelectedTopic(t)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   selectedTopic === t
-                    ? 'bg-[#2563EB] text-white shadow-xs'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                     : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200/60'
                 }`}
               >
@@ -258,7 +258,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
               placeholder="Search by title, author, or slug..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-800"
+              className="w-full pl-9 pr-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 text-slate-800"
             />
           </div>
         </div>
@@ -295,7 +295,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
 
                       {/* Topic */}
                       <td className="py-4 px-5">
-                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100">
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
                           {art.topic}
                         </span>
                         <div className="text-[10px] text-slate-400 mt-1 font-mono">{art.readTime}</div>
@@ -347,7 +347,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                           href={`/blog/${art.slug}`}
                           target="_blank"
                           title="View live article"
-                          className="inline-flex p-2 rounded-xl text-slate-400 hover:text-[#2563EB] hover:bg-blue-50 transition-colors"
+                          className="inline-flex p-2 rounded-xl text-slate-400 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </Link>
@@ -382,7 +382,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
             </button>
 
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
                 <Plus className="w-5 h-5" />
               </div>
               <div>
@@ -407,7 +407,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                     placeholder="e.g. 2026 B2B Influencer Pricing Benchmarks"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-medium"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-medium"
                   />
                 </div>
 
@@ -418,7 +418,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                     placeholder="b2b-pricing-benchmarks-2026"
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-mono"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-mono"
                   />
                 </div>
               </div>
@@ -429,7 +429,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                   <select
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-bold text-slate-800"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-bold text-slate-800"
                   >
                     <option value="CPL economics">CPL economics</option>
                     <option value="LinkedIn micro-creators">LinkedIn micro-creators</option>
@@ -445,7 +445,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                     placeholder="8 min read"
                     value={readTime}
                     onChange={(e) => setReadTime(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-mono"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-mono"
                   />
                 </div>
 
@@ -456,7 +456,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                     placeholder="Alexis Jarre"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                    className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600"
                   />
                 </div>
               </div>
@@ -468,7 +468,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                   placeholder="Key findings and real transacted marketplace data..."
                   value={summary}
                   onChange={(e) => setSummary(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600"
                 />
               </div>
 
@@ -479,7 +479,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                   placeholder="Standardize fixed-fee escrow milestones rather than pay-per-click vanity."
                   value={takeaway1}
                   onChange={(e) => setTakeaway1(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600"
                 />
               </div>
 
@@ -490,7 +490,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                   placeholder="In-depth analysis paragraphs and tactical execution steps..."
                   value={contentBody}
                   onChange={(e) => setContentBody(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 leading-relaxed"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 leading-relaxed"
                 />
               </div>
 
@@ -505,7 +505,7 @@ export default function AdminBlogsClient({ initialUser, blogs: initialItems }: P
                 <button
                   type="submit"
                   disabled={formSubmitting}
-                  className="px-5 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold disabled:opacity-50 cursor-pointer shadow-xs"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold disabled:opacity-50 cursor-pointer shadow-md shadow-emerald-500/20"
                 >
                   {formSubmitting ? 'Publishing...' : 'Publish Article'}
                 </button>

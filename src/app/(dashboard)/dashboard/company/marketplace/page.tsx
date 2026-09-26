@@ -190,17 +190,17 @@ export default function CompanyMarketplacePage() {
       {/* MODE 1: AI MATCHING SCREEN                                               */}
       {/* ========================================================================= */}
       {activeMode === 'ai' ? (
-        <div className="flex-1 w-full min-h-[calc(100vh-64px)] bg-gradient-to-b from-indigo-50/60 via-slate-50/40 to-[#F8FAFC] flex flex-col items-center justify-center px-6 sm:px-8 lg:px-10 py-12 relative overflow-hidden">
+        <div className="flex-1 w-full min-h-[calc(100vh-64px)] bg-gradient-to-b from-emerald-50/50 via-slate-50/30 to-[#F8FAFC] flex flex-col items-center justify-center px-6 sm:px-8 lg:px-10 py-12 relative overflow-hidden">
           {/* Ambient Lighting */}
-          <div className="absolute -left-20 top-1/4 w-96 h-96 rounded-full bg-indigo-200/20 blur-3xl pointer-events-none" />
-          <div className="absolute -right-20 top-1/3 w-96 h-96 rounded-full bg-sky-200/20 blur-3xl pointer-events-none" />
+          <div className="absolute -left-20 top-1/4 w-96 h-96 rounded-full bg-emerald-200/25 blur-3xl pointer-events-none" />
+          <div className="absolute -right-20 top-1/3 w-96 h-96 rounded-full bg-teal-200/20 blur-3xl pointer-events-none" />
 
           {/* Top Segmented Mode Switcher */}
           <div className="bg-white border border-slate-200/90 p-1.5 rounded-2xl shadow-2xs inline-flex items-center gap-1.5 mb-10 z-10">
             <button
               type="button"
               onClick={() => setActiveMode('ai')}
-              className="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/25 cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-md shadow-emerald-600/25 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>AI Matching</span>
@@ -227,9 +227,9 @@ export default function CompanyMarketplacePage() {
                       <stop offset="100%" stopColor="#E2E8F0" />
                     </linearGradient>
                     <radialGradient id="sphereGrad" cx="35%" cy="35%" r="65%">
-                      <stop offset="0%" stopColor="#818CF8" />
-                      <stop offset="40%" stopColor="#4F46E5" />
-                      <stop offset="100%" stopColor="#312E81" />
+                      <stop offset="0%" stopColor="#34D399" />
+                      <stop offset="40%" stopColor="#059669" />
+                      <stop offset="100%" stopColor="#064E3B" />
                     </radialGradient>
                   </defs>
                   <path
@@ -261,7 +261,7 @@ export default function CompanyMarketplacePage() {
 
             {/* Search Input Box */}
             <form onSubmit={handleAiSubmit} className="pt-2">
-              <div className="bg-white rounded-3xl p-2 pl-6 pr-2.5 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.06)] flex items-center justify-between gap-3 focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all">
+              <div className="bg-white rounded-3xl p-2 pl-6 pr-2.5 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.06)] flex items-center justify-between gap-3 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-500/20 transition-all">
                 <input
                   type="text"
                   value={aiQuery}
@@ -272,7 +272,7 @@ export default function CompanyMarketplacePage() {
                 <button
                   type="submit"
                   disabled={isSearchingAi}
-                  className="w-10 h-10 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shrink-0 transition-all active:scale-95 cursor-pointer disabled:opacity-50 shadow-md shadow-indigo-500/20"
+                  className="w-10 h-10 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shrink-0 transition-all active:scale-95 cursor-pointer disabled:opacity-50 shadow-md shadow-emerald-600/20"
                 >
                   {isSearchingAi ? (
                     <Loader2 className="w-4 h-4 animate-spin text-white" />
@@ -288,11 +288,11 @@ export default function CompanyMarketplacePage() {
               <div className="pt-4 space-y-5 text-left animate-in fade-in">
                 <div className="p-5 rounded-3xl bg-white border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                      <Bot className="w-5 h-5" />
+                    <div className="w-9 h-9 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                      <Bot className="w-5 h-5 text-emerald-600" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider block">
+                      <span className="text-[10px] font-black uppercase text-emerald-700 tracking-wider block">
                         Naano Intelligence Match
                       </span>
                       <p className="text-xs text-slate-800 mt-1 leading-relaxed font-medium">
@@ -329,7 +329,7 @@ export default function CompanyMarketplacePage() {
                               className="w-11 h-11 rounded-2xl object-cover object-top border border-slate-200"
                             />
                           ) : (
-                            <div className="w-11 h-11 rounded-2xl bg-indigo-600 text-white font-black text-sm flex items-center justify-center">
+                            <div className="w-11 h-11 rounded-2xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center">
                               {creator.user?.name?.charAt(0)}
                             </div>
                           )}
@@ -350,7 +350,7 @@ export default function CompanyMarketplacePage() {
                           <button
                             type="button"
                             onClick={() => setSelectedCreatorForInvite(creator)}
-                            className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+                            className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold rounded-xl transition-all shadow-xs cursor-pointer"
                           >
                             Book
                           </button>
@@ -367,7 +367,7 @@ export default function CompanyMarketplacePage() {
                       setSearch(aiQuery);
                       setActiveMode('marketplace');
                     }}
-                    className="text-xs font-bold text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 cursor-pointer"
+                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>View all matching profiles in Marketplace</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -385,10 +385,10 @@ export default function CompanyMarketplacePage() {
                       key={idx}
                       type="button"
                       onClick={() => handleSelectSuggested(prompt)}
-                      className="w-full p-4 px-6 text-left text-xs font-semibold text-slate-800 hover:bg-indigo-50/50 hover:text-indigo-600 transition-colors flex items-center justify-between gap-3 group cursor-pointer"
+                      className="w-full p-4 px-6 text-left text-xs font-semibold text-slate-800 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors flex items-center justify-between gap-3 group cursor-pointer"
                     >
                       <span className="truncate">{prompt}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </button>
                   ))}
                 </div>
@@ -418,7 +418,7 @@ export default function CompanyMarketplacePage() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                  <Store className="w-3 h-3 text-indigo-400" />
+                  <Store className="w-3 h-3 text-emerald-400" />
                   <span>Discovery Directory</span>
                 </span>
                 <span className="text-xs font-semibold text-slate-500">
@@ -446,7 +446,7 @@ export default function CompanyMarketplacePage() {
               <button
                 type="button"
                 onClick={() => setActiveMode('marketplace')}
-                className="flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-500/25 cursor-pointer"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-md shadow-emerald-600/25 cursor-pointer"
               >
                 <Store className="w-3.5 h-3.5 text-white" />
                 <span>Creator Marketplace</span>
@@ -461,7 +461,7 @@ export default function CompanyMarketplacePage() {
               onClick={() => setActiveTab('all')}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'all'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -476,7 +476,7 @@ export default function CompanyMarketplacePage() {
               onClick={() => setActiveTab('shortlist')}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'shortlist'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -497,7 +497,7 @@ export default function CompanyMarketplacePage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search creator by name, topic, or niche..."
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all placeholder:text-slate-400"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 transition-all placeholder:text-slate-400"
                 />
               </div>
 
@@ -585,7 +585,7 @@ export default function CompanyMarketplacePage() {
                       setPriceRange('');
                       setSearch('');
                     }}
-                    className="text-xs font-bold text-indigo-600 hover:underline px-2 cursor-pointer"
+                    className="text-xs font-bold text-emerald-700 hover:underline px-2 cursor-pointer"
                   >
                     Clear filters
                   </button>
@@ -601,7 +601,7 @@ export default function CompanyMarketplacePage() {
           {/* CREATOR CARDS GRID */}
           {loading ? (
             <div className="py-24 flex flex-col items-center justify-center gap-3 text-slate-400">
-              <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+              <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
               <span className="text-xs font-semibold">Matching creators...</span>
             </div>
           ) : displayedCreators.length === 0 ? (
@@ -640,7 +640,7 @@ export default function CompanyMarketplacePage() {
                   >
                     <div>
                       {/* Atmospheric Top Bar */}
-                      <div className="h-28 bg-gradient-to-r from-slate-900 to-indigo-950 p-4 flex items-start justify-between relative overflow-hidden">
+                      <div className="h-28 bg-gradient-to-r from-[#070D0A] to-[#064E3B] p-4 flex items-start justify-between relative overflow-hidden">
                         <img
                           src="/images/hero-clouds.jpg"
                           alt="Clouds"
@@ -653,7 +653,7 @@ export default function CompanyMarketplacePage() {
                             type="button"
                             onClick={() => toggleCheckbox(creator.id)}
                             className={`w-8 h-8 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xs flex items-center justify-center transition-all cursor-pointer ${
-                              isSelected ? 'bg-indigo-600 border-indigo-500' : 'hover:bg-white/20'
+                              isSelected ? 'bg-emerald-600 border-emerald-500' : 'hover:bg-white/20'
                             }`}
                           >
                             {isSelected ? (
@@ -701,7 +701,7 @@ export default function CompanyMarketplacePage() {
                           <button
                             type="button"
                             onClick={() => setSelectedCreatorForInvite(creator)}
-                            className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md shadow-indigo-500/20 transition-all active:scale-95 cursor-pointer"
+                            className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md shadow-emerald-600/20 transition-all active:scale-95 cursor-pointer"
                           >
                             Book
                           </button>
@@ -717,7 +717,7 @@ export default function CompanyMarketplacePage() {
                             className="w-20 h-20 rounded-2xl border-4 border-white shadow-md object-cover object-top bg-slate-100"
                           />
                         ) : (
-                          <div className="w-20 h-20 rounded-2xl border-4 border-white shadow-md bg-indigo-600 text-white font-black text-2xl flex items-center justify-center">
+                          <div className="w-20 h-20 rounded-2xl border-4 border-white shadow-md bg-emerald-600 text-white font-black text-2xl flex items-center justify-center">
                             {initial}
                           </div>
                         )}
@@ -736,7 +736,7 @@ export default function CompanyMarketplacePage() {
 
                       {/* Forecaster 4-Column Metric Bar */}
                       <div className="mx-4 my-3 p-3 rounded-2xl bg-slate-50/70 border border-slate-200/80 grid grid-cols-4 gap-2 text-center">
-                        <div className="border-l-2 border-indigo-500 pl-1 text-left">
+                        <div className="border-l-2 border-emerald-500 pl-1 text-left">
                           <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                             FOLLOWERS
                           </span>
@@ -744,7 +744,7 @@ export default function CompanyMarketplacePage() {
                             {followersDisplay}
                           </span>
                         </div>
-                        <div className="border-l-2 border-emerald-500 pl-1 text-left">
+                        <div className="border-l-2 border-teal-500 pl-1 text-left">
                           <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                             MEDIAN
                           </span>
@@ -760,7 +760,7 @@ export default function CompanyMarketplacePage() {
                             {cpmDisplay}
                           </span>
                         </div>
-                        <div className="border-l-2 border-violet-500 pl-1 text-left">
+                        <div className="border-l-2 border-emerald-600 pl-1 text-left">
                           <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                             RATE
                           </span>
@@ -776,13 +776,13 @@ export default function CompanyMarketplacePage() {
                       <button
                         type="button"
                         onClick={() => setSelectedCreatorForProfile(creator)}
-                        className="w-full flex items-center justify-between text-xs font-bold text-slate-700 hover:text-indigo-600 transition-colors py-1 cursor-pointer"
+                        className="w-full flex items-center justify-between text-xs font-bold text-slate-700 hover:text-emerald-700 transition-colors py-1 cursor-pointer"
                       >
                         <div className="flex items-center gap-2">
-                          <UserCircle className="w-4 h-4 text-indigo-600" />
+                          <UserCircle className="w-4 h-4 text-emerald-600" />
                           <span>View Media Kit Card</span>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all" />
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all" />
                       </button>
                     </div>
                   </div>

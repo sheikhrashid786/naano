@@ -4,70 +4,103 @@
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  --bg-canvas: #FAFAFC;
+  /* Alternating Public Section Background Tokens */
+  --bg-canvas-odd: #FFFFFF;
+  --bg-canvas-even: #EBF1EE;
   --bg-surface: #FFFFFF;
-  --bg-subtle: #F1F5F9;
+  --bg-subtle: #E2ECE6;
   
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
+  --text-primary: #0A120E;
+  --text-secondary: #3D4F46;
+  --text-muted: #83958B;
   
-  --border-light: #E2E8F0;
-  --border-subtle: #F1F5F9;
+  --border-light: #DCE7E1;
+  --border-subtle: rgba(6, 78, 59, 0.09);
   
-  --brand-primary: #4F46E5;
-  --brand-primary-hover: #4338CA;
-  --brand-secondary: #7C3AED;
-  --brand-accent: #06B6D4;
-  --brand-emerald: #10B981;
+  /* Emerald & Mint Luxury Brand Colors (Fintech/Payouts style - Ramp & Wise) */
+  --brand-primary: #059669;
+  --brand-primary-hover: #047857;
+  --brand-forest: #064E3B;
+  --brand-mint: #10B981;
+  --brand-light-mint: #34D399;
 }
 
 body {
-  background-color: var(--bg-canvas);
+  background-color: var(--bg-canvas-odd);
   color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Modern Gradient Text */
+/* Public Alternating Section Rhythm */
+.section-odd {
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.section-even {
+  background-color: #EBF1EE;
+  border-top: 1px solid rgba(6, 78, 59, 0.08);
+  border-bottom: 1px solid rgba(6, 78, 59, 0.08);
+  position: relative;
+}
+
+/* Banner / Hero Section with distinct non-white background and ambient glow */
+.banner-section {
+  background-color: #EBF1EE;
+  background-image: 
+    radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.12) 0px, transparent 55%),
+    radial-gradient(at 90% 10%, rgba(5, 150, 105, 0.10) 0px, transparent 50%),
+    radial-gradient(at 50% 95%, rgba(209, 250, 229, 0.6) 0px, transparent 65%);
+  border-bottom: 1px solid rgba(6, 78, 59, 0.12);
+  position: relative;
+}
+
+/* Luxury Emerald & Mint Gradient Text */
 .text-gradient-brand {
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #2563EB 100%);
+  background: linear-gradient(135deg, #047857 0%, #059669 45%, #10B981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-mint {
+  background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-slate {
-  background: linear-gradient(180deg, #0F172A 0%, #334155 100%);
+  background: linear-gradient(180deg, #0A120E 0%, #293831 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Glassmorphism & Surface Cards */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 12px 32px -4px rgba(79, 70, 229, 0.04);
+  border: 1px solid rgba(6, 78, 59, 0.09);
+  box-shadow: 0 4px 20px -2px rgba(10, 18, 14, 0.04), 0 12px 32px -4px rgba(5, 150, 105, 0.05);
 }
 
 .glass-panel-dark {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(7, 13, 10, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(52, 211, 153, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
 }
 
 /* Ambient Subtle Background Grid Pattern */
 .bg-grid-subtle {
-  background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(131, 149, 139, 0.22) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
 .bg-dot-pattern {
-  background-image: radial-gradient(rgba(79, 70, 229, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(5, 150, 105, 0.14) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 

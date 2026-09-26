@@ -46,12 +46,12 @@ export default function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-[#FAFAFC] relative overflow-hidden scroll-mt-20">
+    <section id="how-it-works" className="py-24 bg-[#EBF1EE] border-b border-slate-200/80 relative overflow-hidden section-even scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 text-violet-700 text-xs font-bold border border-violet-100 uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200/80 uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Engineered for B2B Results</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-indigo-200 transition-all duration-300 flex flex-col justify-between"
+                className="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-2xs hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -81,14 +81,14 @@ export default function HowItWorksSection() {
                     </span>
                   </div>
 
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-5">
                     <Icon className="w-6 h-6" />
                   </div>
 
                   <h3 className="text-xl font-bold text-slate-900 tracking-tight">
                     {step.title}
                   </h3>
-                  <div className="text-xs font-semibold text-indigo-600 mt-1 mb-3">
+                  <div className="text-xs font-semibold text-emerald-700 mt-1 mb-3">
                     {step.subtitle}
                   </div>
                   <p className="text-sm text-slate-600 leading-relaxed">
@@ -97,7 +97,7 @@ export default function HowItWorksSection() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-slate-400">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   <span>Automated in platform</span>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default function HowItWorksSection() {
           {/* Header - White background matching other sections */}
           <div className="p-7 sm:p-9 bg-white text-slate-900 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-200/80">
             <div className="max-w-2xl">
-              <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-indigo-600 font-mono">
+              <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-emerald-700 font-mono">
                 Live Campaign Architecture
               </span>
               <h3 className="text-xl sm:text-2xl lg:text-[26px] font-black text-slate-900 tracking-tight mt-1">
@@ -128,7 +128,7 @@ export default function HowItWorksSection() {
                 onClick={() => setActiveTab('brief')}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   activeTab === 'brief'
-                    ? 'bg-indigo-600 text-white shadow-sm'
+                    ? 'bg-emerald-600 text-white shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -139,7 +139,7 @@ export default function HowItWorksSection() {
                 onClick={() => setActiveTab('match')}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   activeTab === 'match'
-                    ? 'bg-indigo-600 text-white shadow-sm'
+                    ? 'bg-emerald-600 text-white shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -150,7 +150,7 @@ export default function HowItWorksSection() {
                 onClick={() => setActiveTab('attribution')}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   activeTab === 'attribution'
-                    ? 'bg-indigo-600 text-white shadow-sm'
+                    ? 'bg-emerald-600 text-white shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -160,17 +160,17 @@ export default function HowItWorksSection() {
           </div>
 
           {/* Tab Content Canvas */}
-          <div className="p-6 sm:p-9 bg-slate-50/50">
+          <div className="p-6 sm:p-9 bg-slate-50/70 border-t border-slate-100">
             {activeTab === 'brief' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
                 {/* 1. Suggested Hook */}
-                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-[11px] font-bold text-indigo-600 uppercase tracking-widest mb-3">
-                      <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <div className="flex items-center gap-2 text-[11px] font-bold text-emerald-700 uppercase tracking-widest mb-3">
+                      <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Suggested High-Retention Hook</span>
                     </div>
-                    <div className="border-l-2 border-indigo-500 pl-4 py-0.5">
+                    <div className="border-l-2 border-emerald-500 pl-4 py-0.5">
                       <p className="text-[14.5px] font-medium text-slate-900 leading-relaxed italic">
                         &ldquo;99% of AI cold outreach tools sound like generic bots. Here is the exact intent-driven workflow our team used to generate 42 qualified enterprise demos last month:&rdquo;
                       </p>
@@ -179,45 +179,45 @@ export default function HowItWorksSection() {
                 </div>
 
                 {/* 2. Call-to-Action Strategy */}
-                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-[11px] font-bold text-emerald-600 uppercase tracking-widest mb-3">
+                    <div className="flex items-center gap-2 text-[11px] font-bold text-emerald-700 uppercase tracking-widest mb-3">
                       <LinkIcon className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Call-to-Action Strategy</span>
                     </div>
                     <div className="border-l-2 border-emerald-500 pl-4 py-0.5">
                       <div className="text-sm font-semibold text-slate-900">Lead Magnet in 1st Comment</div>
                       <p className="text-[13.5px] text-slate-600 leading-relaxed mt-1">
-                        Keep the post algorithm-friendly by instructing readers to comment <code className="font-mono font-semibold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100 text-xs">&ldquo;PLAYBOOK&rdquo;</code> for the automated DM link.
+                        Keep the post algorithm-friendly by instructing readers to comment <code className="font-mono font-semibold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 text-xs">&ldquo;PLAYBOOK&rdquo;</code> for the automated DM link.
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {/* 3. Key Talking Points */}
-                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:shadow-md transition-all duration-200">
+                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-md transition-all duration-200">
                   <div className="flex items-center gap-2 text-[11px] font-bold text-slate-700 uppercase tracking-widest mb-3">
                     <FileCheck2 className="w-4 h-4 text-slate-500 shrink-0" />
                     <span>Key Talking Points &amp; Differentiation</span>
                   </div>
                   <div className="border-l-2 border-slate-300 pl-4 py-0.5 space-y-2.5">
                     <div className="flex items-start gap-2.5 text-[13.5px] text-slate-700 leading-snug">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
                       <span>Highlight native LinkedIn research enrichment vs. stale static scrapers.</span>
                     </div>
                     <div className="flex items-start gap-2.5 text-[13.5px] text-slate-700 leading-snug">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
                       <span>Showcase a 30-second screen recording of the actual workflow.</span>
                     </div>
                     <div className="flex items-start gap-2.5 text-[13.5px] text-slate-700 leading-snug">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
                       <span>Mention the 14-day unrestricted trial (no credit card required).</span>
                     </div>
                   </div>
                 </div>
 
                 {/* 4. Platform Dos & Don'ts */}
-                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2 text-[11px] font-bold text-amber-700 uppercase tracking-widest mb-3">
                       <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0" />
@@ -245,14 +245,14 @@ export default function HowItWorksSection() {
             {activeTab === 'match' && (
               <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                 <div className="space-y-3 max-w-xl">
-                  <div className="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 uppercase tracking-wider font-mono">
-                    <ShieldCheck className="w-4 h-4" />
+                  <div className="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 uppercase tracking-wider font-mono">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
                     <span>Automated Stripe Escrow Vault</span>
                   </div>
                   <h4 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
                     How your campaign capital is guaranteed
                   </h4>
-                  <div className="text-[13.5px] text-slate-600 space-y-2 leading-relaxed border-l-2 border-indigo-500 pl-4 py-0.5">
+                  <div className="text-[13.5px] text-slate-600 space-y-2 leading-relaxed border-l-2 border-emerald-500 pl-4 py-0.5">
                     <p><strong className="text-slate-900 font-semibold">1. Budget Reserved:</strong> Campaign fee is secured in escrow upon invitation.</p>
                     <p><strong className="text-slate-900 font-semibold">2. Content Review:</strong> Creator drafts post adhering to your brief parameters.</p>
                     <p><strong className="text-slate-900 font-semibold">3. Verified Publish:</strong> Post goes live with unique tracking parameters.</p>
@@ -274,12 +274,12 @@ export default function HowItWorksSection() {
               <div className="space-y-5">
                 <div className="flex items-center justify-between text-xs">
                   <h4 className="font-bold text-slate-900 text-sm">Multi-Channel Attribution Breakdown</h4>
-                  <span className="font-mono text-indigo-600 font-bold bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100">
+                  <span className="font-mono text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
                     UTM-Tagged Campaign
                   </span>
                 </div>
                 <div className="p-3.5 bg-slate-50 border border-slate-200/90 text-slate-700 rounded-xl font-mono text-xs overflow-x-auto shadow-2xs">
-                  <span className="text-indigo-600 font-semibold">https://yourcompany.com/?</span>utm_source=linkedin&amp;utm_medium=creator&amp;utm_campaign=alexis_jarre&amp;utm_content=outbound_breakdown
+                  <span className="text-emerald-700 font-semibold">https://yourcompany.com/?</span>utm_source=linkedin&amp;utm_medium=creator&amp;utm_campaign=alexis_jarre&amp;utm_content=outbound_breakdown
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div className="p-5 bg-white rounded-2xl border border-slate-200/90 shadow-xs">
@@ -292,7 +292,7 @@ export default function HowItWorksSection() {
                   </div>
                   <div className="p-5 bg-white rounded-2xl border border-slate-200/90 shadow-xs">
                     <div className="text-xs text-slate-500 font-medium">Pipeline Added</div>
-                    <div className="text-2xl font-black text-indigo-600 font-mono mt-1">€18,400</div>
+                    <div className="text-2xl font-black text-emerald-700 font-mono mt-1">€18,400</div>
                   </div>
                 </div>
               </div>

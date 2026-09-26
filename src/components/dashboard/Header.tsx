@@ -79,7 +79,7 @@ export default function Header({ title, subtitle, children, balance = 0, user }:
           {/* Title or Brand on mobile */}
           <div className="md:hidden">
             <Link href="/" className="inline-flex items-center">
-              <span className="font-black text-lg tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+              <span className="font-black text-lg tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                 naano
               </span>
             </Link>
@@ -162,7 +162,7 @@ export default function Header({ title, subtitle, children, balance = 0, user }:
                       onClick={() => setMobileMenuOpen(false)}
                       className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all ${
                         active
-                          ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                          ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                           : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                       }`}
                     >

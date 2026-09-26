@@ -20,7 +20,7 @@ export default function TrustBar() {
         {/* Case Study Badge */}
         <Link
           href="#quote"
-          className="inline-flex items-center gap-3 bg-white border border-[#E4E1DC] shadow-sm rounded-full py-1.5 pl-4 pr-3 text-xs font-semibold text-[#17181C] hover:border-blue-400 transition-colors shrink-0"
+          className="inline-flex items-center gap-3 bg-white border border-[#E4E1DC] shadow-sm rounded-full py-1.5 pl-4 pr-3 text-xs font-semibold text-[#17181C] hover:border-emerald-400 transition-colors shrink-0"
         >
           <span className="font-bold tracking-tight">BlogSEO</span>
           <span className="bg-neutral-100 text-neutral-800 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -40,7 +40,7 @@ export default function TrustBar() {
         {/* Repeat once for seamless infinite loop */}
         <Link
           href="#quote"
-          className="inline-flex items-center gap-3 bg-white border border-[#E4E1DC] shadow-sm rounded-full py-1.5 pl-4 pr-3 text-xs font-semibold text-[#17181C] hover:border-blue-400 transition-colors shrink-0"
+          className="inline-flex items-center gap-3 bg-white border border-[#E4E1DC] shadow-sm rounded-full py-1.5 pl-4 pr-3 text-xs font-semibold text-[#17181C] hover:border-emerald-400 transition-colors shrink-0"
         >
           <span className="font-bold tracking-tight">BlogSEO</span>
           <span className="bg-neutral-100 text-neutral-800 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">

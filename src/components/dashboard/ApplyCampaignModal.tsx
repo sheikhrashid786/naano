@@ -92,7 +92,7 @@ export default function ApplyCampaignModal({
               type="number"
               value={customRate}
               onChange={(e) => setCustomRate(e.target.value)}
-              className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600"
+              className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 font-mono"
             />
           </div>
 
@@ -105,7 +105,7 @@ export default function ApplyCampaignModal({
               value={pitchMessage}
               onChange={(e) => setPitchMessage(e.target.value)}
               placeholder="What angle will your post take? Why is your audience a strong fit for this brand?"
-              className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-blue-600 resize-none"
+              className="w-full bg-white border border-[#D1D5DB] rounded-xl px-4 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 resize-none"
             />
           </div>
 
@@ -113,14 +113,14 @@ export default function ApplyCampaignModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-[#4B5563] hover:text-[#111827]"
+              className="px-4 py-2 text-xs font-semibold text-[#4B5563] hover:text-[#111827] cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl shadow-xs transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl shadow-xs transition-all disabled:opacity-50 cursor-pointer"
             >
               {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
               <span>Send Application</span>

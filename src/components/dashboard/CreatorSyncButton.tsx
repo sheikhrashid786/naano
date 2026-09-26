@@ -31,10 +31,10 @@ export default function CreatorSyncButton({ lastSyncText = 'Just now' }: Creator
         type="button"
         onClick={handleSync}
         disabled={isSyncing}
-        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200/80 hover:border-indigo-200 text-slate-700 hover:text-indigo-700 text-xs font-bold transition-all shadow-2xs cursor-pointer active:scale-95 disabled:opacity-60"
+        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200/80 hover:border-emerald-200 text-slate-700 hover:text-emerald-700 text-xs font-bold transition-all shadow-2xs cursor-pointer active:scale-95 disabled:opacity-60"
         title="Sync latest LinkedIn impressions and followers"
       >
-        <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin text-indigo-600' : ''}`} />
+        <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin text-emerald-600' : ''}`} />
         <span>{isSyncing ? 'Syncing...' : 'Sync Insights'}</span>
       </button>
 

@@ -6,12 +6,12 @@ import { ArrowRight, ShieldCheck, Heart } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-white pt-20 pb-12 border-t border-slate-900">
+    <footer className="bg-[#070D0A] text-white pt-20 pb-12 border-t border-emerald-950/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top CTA Row */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-indigo-900/60 via-slate-900 to-indigo-950/80 border border-indigo-500/20 mb-16 flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-emerald-950/80 via-[#0A140F] to-emerald-950/90 border border-emerald-500/20 mb-16 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
               Ready to scale your pipeline?
             </span>
             <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
@@ -25,13 +25,13 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
             <Link
               href="/register"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/30 transition-all text-center"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/30 transition-all text-center"
             >
               Sign Up for Free
             </Link>
             <Link
               href="/#creators"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/10 transition-all text-center"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-emerald-500/20 transition-all text-center"
             >
               Browse Creators
             </Link>
@@ -39,11 +39,11 @@ export default function Footer() {
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 pb-12 border-b border-emerald-950/60">
           {/* Col 1: Brand */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-base">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-700 via-emerald-600 to-teal-500 flex items-center justify-center text-white font-bold text-base shadow-md shadow-emerald-600/30">
                 N
               </div>
               <span className="font-extrabold text-xl tracking-tight text-white">

@@ -89,18 +89,18 @@ export default function CompanyOverviewClient({
                 <span>Hello {firstName}</span>
                 <span className="text-sm">👋</span>
               </span>
-              <span className="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 px-2.5 py-0.5 rounded-full">
+              <span className="text-[10px] font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full">
                 Brand Workspace
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-slate-950 tracking-tight leading-tight">
-              Here is what is happening for <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">{companyName}</span>
+              Here is what is happening for <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">{companyName}</span>
             </h1>
           </div>
 
           <Link
             href="/dashboard/company/campaigns"
-            className="self-start sm:self-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold rounded-2xl shadow-md shadow-indigo-600/25 flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shrink-0"
+            className="self-start sm:self-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-2xl shadow-md shadow-emerald-600/25 flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shrink-0"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
             <span>Launch Campaign</span>
@@ -114,13 +114,13 @@ export default function CompanyOverviewClient({
             <div>
               <div className="flex items-center justify-between gap-2 mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                     <Users className="w-4 h-4 stroke-[2.2]" />
                   </div>
-                  <span className="text-[11px] font-bold text-indigo-700 uppercase tracking-wider truncate">Activated Creators</span>
+                  <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider truncate">Activated Creators</span>
                 </div>
               </div>
-              <div className="border-l-2 border-indigo-500 pl-3.5 py-0.5">
+              <div className="border-l-2 border-emerald-500 pl-3.5 py-0.5">
                 <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
                   {stats.creatorsActivated}
                 </div>
@@ -134,13 +134,13 @@ export default function CompanyOverviewClient({
             <div>
               <div className="flex items-center justify-between gap-2 mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
                     <FileText className="w-4 h-4 stroke-[2.2]" />
                   </div>
-                  <span className="text-[11px] font-bold text-blue-700 uppercase tracking-wider truncate">Posts Published</span>
+                  <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider truncate">Posts Published</span>
                 </div>
               </div>
-              <div className="border-l-2 border-blue-500 pl-3.5 py-0.5">
+              <div className="border-l-2 border-teal-500 pl-3.5 py-0.5">
                 <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
                   {stats.postsPublished}
                 </div>
@@ -154,13 +154,13 @@ export default function CompanyOverviewClient({
             <div>
               <div className="flex items-center justify-between gap-2 mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
                     <MessageSquare className="w-4 h-4 stroke-[2.2]" />
                   </div>
-                  <span className="text-[11px] font-bold text-purple-700 uppercase tracking-wider truncate">Profiles Engaged</span>
+                  <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider truncate">Profiles Engaged</span>
                 </div>
               </div>
-              <div className="border-l-2 border-purple-500 pl-3.5 py-0.5">
+              <div className="border-l-2 border-emerald-500 pl-3.5 py-0.5">
                 <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
                   {stats.profilesEngaged.toLocaleString()}
                 </div>
@@ -208,7 +208,7 @@ export default function CompanyOverviewClient({
                 </div>
                 <Link
                   href="/dashboard/company/campaigns"
-                  className="text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors"
+                  className="text-xs font-bold text-emerald-600 hover:text-emerald-800 transition-colors"
                 >
                   See all
                 </Link>
@@ -224,7 +224,7 @@ export default function CompanyOverviewClient({
                     <div className="w-5 h-5 rounded-full border-2 border-amber-400 group-hover:border-amber-500 shrink-0 transition-colors flex items-center justify-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                     </div>
-                    <span className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
+                    <span className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors truncate">
                       Top up your escrow holding vault
                     </span>
                   </div>
@@ -232,7 +232,7 @@ export default function CompanyOverviewClient({
                     <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200/70 text-[11px] font-extrabold font-mono">
                       Action Needed
                     </span>
-                    <div className="w-7 h-7 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors shadow-2xs">
+                    <div className="w-7 h-7 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 group-hover:text-emerald-600 transition-colors shadow-2xs">
                       <ChevronRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -244,16 +244,16 @@ export default function CompanyOverviewClient({
                   className="py-4 flex items-center justify-between gap-3 group cursor-pointer transition-colors hover:bg-slate-50/50 -mx-2 px-2 rounded-2xl"
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
-                    <div className="w-5 h-5 rounded-full border-2 border-indigo-300 group-hover:border-indigo-500 shrink-0 transition-colors" />
-                    <span className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
+                    <div className="w-5 h-5 rounded-full border-2 border-emerald-300 group-hover:border-emerald-500 shrink-0 transition-colors" />
+                    <span className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors truncate">
                       Book a strategy call with a B2B campaign director
                     </span>
                   </div>
                   <div className="flex items-center gap-3 shrink-0">
-                    <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/70 text-[11px] font-extrabold font-mono">
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/70 text-[11px] font-extrabold font-mono">
                       Free Strategy
                     </span>
-                    <div className="w-7 h-7 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors shadow-2xs">
+                    <div className="w-7 h-7 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 group-hover:text-emerald-600 transition-colors shadow-2xs">
                       <ChevronRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -266,7 +266,7 @@ export default function CompanyOverviewClient({
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <div className="w-5 h-5 rounded-full border-2 border-slate-300 group-hover:border-slate-400 shrink-0 transition-colors" />
-                    <span className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
+                    <span className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors truncate">
                       Browse top verified LinkedIn voices for your ICP
                     </span>
                   </div>
@@ -274,7 +274,7 @@ export default function CompanyOverviewClient({
                     <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[11px] font-extrabold font-mono">
                       Marketplace
                     </span>
-                    <div className="w-7 h-7 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors shadow-2xs">
+                    <div className="w-7 h-7 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-400 group-hover:text-emerald-600 transition-colors shadow-2xs">
                       <ChevronRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -286,10 +286,10 @@ export default function CompanyOverviewClient({
           {/* Right: Recently engaged companies (5 columns) */}
           <div className="lg:col-span-5 bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] flex flex-col">
             {/* Scenic Gradient Header */}
-            <div className="bg-gradient-to-b from-indigo-50/70 via-slate-50/40 to-white p-6 pb-4 border-b border-slate-100">
+            <div className="bg-gradient-to-b from-emerald-50/70 via-slate-50/40 to-white p-6 pb-4 border-b border-slate-100">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-indigo-700 block font-mono">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 block font-mono">
                     RECENTLY ENGAGED COMPANIES
                   </span>
                   <h2 className="text-base sm:text-lg font-black text-slate-900 mt-1">
@@ -298,7 +298,7 @@ export default function CompanyOverviewClient({
                 </div>
                 <Link
                   href="/dashboard/company/marketplace"
-                  className="px-3.5 py-1 bg-white hover:bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full shadow-2xs border border-indigo-100 transition-colors shrink-0"
+                  className="px-3.5 py-1 bg-white hover:bg-emerald-50 text-emerald-800 text-xs font-bold rounded-full shadow-2xs border border-emerald-200/80 transition-colors shrink-0"
                 >
                   See all
                 </Link>
@@ -307,7 +307,7 @@ export default function CompanyOverviewClient({
 
             {/* Empty State */}
             <div className="flex-1 flex flex-col items-center justify-center p-8 py-14 text-center">
-              <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2 shadow-2xs">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 shadow-2xs">
                 <Users className="w-5 h-5" />
               </div>
               <span className="text-xs font-semibold text-slate-600">
@@ -364,7 +364,7 @@ export default function CompanyOverviewClient({
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">Verified Creators</h2>
-                  <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-extrabold text-xs border border-indigo-100 font-mono">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-extrabold text-xs border border-emerald-200/80 font-mono">
                     {creators.length}
                   </span>
                 </div>
@@ -373,7 +373,7 @@ export default function CompanyOverviewClient({
 
               <Link
                 href="/dashboard/company/marketplace"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors"
+                className="text-xs font-bold text-emerald-600 hover:text-emerald-800 transition-colors"
               >
                 Explore all →
               </Link>
@@ -384,18 +384,18 @@ export default function CompanyOverviewClient({
               {creators.map((creator, idx) => (
                 <div
                   key={creator.id}
-                  className="w-[172px] sm:w-[180px] shrink-0 bg-white rounded-2xl border border-slate-200/90 overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md hover:border-slate-300 transition-all group"
+                  className="w-[172px] sm:w-[180px] shrink-0 bg-white rounded-2xl border border-slate-200/90 overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all group"
                 >
                   {/* Top Subtle Gradient */}
                   <div
                     className={`h-11 w-full ${
                       idx % 4 === 0
-                        ? 'bg-gradient-to-b from-indigo-100/70 to-indigo-50/20'
-                        : idx % 4 === 1
                         ? 'bg-gradient-to-b from-emerald-100/70 to-emerald-50/20'
+                        : idx % 4 === 1
+                        ? 'bg-gradient-to-b from-teal-100/70 to-teal-50/20'
                         : idx % 4 === 2
-                        ? 'bg-gradient-to-b from-violet-100/70 to-violet-50/20'
-                        : 'bg-gradient-to-b from-sky-100/70 to-sky-50/20'
+                        ? 'bg-gradient-to-b from-emerald-100/70 to-emerald-50/20'
+                        : 'bg-gradient-to-b from-teal-100/70 to-teal-50/20'
                     }`}
                   />
 
@@ -426,7 +426,7 @@ export default function CompanyOverviewClient({
 
                       {/* ICP Badge */}
                       <div className="mt-2">
-                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-[10px] font-extrabold border border-indigo-100 font-mono">
+                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-extrabold border border-emerald-200/80 font-mono">
                           {creator.icpMatch} ICP
                         </span>
                       </div>
@@ -452,7 +452,7 @@ export default function CompanyOverviewClient({
                             });
                           }
                         }}
-                        className="w-full py-1.5 mt-2 bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white border border-indigo-200/80 hover:border-indigo-600 text-xs font-bold rounded-xl transition-all block text-center cursor-pointer shadow-2xs hover:shadow-indigo-500/20 active:scale-95"
+                        className="w-full py-1.5 mt-2 bg-emerald-50 hover:bg-emerald-600 text-emerald-800 hover:text-white border border-emerald-200/80 hover:border-emerald-600 text-xs font-bold rounded-xl transition-all block text-center cursor-pointer shadow-2xs hover:shadow-emerald-600/20 active:scale-95"
                       >
                         Invite
                       </button>
@@ -465,12 +465,12 @@ export default function CompanyOverviewClient({
         </div>
 
         {/* BOTTOM EXPERT CALL BANNER */}
-        <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="bg-gradient-to-r from-[#070D0A] via-[#064E3B] to-[#070D0A] text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-6 border border-emerald-500/20">
           <div className="flex items-start sm:items-center gap-4">
             <img
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80"
               alt="Naano expert"
-              className="w-12 h-12 rounded-2xl object-cover shrink-0 border-2 border-indigo-400 shadow-md"
+              className="w-12 h-12 rounded-2xl object-cover shrink-0 border-2 border-emerald-400 shadow-md"
             />
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-1.5 border border-emerald-500/30">
@@ -489,7 +489,7 @@ export default function CompanyOverviewClient({
           <button
             type="button"
             onClick={() => setIsCallModalOpen(true)}
-            className="px-6 py-3 rounded-2xl bg-white hover:bg-indigo-50 text-slate-900 font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-105 active:scale-95 shrink-0 cursor-pointer text-center"
+            className="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-600/30 transition-all hover:scale-105 active:scale-95 shrink-0 cursor-pointer text-center"
           >
             Book Strategy Call
           </button>
@@ -502,7 +502,7 @@ export default function CompanyOverviewClient({
           <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in duration-200">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
                   <Sparkles className="w-5 h-5" />
                 </div>
                 <div>
@@ -533,7 +533,7 @@ export default function CompanyOverviewClient({
                         onClick={() => setSelectedDate(slot)}
                         className={`p-2.5 rounded-xl text-xs font-semibold border text-center transition-all cursor-pointer ${
                           selectedDate === slot
-                            ? 'border-indigo-600 bg-indigo-50 text-indigo-700 font-bold'
+                            ? 'border-emerald-600 bg-emerald-50 text-emerald-800 font-bold'
                             : 'border-slate-200 hover:border-slate-300 text-slate-700'
                         }`}
                       >
@@ -551,7 +551,7 @@ export default function CompanyOverviewClient({
                 <textarea
                   rows={3}
                   defaultValue={`Hi, we want to launch a B2B LinkedIn campaign for ${companyName} and would like expert help shortlisting matching creators.`}
-                  className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:border-indigo-600 focus:outline-none text-slate-900"
+                  className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:outline-none text-slate-900"
                 />
               </div>
 
@@ -565,7 +565,7 @@ export default function CompanyOverviewClient({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
+                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
                 >
                   Confirm reservation
                 </button>

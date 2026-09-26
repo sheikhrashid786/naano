@@ -63,7 +63,7 @@ export default function CreatorApplicationsPage() {
 
           {loading ? (
             <div className="py-8 flex justify-center">
-              <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+              <Loader2 className="w-6 h-6 animate-spin text-emerald-600" />
             </div>
           ) : invites.length === 0 ? (
             <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 text-center text-xs text-[#9CA3AF]">
@@ -108,7 +108,7 @@ export default function CreatorApplicationsPage() {
                     <button
                       onClick={() => handleRespond(inv.id, 'ACCEPTED')}
                       disabled={processingId === inv.id}
-                      className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
                     >
                       {processingId === inv.id ? (
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -133,7 +133,7 @@ export default function CreatorApplicationsPage() {
           {myApplications.length === 0 ? (
             <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 text-center text-xs text-[#9CA3AF]">
               You haven&apos;t sent any applications yet.{' '}
-              <Link href="/dashboard/creator/marketplace" className="text-blue-600 font-bold underline">
+              <Link href="/dashboard/creator/marketplace" className="text-emerald-700 font-bold underline">
                 Browse open SaaS campaigns →
               </Link>
             </div>
@@ -149,7 +149,7 @@ export default function CreatorApplicationsPage() {
                       <span className="font-bold text-sm text-[#111827]">
                         {app.campaign.company.name}
                       </span>
-                      <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+                      <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/80">
                         Requested: €{app.fixedRate}
                       </span>
                     </div>

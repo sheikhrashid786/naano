@@ -189,7 +189,7 @@ export default function CreatorProfilePage() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[500px]">
-        <Loader2 className="w-8 h-8 animate-spin text-[#2864EA]" />
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
       </div>
     );
   }
@@ -211,7 +211,7 @@ export default function CreatorProfilePage() {
         {/* Top Controls & Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-bold mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Public Media Kit & Live Rate Card</span>
             </div>
@@ -229,7 +229,7 @@ export default function CreatorProfilePage() {
               onClick={() => setMode('preview')}
               className={`px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                 mode === 'preview'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -240,7 +240,7 @@ export default function CreatorProfilePage() {
               onClick={() => setMode('edit')}
               className={`px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                 mode === 'edit'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -280,7 +280,7 @@ export default function CreatorProfilePage() {
             {/* Card 1: Avatar, Name, Headline & Followers */}
             <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
               <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border-2 border-indigo-100 bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md relative">
+                <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border-2 border-emerald-200 bg-gradient-to-tr from-[#070D0A] to-[#064E3B] flex items-center justify-center shadow-md relative">
                   <img
                     src={avatarUrl}
                     alt={name}
@@ -305,7 +305,7 @@ export default function CreatorProfilePage() {
 
               {/* Followers Stat Block */}
               <div className="mt-6 pt-5 border-t border-slate-100">
-                <div className="border-l-2 border-indigo-500 pl-3.5 py-0.5">
+                <div className="border-l-2 border-emerald-500 pl-3.5 py-0.5">
                   <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
                     {followersDisplay}
                   </div>
@@ -332,7 +332,7 @@ export default function CreatorProfilePage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
-                  <div className="border-l-2 border-indigo-500 pl-3">
+                  <div className="border-l-2 border-emerald-500 pl-3">
                     <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
                       {followersDisplay}
                     </div>
@@ -343,7 +343,7 @@ export default function CreatorProfilePage() {
                 </div>
 
                 <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
-                  <div className="border-l-2 border-blue-500 pl-3">
+                  <div className="border-l-2 border-teal-500 pl-3">
                     <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
                       {countryName}
                     </div>
@@ -354,7 +354,7 @@ export default function CreatorProfilePage() {
                 </div>
 
                 <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
-                  <div className="border-l-2 border-emerald-500 pl-3">
+                  <div className="border-l-2 border-emerald-600 pl-3">
                     <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
                       ~12.4K
                     </div>
@@ -365,7 +365,7 @@ export default function CreatorProfilePage() {
                 </div>
 
                 <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4">
-                  <div className="border-l-2 border-violet-500 pl-3">
+                  <div className="border-l-2 border-teal-600 pl-3">
                     <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono">
                       3.8%
                     </div>
@@ -399,7 +399,7 @@ export default function CreatorProfilePage() {
                 </div>
 
                 <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 flex flex-col justify-between">
-                  <div className="border-l-2 border-indigo-500 pl-3.5">
+                  <div className="border-l-2 border-teal-500 pl-3.5">
                     <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
                       €{Math.round(pricePerPost * 2.7)}
                     </div>
@@ -433,7 +433,7 @@ export default function CreatorProfilePage() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md shadow-indigo-500/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50 active:scale-95"
+                  className="px-5 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50 active:scale-95"
                 >
                   {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                   Save Changes
@@ -451,7 +451,7 @@ export default function CreatorProfilePage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                 />
               </div>
 
@@ -464,7 +464,7 @@ export default function CreatorProfilePage() {
                   value={avatarUrl}
                   onChange={(e) => setAvatarUrl(e.target.value)}
                   placeholder="/lp/avatar-umar.jpg"
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                 />
               </div>
             </div>
@@ -481,7 +481,7 @@ export default function CreatorProfilePage() {
                   step={10}
                   value={pricePerPost}
                   onChange={(e) => setPricePerPost(parseInt(e.target.value, 10) || 0)}
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono font-bold focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono font-bold focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                 />
               </div>
 
@@ -495,7 +495,7 @@ export default function CreatorProfilePage() {
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder="PK or Pakistan"
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                 />
               </div>
             </div>
@@ -510,7 +510,7 @@ export default function CreatorProfilePage() {
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
                 placeholder="Professional Headline"
-                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 leading-relaxed transition-all"
+                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 leading-relaxed transition-all"
               />
             </div>
 
@@ -523,7 +523,7 @@ export default function CreatorProfilePage() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Write your background and bullet points..."
-                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 leading-relaxed font-mono text-[11px] transition-all"
+                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 leading-relaxed font-mono text-[11px] transition-all"
               />
               <p className="text-[11px] text-slate-400 mt-1.5">
                 Tip: Format sections with blank lines, and bullet lists with &quot;• &quot; for clean preview rendering.

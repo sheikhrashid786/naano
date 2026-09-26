@@ -290,7 +290,7 @@ export default function CreatorEarningsPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <Wallet className="w-3 h-3 text-indigo-400" />
+                <Wallet className="w-3 h-3 text-emerald-400" />
                 <span>Earnings &amp; Payouts</span>
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -309,11 +309,11 @@ export default function CreatorEarningsPage() {
         {/* Top Row: 3 Forecaster Metric Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Total earned */}
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-indigo-600 relative overflow-hidden flex flex-col justify-between min-h-[160px]">
+          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-emerald-600 relative overflow-hidden flex flex-col justify-between min-h-[160px]">
             <div>
               <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase font-mono tracking-wider">
                 <span>Total Earned</span>
-                <TrendingUp className="w-4 h-4 text-indigo-600" />
+                <TrendingUp className="w-4 h-4 text-emerald-600" />
               </div>
               <div className="text-3xl sm:text-4xl font-black text-slate-900 font-mono tracking-tight mt-3">
                 €{totalEarned.toLocaleString()}
@@ -343,11 +343,11 @@ export default function CreatorEarningsPage() {
           </div>
 
           {/* Card 3: Available now */}
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-emerald-500 flex flex-col justify-between min-h-[160px]">
+          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-teal-500 flex flex-col justify-between min-h-[160px]">
             <div>
               <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase font-mono tracking-wider">
                 <span>Available Balance</span>
-                <Wallet className="w-4 h-4 text-emerald-500" />
+                <Wallet className="w-4 h-4 text-teal-600" />
               </div>
               <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-mono tracking-tight mt-3">
                 €{availableNow.toLocaleString()}
@@ -375,7 +375,7 @@ export default function CreatorEarningsPage() {
                     Net monthly collaboration revenue over the last six months.
                   </p>
                 </div>
-                <span className="text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full shrink-0">
+                <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-3 py-1 rounded-full shrink-0">
                   €{totalOver6Months.toLocaleString()} (6-mo total)
                 </span>
               </div>
@@ -396,18 +396,18 @@ export default function CreatorEarningsPage() {
                         <div className="w-full h-48 sm:h-52 bg-slate-50 rounded-2xl flex flex-col justify-end p-1 relative overflow-hidden border border-slate-200/60">
                           {heightPct > 0 && (
                             <div
-                              className="w-full bg-indigo-600/30 rounded-xl mb-1 transition-all duration-500"
+                              className="w-full bg-emerald-600/30 rounded-xl mb-1 transition-all duration-500"
                               style={{ height: `${heightPct}%` }}
                             />
                           )}
 
-                          <div className="h-1.5 w-full rounded-full bg-indigo-600" />
+                          <div className="h-1.5 w-full rounded-full bg-emerald-600" />
                         </div>
 
                         <span
                           className={`text-xs mt-2.5 font-medium ${
                             m.isCurrent
-                              ? 'text-indigo-600 font-black'
+                              ? 'text-emerald-700 font-black'
                               : 'text-slate-500'
                           }`}
                         >
@@ -442,7 +442,7 @@ export default function CreatorEarningsPage() {
                 onClick={() => setSelectedMethod('stripe')}
                 className={`rounded-2xl border p-4 transition-all cursor-pointer ${
                   selectedMethod === 'stripe'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-500/20'
+                    ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-500/20'
                     : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
@@ -450,7 +450,7 @@ export default function CreatorEarningsPage() {
                   <div
                     className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                       selectedMethod === 'stripe'
-                        ? 'border-indigo-600 bg-indigo-600'
+                        ? 'border-emerald-600 bg-emerald-600'
                         : 'border-slate-300 bg-white'
                     }`}
                   >
@@ -458,7 +458,7 @@ export default function CreatorEarningsPage() {
                       <div className="w-1.5 h-1.5 rounded-full bg-white" />
                     )}
                   </div>
-                  <CreditCard className="w-4 h-4 text-indigo-600" />
+                  <CreditCard className="w-4 h-4 text-emerald-600" />
                   <span className="text-xs sm:text-sm font-bold text-slate-900">
                     Stripe Connect
                   </span>
@@ -496,7 +496,7 @@ export default function CreatorEarningsPage() {
                 onClick={() => setSelectedMethod('bank')}
                 className={`rounded-2xl border p-4 transition-all cursor-pointer ${
                   selectedMethod === 'bank'
-                    ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-500/20'
+                    ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-500/20'
                     : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
@@ -504,7 +504,7 @@ export default function CreatorEarningsPage() {
                   <div
                     className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                       selectedMethod === 'bank'
-                        ? 'border-indigo-600 bg-indigo-600'
+                        ? 'border-emerald-600 bg-emerald-600'
                         : 'border-slate-300 bg-white'
                     }`}
                   >
@@ -554,7 +554,7 @@ export default function CreatorEarningsPage() {
                   onChange={(e) => setWithdrawAmount(e.target.value)}
                   placeholder="Amount"
                   max={availableNow}
-                  className="w-full pl-8 pr-3 py-2.5 text-xs font-mono font-bold text-slate-900 bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white"
+                  className="w-full pl-8 pr-3 py-2.5 text-xs font-mono font-bold text-slate-900 bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white"
                 />
               </div>
 
@@ -562,7 +562,7 @@ export default function CreatorEarningsPage() {
                 type="button"
                 onClick={handleWithdraw}
                 disabled={actionLoading || availableNow <= 0}
-                className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-200 text-white disabled:text-slate-400 text-xs font-bold rounded-xl shadow-md shadow-indigo-500/20 transition-all cursor-pointer disabled:cursor-not-allowed shrink-0 active:scale-95"
+                className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-200 text-white disabled:text-slate-400 text-xs font-bold rounded-xl shadow-sm shadow-emerald-600/20 transition-all cursor-pointer disabled:cursor-not-allowed shrink-0 active:scale-95"
               >
                 {actionLoading ? 'Processing...' : 'Withdraw All'}
               </button>
@@ -588,7 +588,7 @@ export default function CreatorEarningsPage() {
               onClick={() => setActiveActivityTab('earnings')}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeActivityTab === 'earnings'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -600,7 +600,7 @@ export default function CreatorEarningsPage() {
               onClick={() => setActiveActivityTab('awaiting')}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeActivityTab === 'awaiting'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -615,7 +615,7 @@ export default function CreatorEarningsPage() {
               onClick={() => setActiveActivityTab('invoices')}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeActivityTab === 'invoices'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -675,7 +675,7 @@ export default function CreatorEarningsPage() {
                             href={item.invoiceUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-indigo-600 hover:underline font-bold text-[11px]"
+                            className="text-emerald-700 hover:underline font-bold text-[11px]"
                           >
                             Download PDF
                           </a>
@@ -698,7 +698,7 @@ export default function CreatorEarningsPage() {
           <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider block">
+                <span className="text-[10px] font-black uppercase text-emerald-700 tracking-wider block">
                   Wire Details
                 </span>
                 <h3 className="text-lg font-black text-slate-900 mt-0.5">
@@ -729,7 +729,7 @@ export default function CreatorEarningsPage() {
                     setBankDetails({ ...bankDetails, accountHolder: e.target.value })
                   }
                   placeholder="e.g. Umar Draz"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white text-slate-900"
                 />
               </div>
 
@@ -744,7 +744,7 @@ export default function CreatorEarningsPage() {
                     setBankDetails({ ...bankDetails, iban: e.target.value })
                   }
                   placeholder="e.g. FR76 3000 6000 0112 3456 7890 189"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900 font-mono"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white text-slate-900 font-mono"
                 />
               </div>
             </div>
@@ -763,7 +763,7 @@ export default function CreatorEarningsPage() {
                   setIsBankModalOpen(false);
                   setToast({ type: 'success', message: 'Bank details saved.' });
                 }}
-                className="px-5 py-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md shadow-indigo-500/20 transition cursor-pointer"
+                className="px-5 py-2.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-sm shadow-emerald-600/20 transition cursor-pointer"
               >
                 Save Details
               </button>

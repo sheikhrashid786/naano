@@ -197,7 +197,7 @@ export default function CreatorMessagesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search conversations"
-                className="w-full pl-9 pr-3.5 py-2 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#111827] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#2864EA] transition-all shadow-2xs"
+                className="w-full pl-9 pr-3.5 py-2 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#111827] placeholder:text-[#94A3B8] focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-2xs"
               />
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function CreatorMessagesPage() {
               onClick={() => setSelectedThreadId('naanobot')}
               className={`p-3.5 mx-3 rounded-2xl flex items-start gap-3 transition-colors cursor-pointer ${
                 selectedThreadId === 'naanobot'
-                  ? 'bg-[#F0F5FF]'
+                  ? 'bg-emerald-50/80 border border-emerald-200/80'
                   : 'hover:bg-slate-50/80'
               }`}
             >
@@ -234,7 +234,7 @@ export default function CreatorMessagesPage() {
                   <p className="text-[11px] text-[#64748B] truncate max-w-[145px]">
                     A question or need help? Start here.
                   </p>
-                  <span className="w-4 h-4 rounded-full bg-[#2864EA] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                  <span className="w-4 h-4 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
                     1
                   </span>
                 </div>
@@ -254,7 +254,7 @@ export default function CreatorMessagesPage() {
                   key={conv.id}
                   onClick={() => setSelectedThreadId(conv.collaborationId || conv.id)}
                   className={`p-3.5 mx-3 mt-1 rounded-2xl flex items-start gap-3 transition-colors cursor-pointer ${
-                    isSelected ? 'bg-[#F0F5FF]' : 'hover:bg-slate-50/80'
+                    isSelected ? 'bg-emerald-50/80 border border-emerald-200/80' : 'hover:bg-slate-50/80'
                   }`}
                 >
                   <div className="w-9 h-9 rounded-xl bg-white border border-[#E2E8F0] overflow-hidden flex items-center justify-center shrink-0 shadow-2xs">
@@ -332,7 +332,7 @@ export default function CreatorMessagesPage() {
                     <div
                       className={`max-w-[380px] p-3.5 rounded-2xl text-xs leading-relaxed shadow-2xs ${
                         msg.sender === 'user'
-                          ? 'bg-[#2864EA] text-white rounded-br-none'
+                          ? 'bg-emerald-600 text-white rounded-br-none'
                           : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#111827] rounded-bl-none'
                       }`}
                     >
@@ -355,7 +355,7 @@ export default function CreatorMessagesPage() {
                         onClick={() => {
                           setInputMessage(chip);
                         }}
-                        className="text-[11px] font-semibold text-[#2864EA] bg-[#F0F5FF] hover:bg-blue-100/70 border border-blue-200/60 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+                        className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100/70 border border-emerald-200/80 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
                       >
                         {chip}
                       </button>
@@ -383,7 +383,7 @@ export default function CreatorMessagesPage() {
                         <div
                           className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-2xs ${
                             isMe
-                              ? 'bg-[#2864EA] text-white rounded-br-none'
+                              ? 'bg-emerald-600 text-white rounded-br-none'
                               : 'bg-[#F8FAFC] border border-[#E2E8F0] text-[#111827] rounded-bl-none'
                           }`}
                         >
@@ -418,12 +418,12 @@ export default function CreatorMessagesPage() {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Write a message..."
-              className="flex-1 py-3 px-5 text-xs text-[#111827] placeholder:text-[#94A3B8] bg-white border border-[#E2E8F0] rounded-full focus:outline-none focus:border-[#2864EA] transition-all shadow-2xs"
+              className="flex-1 py-3 px-5 text-xs text-[#111827] placeholder:text-[#94A3B8] bg-white border border-[#E2E8F0] rounded-full focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-2xs"
             />
             <button
               type="submit"
               disabled={sending || !inputMessage.trim()}
-              className="w-10 h-10 rounded-full bg-[#2864EA] hover:bg-blue-700 disabled:bg-slate-200 text-white disabled:text-slate-400 flex items-center justify-center shrink-0 shadow-xs cursor-pointer transition-all active:scale-95 disabled:cursor-not-allowed"
+              className="w-10 h-10 rounded-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-200 text-white disabled:text-slate-400 flex items-center justify-center shrink-0 shadow-xs cursor-pointer transition-all active:scale-95 disabled:cursor-not-allowed"
             >
               {sending ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

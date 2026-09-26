@@ -91,15 +91,17 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
   }));
 
   return (
-    <div className="min-h-screen bg-[#FAFAFC] flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-white flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
       <Navbar initialUser={session} />
 
-      <main className="w-full flex-1 pt-32 pb-24">
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Banner Section (Section 1: Even - Tinted background) */}
+      <header className="relative overflow-hidden pt-32 pb-16 banner-section bg-[#EBF1EE] border-b border-slate-200/80 section-even">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-emerald-200/40 via-teal-200/30 to-emerald-100/30 blur-3xl pointer-events-none rounded-full -z-10" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Back Navigation */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-6"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-emerald-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to All Articles</span>
@@ -107,7 +109,7 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
 
           {/* Article Header Metadata */}
           <div className="flex items-center gap-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-            <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 font-mono">
+            <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/80 font-mono">
               {article.topic}
             </span>
             <span>•</span>
@@ -125,7 +127,7 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
           </h1>
 
           {/* Author Badge */}
-          <div className="mt-6 flex items-center gap-3.5 pb-8 border-b border-slate-200">
+          <div className="mt-6 flex items-center gap-3.5 pb-8 border-b border-slate-200/80">
             <img
               src={article.authorAvatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80'}
               alt={article.author}
@@ -138,19 +140,25 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
           </div>
 
           {/* Executive Summary */}
-          <div className="my-8 p-6 rounded-3xl bg-slate-50 border border-slate-200/80">
-            <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2">
+          <div className="mt-8 p-6 rounded-3xl bg-white border border-slate-200/90 shadow-2xs">
+            <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
               Executive Abstract
             </div>
             <p className="text-base text-slate-700 leading-relaxed font-medium">
               {article.summary}
             </p>
           </div>
+        </div>
+      </header>
+
+      {/* Article Content (Section 2: Odd - Clean White) */}
+      <main className="w-full flex-1 py-16 bg-white section-odd">
+        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Strategic Takeaways Callout */}
-          <div className="my-8 p-6 sm:p-8 rounded-3xl bg-indigo-50/60 border border-indigo-100">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-indigo-900 mb-4 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-indigo-600" />
+          <div className="my-8 p-6 sm:p-8 rounded-3xl bg-emerald-50/70 border border-emerald-200/80">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-900 mb-4 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-emerald-600" />
               <span>Key Strategic Takeaways</span>
             </h3>
             <ul className="space-y-3">
@@ -193,7 +201,7 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
 
               <Link
                 href="/blog"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
               >
                 <span>View All Articles</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -205,7 +213,7 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
                 <Link
                   key={rel.id}
                   href={`/blog/${rel.slug}`}
-                  className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-200 transition-all block group"
+                  className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all block group"
                 >
                   <div className="flex items-center justify-between mb-3 text-xs text-slate-400 font-mono">
                     <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold uppercase">
@@ -213,7 +221,7 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
                     </span>
                     <span>{rel.readTime}</span>
                   </div>
-                  <h4 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug mb-2">
+                  <h4 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors leading-snug mb-2">
                     {rel.title}
                   </h4>
                   <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
@@ -221,7 +229,7 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
                   </p>
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
                     <span>{rel.author}</span>
-                    <span className="text-indigo-600 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                    <span className="text-emerald-700 group-hover:translate-x-0.5 transition-transform flex items-center gap-1 font-bold">
                       Read →
                     </span>
                   </div>
@@ -231,16 +239,16 @@ export default async function BlogArticleDetailPage({ params }: BlogArticlePageP
           </div>
 
           {/* Bottom Action CTA Card */}
-          <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-indigo-600 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#070D0A] via-[#064E3B] to-[#070D0A] border border-emerald-500/20 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
             <div>
               <h3 className="text-xl font-bold">Put these creator frameworks to work</h3>
-              <p className="text-xs text-indigo-100 mt-1 max-w-md">
+              <p className="text-xs text-emerald-100/80 mt-1 max-w-md">
                 Browse verified B2B LinkedIn creators and launch your first targeted campaign in under 10 minutes.
               </p>
             </div>
             <Link
               href="/dashboard/company/campaigns"
-              className="px-6 py-3 rounded-xl bg-white text-indigo-700 hover:bg-indigo-50 font-bold text-xs sm:text-sm transition-all shrink-0 shadow-sm"
+              className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#070D0A] font-bold text-xs sm:text-sm transition-all shrink-0 shadow-md shadow-emerald-500/20"
             >
               Launch a Campaign
             </Link>

@@ -193,14 +193,14 @@ export default function CreatorCollabsPage() {
         );
       case 'APPLIED':
         return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-teal-50 text-teal-800 border border-teal-200/80">
             Applied
           </span>
         );
       case 'IN_PROGRESS':
       case 'ACCEPTED':
         return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-sky-50 text-sky-700 border border-sky-200">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
             In progress
           </span>
         );
@@ -270,7 +270,7 @@ export default function CreatorCollabsPage() {
         {/* Page Title & Subtitle */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-bold mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Sponsorship Deliverables &amp; Escrow Pipeline</span>
             </div>
@@ -299,7 +299,7 @@ export default function CreatorCollabsPage() {
               onClick={() => setActiveTab(tab.id as TabType)}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -321,7 +321,7 @@ export default function CreatorCollabsPage() {
         <div className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
           {loading ? (
             <div className="py-24 flex flex-col items-center justify-center gap-3">
-              <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+              <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
               <span className="text-xs font-bold text-slate-500">Loading collaborations...</span>
             </div>
           ) : (
@@ -365,7 +365,7 @@ export default function CreatorCollabsPage() {
                           {/* 1. Brand */}
                           <td className="py-4 px-6">
                             <div className="flex items-center gap-3">
-                              <div className="w-9 h-9 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center font-black text-xs shrink-0 shadow-2xs">
+                              <div className="w-9 h-9 rounded-2xl bg-emerald-50 border border-emerald-200/80 text-emerald-800 flex items-center justify-center font-black text-xs shrink-0 shadow-2xs">
                                 {companyName.slice(0, 2).toUpperCase()}
                               </div>
                               <div className="min-w-0">
@@ -408,7 +408,7 @@ export default function CreatorCollabsPage() {
                                 href={collab.submittedPostUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-indigo-600 font-bold hover:underline"
+                                className="inline-flex items-center gap-1 text-xs text-emerald-700 font-bold hover:underline"
                               >
                                 <span>Live Post</span>
                                 <ExternalLink className="w-3 h-3" />
@@ -426,7 +426,7 @@ export default function CreatorCollabsPage() {
                                   type="button"
                                   disabled={isUpdating}
                                   onClick={() => handleStatusChange(collab.id, 'ACCEPTED')}
-                                  className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50 active:scale-95"
+                                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-50 active:scale-95"
                                 >
                                   {isUpdating ? <Loader2 className="w-3 h-3 animate-spin" /> : 'Accept'}
                                 </button>
@@ -443,7 +443,7 @@ export default function CreatorCollabsPage() {
                               <button
                                 type="button"
                                 onClick={() => setSelectedCollabForSubmit(collab)}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
+                                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
                               >
                                 <Send className="w-3 h-3" />
                                 <span>Submit URL</span>
@@ -486,7 +486,7 @@ export default function CreatorCollabsPage() {
                 <span className="font-semibold">
                   Showing {filteredCollabs.length} {filteredCollabs.length === 1 ? 'collaboration' : 'collaborations'}
                 </span>
-                <span className="font-mono text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">
+                <span className="font-mono text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-md">
                   Escrow Protected
                 </span>
               </div>
@@ -527,7 +527,7 @@ export default function CreatorCollabsPage() {
                   placeholder="https://www.linkedin.com/posts/username_..."
                   value={postUrl}
                   onChange={(e) => setPostUrl(e.target.value)}
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
 
@@ -540,7 +540,7 @@ export default function CreatorCollabsPage() {
                   placeholder="e.g. Added the tracked link in the first comment as requested..."
                   value={proofText}
                   onChange={(e) => setProofText(e.target.value)}
-                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20"
+                  className="w-full bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                 />
               </div>
 
@@ -555,7 +555,7 @@ export default function CreatorCollabsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-all cursor-pointer shadow-md shadow-indigo-500/20 flex items-center justify-center gap-1.5 disabled:opacity-50 active:scale-95"
+                  className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all cursor-pointer shadow-md shadow-emerald-500/20 flex items-center justify-center gap-1.5 disabled:opacity-50 active:scale-95"
                 >
                   {submitting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />

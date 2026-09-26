@@ -68,28 +68,26 @@ export default function Navbar({ initialUser }: NavbarProps) {
         <div className="flex items-center justify-between">
           {/* Logo Mark */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              <span className="font-extrabold text-lg tracking-tighter">N</span>
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-700 via-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/25 ring-1 ring-black/5 group-hover:scale-105 transition-all">
+              <span className="font-black text-lg tracking-tighter">N</span>
             </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-xl tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
-                  naano
-                </span>
-                <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200/60 uppercase tracking-wider">
-                  OS
-                </span>
-              </div>
+            <div className="flex items-center gap-1.5">
+              <span className="font-black text-xl tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors">
+                naano
+              </span>
+              <span className="px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-200/80 uppercase tracking-widest font-mono">
+                B2B
+              </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2 bg-white/70 backdrop-blur-md border border-slate-200/80 px-3 py-1.5 rounded-full shadow-2xs">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 bg-white/85 backdrop-blur-md border border-slate-200/90 px-3 py-1.5 rounded-full shadow-2xs">
             <Link
               href="/"
               className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold transition-all ${
                 pathname === '/'
-                  ? 'text-indigo-600 bg-indigo-50/80'
+                  ? 'text-emerald-700 bg-emerald-50/90 font-bold shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
               }`}
             >
@@ -100,7 +98,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
               href="/creators"
               className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold transition-all ${
                 pathname === '/creators'
-                  ? 'text-indigo-600 bg-indigo-50/80'
+                  ? 'text-emerald-700 bg-emerald-50/90 font-bold shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
               }`}
             >
@@ -111,7 +109,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
               href="/agencies"
               className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold transition-all ${
                 pathname === '/agencies'
-                  ? 'text-indigo-600 bg-indigo-50/80'
+                  ? 'text-emerald-700 bg-emerald-50/90 font-bold shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
               }`}
             >
@@ -133,7 +131,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
                 className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all cursor-pointer"
               >
                 <span>Insights</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${resourcesOpen ? 'rotate-180 text-indigo-600' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${resourcesOpen ? 'rotate-180 text-emerald-600' : ''}`} />
               </button>
 
               {resourcesOpen && (
@@ -146,7 +144,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
                     onClick={() => setResourcesOpen(false)}
                     className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600 shrink-0">
+                    <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 shrink-0">
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <div>
@@ -160,7 +158,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
                     onClick={() => setResourcesOpen(false)}
                     className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
                   >
-                    <div className="p-1.5 rounded-lg bg-violet-50 text-violet-600 shrink-0">
+                    <div className="p-1.5 rounded-lg bg-teal-50 text-teal-600 shrink-0">
                       <BookOpen className="w-4 h-4" />
                     </div>
                     <div>
@@ -192,7 +190,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
             {currentUser ? (
               <Link
                 href={dashboardUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-slate-900 hover:bg-indigo-600 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-slate-900 hover:bg-emerald-600 text-white shadow-sm transition-all hover:scale-105 active:scale-95"
               >
                 <span>Dashboard</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -208,7 +206,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
 
                 <Link
                   href="/register"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/25 hover:shadow-emerald-600/35 transition-all hover:scale-105 active:scale-95"
                 >
                   <span>Start Free</span>
                   <ArrowRight className="w-3.5 h-3.5" />

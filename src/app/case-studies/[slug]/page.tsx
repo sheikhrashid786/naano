@@ -116,15 +116,17 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
   }));
 
   return (
-    <div className="min-h-screen bg-[#FAFAFC] flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-white flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
       <Navbar initialUser={session} />
 
-      <main className="w-full flex-1 pt-32 pb-24">
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Banner Section (Section 1: Even - Tinted background) */}
+      <header className="relative overflow-hidden pt-32 pb-16 banner-section bg-[#EBF1EE] border-b border-slate-200/80 section-even">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-emerald-200/40 via-teal-200/30 to-emerald-100/30 blur-3xl pointer-events-none rounded-full -z-10" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Back Navigation */}
           <Link
             href="/case-studies"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-6"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-emerald-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to All Case Studies</span>
@@ -132,7 +134,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
 
           {/* Header Metadata */}
           <div className="flex items-center gap-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-            <span className="text-indigo-600">{cs.industry}</span>
+            <span className="text-emerald-700 font-bold">{cs.industry}</span>
             <span>•</span>
             <span className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" /> {cs.readTime}
@@ -152,10 +154,10 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
           </p>
 
           {/* Key Metrics Banner */}
-          <div className="my-10 p-6 sm:p-8 rounded-3xl bg-slate-950 text-white grid grid-cols-2 md:grid-cols-4 gap-6 shadow-xl">
+          <div className="mt-10 p-6 sm:p-8 rounded-3xl bg-[#070D0A] border border-emerald-500/20 text-white grid grid-cols-2 md:grid-cols-4 gap-6 shadow-2xl">
             <div>
               <div className="text-xs font-bold uppercase text-slate-400">Primary Impact</div>
-              <div className="text-3xl sm:text-4xl font-black text-indigo-400 font-mono mt-1">{cs.metric}</div>
+              <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono mt-1">{cs.metric}</div>
               <div className="text-[11px] text-slate-400 mt-1">{cs.metricLabel}</div>
             </div>
 
@@ -177,10 +179,16 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
               <div className="text-[11px] text-slate-400 mt-1">Across Posts</div>
             </div>
           </div>
+        </div>
+      </header>
+
+      {/* Case Study Content (Section 2: Odd - Clean White) */}
+      <main className="w-full flex-1 py-16 bg-white section-odd">
+        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Executive Quote */}
-          <div className="p-8 rounded-3xl bg-indigo-50/70 border border-indigo-100 my-10 relative">
-            <Quote className="w-8 h-8 text-indigo-200 mb-3 rotate-180" />
+          <div className="p-8 rounded-3xl bg-emerald-50/70 border border-emerald-200/80 my-10 relative">
+            <Quote className="w-8 h-8 text-emerald-300 mb-3 rotate-180" />
             <p className="text-base sm:text-lg text-slate-800 italic font-medium leading-relaxed">
               &quot;{cs.quote}&quot;
             </p>
@@ -190,9 +198,9 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
                 alt={cs.company}
                 className="h-7 max-w-[120px] object-contain"
               />
-              <div className="border-l border-indigo-200 pl-3">
+              <div className="border-l border-emerald-200 pl-3">
                 <div className="text-sm font-bold text-slate-900">{cs.author}</div>
-                <div className="text-xs text-indigo-700">{cs.role}</div>
+                <div className="text-xs text-emerald-800 font-semibold">{cs.role}</div>
               </div>
             </div>
           </div>
@@ -224,7 +232,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {cs.creators.map((c, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs flex items-center gap-3">
+                  <div key={i} className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-emerald-300 transition-all flex items-center gap-3">
                     <img
                       src={c.avatar}
                       alt={c.name}
@@ -232,7 +240,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
                     />
                     <div>
                       <div className="text-xs font-bold text-slate-900">{c.name}</div>
-                      <div className="text-[11px] text-indigo-600 font-semibold">{c.niche}</div>
+                      <div className="text-[11px] text-emerald-700 font-semibold">{c.niche}</div>
                       <div className="text-[10px] text-slate-400 font-mono mt-0.5">{c.followers} Followers</div>
                     </div>
                   </div>
@@ -245,11 +253,11 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
               <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
                 4. Key Attributed Results
               </h2>
-              <div className="p-6 rounded-2xl bg-emerald-50/50 border border-emerald-100 space-y-3">
+              <div className="p-6 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 space-y-3">
                 {cs.results.map((res, i) => (
                   <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-slate-800">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{res}</span>
+                    <span className="leading-relaxed">{res}</span>
                   </div>
                 ))}
               </div>
@@ -284,7 +292,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
 
               <Link
                 href="/case-studies"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
               >
                 <span>View All Case Studies</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -296,13 +304,13 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
                 <Link
                   key={other.id}
                   href={`/case-studies/${other.slug}`}
-                  className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-200 transition-all block group"
+                  className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all block group"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <img src={other.logo} alt={other.company} className="h-6 object-contain" />
                     <span className="text-xs font-bold text-emerald-600 font-mono">{other.pipelineAdded}</span>
                   </div>
-                  <div className="text-2xl font-black text-slate-900 font-mono group-hover:text-indigo-600 transition-colors">
+                  <div className="text-2xl font-black text-slate-900 font-mono group-hover:text-emerald-700 transition-colors">
                     {other.metric}
                   </div>
                   <div className="text-xs font-bold text-slate-500 uppercase mt-0.5">{other.metricLabel}</div>
@@ -311,7 +319,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
                   </p>
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                     <span className="text-[11px] text-slate-400 font-medium">{other.author}, {other.company}</span>
-                    <span className="text-xs font-bold text-indigo-600 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                    <span className="text-xs font-bold text-emerald-700 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
                       Read Story →
                     </span>
                   </div>
@@ -321,16 +329,16 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
           </div>
 
           {/* Bottom Action CTA Card */}
-          <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-indigo-600 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#070D0A] via-[#064E3B] to-[#070D0A] border border-emerald-500/20 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
             <div>
               <h3 className="text-xl font-bold">Ready to duplicate these results for your B2B SaaS?</h3>
-              <p className="text-xs text-indigo-100 mt-1 max-w-md">
+              <p className="text-xs text-emerald-100/80 mt-1 max-w-md">
                 Browse verified B2B LinkedIn creators and launch your first targeted campaign with escrow protection.
               </p>
             </div>
             <Link
               href="/dashboard/company/campaigns"
-              className="px-6 py-3 rounded-xl bg-white text-indigo-700 hover:bg-indigo-50 font-bold text-xs sm:text-sm transition-all shrink-0 shadow-sm"
+              className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#070D0A] font-bold text-xs sm:text-sm transition-all shrink-0 shadow-md shadow-emerald-500/20"
             >
               Launch a Campaign
             </Link>

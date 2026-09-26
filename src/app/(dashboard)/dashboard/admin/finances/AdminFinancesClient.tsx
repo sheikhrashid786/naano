@@ -109,7 +109,7 @@ export default function AdminFinancesClient({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <ShieldCheck className="w-3 h-3 text-indigo-400" />
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 <span>Super Admin Escrow Controller</span>
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -128,10 +128,10 @@ export default function AdminFinancesClient({
         {/* 4 Top Forecaster Metric Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {/* GMV */}
-          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-indigo-600">
+          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-emerald-600">
             <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono flex items-center justify-between">
               <span>Total Volume (GMV)</span>
-              <DollarSign className="w-4 h-4 text-indigo-600" />
+              <DollarSign className="w-4 h-4 text-emerald-700" />
             </div>
             <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-2 font-mono">
               €{stats.totalGMV.toLocaleString()}
@@ -164,12 +164,12 @@ export default function AdminFinancesClient({
           </div>
 
           {/* Platform Revenue */}
-          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-violet-500">
+          <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] border-l-4 border-l-teal-500">
             <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono flex items-center justify-between">
               <span>Platform Take Rate (15%)</span>
-              <TrendingUp className="w-4 h-4 text-violet-500" />
+              <TrendingUp className="w-4 h-4 text-teal-600" />
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-violet-600 tracking-tight mt-2 font-mono">
+            <div className="text-2xl sm:text-3xl font-black text-teal-700 tracking-tight mt-2 font-mono">
               €{stats.estimatedFees.toLocaleString()}
             </div>
             <div className="text-[11px] text-slate-400 mt-1 font-medium">Net platform revenue margin</div>
@@ -185,7 +185,7 @@ export default function AdminFinancesClient({
                 onClick={() => setSelectedStatus(st)}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   selectedStatus === st
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
@@ -204,7 +204,7 @@ export default function AdminFinancesClient({
               placeholder="Search creator, brand, or stripe ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2.5 text-xs bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus:bg-white text-slate-800 transition-all placeholder:text-slate-400"
+              className="w-full pl-9 pr-3.5 py-2.5 text-xs bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 focus:bg-white text-slate-800 transition-all placeholder:text-slate-400"
             />
           </div>
         </div>

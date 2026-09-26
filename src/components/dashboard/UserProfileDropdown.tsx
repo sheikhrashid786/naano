@@ -260,12 +260,12 @@ export default function UserProfileDropdown({
           aria-expanded={isOpen}
           className={`w-full relative flex items-center gap-3 px-2.5 py-2 rounded-xl transition-all duration-200 outline-none cursor-pointer text-left ${
             isOpen
-              ? 'bg-blue-50/80 text-slate-900 ring-1 ring-blue-200 shadow-2xs'
+              ? 'bg-emerald-50/80 text-slate-900 ring-1 ring-emerald-200 shadow-2xs'
               : 'hover:bg-slate-100 text-slate-700'
           }`}
         >
           <div className="relative shrink-0">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 bg-gradient-to-tr from-[#2563EB] to-[#3B82F6] text-white font-bold flex items-center justify-center text-xs shadow-xs">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 text-white font-bold flex items-center justify-center text-xs shadow-xs">
               {activeAvatar ? (
                 <img
                   src={activeAvatar}
@@ -295,11 +295,11 @@ export default function UserProfileDropdown({
           aria-expanded={isOpen}
           className={`relative flex items-center justify-center rounded-full p-0.5 transition-all duration-200 outline-none cursor-pointer group ${
             isOpen
-              ? 'ring-2 ring-[#2563EB] ring-offset-2 ring-offset-white scale-105'
+              ? 'ring-2 ring-emerald-600 ring-offset-2 ring-offset-white scale-105'
               : 'hover:ring-2 hover:ring-slate-300 hover:ring-offset-1 ring-offset-white'
           }`}
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 bg-gradient-to-tr from-[#2563EB] to-[#3B82F6] text-white font-bold flex items-center justify-center text-xs shadow-xs">
+          <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 text-white font-bold flex items-center justify-center text-xs shadow-xs">
             {activeAvatar ? (
               <img
                 src={activeAvatar}
@@ -339,9 +339,9 @@ export default function UserProfileDropdown({
           }`}
         >
           {/* Header Card: User Info */}
-          <div className="p-4 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 border-b border-slate-100">
+          <div className="p-4 bg-gradient-to-br from-slate-50 via-white to-emerald-50/40 border-b border-slate-100">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-white bg-gradient-to-tr from-[#2563EB] to-[#3B82F6] text-white font-bold flex items-center justify-center text-sm shadow-xs shrink-0">
+              <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-white bg-gradient-to-tr from-emerald-600 via-teal-600 to-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-xs shrink-0">
                 {activeAvatar ? (
                   <img
                     src={activeAvatar}
@@ -373,13 +373,13 @@ export default function UserProfileDropdown({
                   isAdminView
                     ? 'bg-slate-900 text-white border-slate-800'
                     : isCreatorView
-                    ? 'bg-purple-50/80 text-purple-700 border-purple-200/70'
-                    : 'bg-blue-50/80 text-blue-700 border-blue-200/70'
+                    ? 'bg-teal-50/80 text-teal-800 border-teal-200/70'
+                    : 'bg-emerald-50/80 text-emerald-800 border-emerald-200/70'
                 }`}
               >
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
-                    isAdminView ? 'bg-indigo-400' : isCreatorView ? 'bg-purple-600' : 'bg-blue-600'
+                    isAdminView ? 'bg-emerald-400' : isCreatorView ? 'bg-teal-600' : 'bg-emerald-600'
                   }`}
                 />
                 {isAdminView ? 'Super Admin' : isCreatorView ? 'Creator Account' : 'Brand Account'}
@@ -412,7 +412,7 @@ export default function UserProfileDropdown({
                   onClick={() => setIsOpen(false)}
                   className={`flex items-center justify-between px-2.5 py-2 rounded-xl text-xs transition-all group ${
                     isActive
-                      ? 'bg-blue-50/70 text-[#2563EB] font-bold'
+                      ? 'bg-emerald-50/80 text-emerald-800 font-bold'
                       : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium'
                   }`}
                 >
@@ -420,7 +420,7 @@ export default function UserProfileDropdown({
                     <div
                       className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                         isActive
-                          ? 'bg-blue-100 text-[#2563EB]'
+                          ? 'bg-emerald-100 text-emerald-700'
                           : 'bg-slate-100 text-slate-500 group-hover:bg-slate-200/80 group-hover:text-slate-700'
                       }`}
                     >
@@ -436,7 +436,7 @@ export default function UserProfileDropdown({
                   <ChevronRight
                     className={`w-3.5 h-3.5 shrink-0 transition-transform ${
                       isActive
-                        ? 'text-[#2563EB]'
+                        ? 'text-emerald-600'
                         : 'text-slate-300 group-hover:text-slate-500 group-hover:translate-x-0.5'
                     }`}
                   />

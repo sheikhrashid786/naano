@@ -111,8 +111,8 @@ function renderCompanyLogo(company: { name: string; logoUrl?: string | null }) {
     .toUpperCase();
 
   return (
-    <div className="w-full h-full bg-indigo-50 flex items-center justify-center">
-      <span className="text-indigo-600 font-black text-base">{initials}</span>
+    <div className="w-full h-full bg-emerald-50 flex items-center justify-center">
+      <span className="text-emerald-700 font-black text-base">{initials}</span>
     </div>
   );
 }
@@ -257,7 +257,7 @@ export default function CreatorMarketplacePage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <Store className="w-3 h-3 text-indigo-400" />
+                <Store className="w-3 h-3 text-emerald-400" />
                 <span>Campaign Marketplace</span>
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -280,7 +280,7 @@ export default function CreatorMarketplacePage() {
             onClick={() => setActiveChannel('all')}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeChannel === 'all'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
@@ -295,7 +295,7 @@ export default function CreatorMarketplacePage() {
             onClick={() => setActiveChannel('linkedin')}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeChannel === 'linkedin'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
@@ -316,7 +316,7 @@ export default function CreatorMarketplacePage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for a campaign brief or a brand..."
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white transition-all"
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white transition-all"
             />
           </div>
 
@@ -369,7 +369,7 @@ export default function CreatorMarketplacePage() {
         {/* Dynamic Campaign Cards Grid */}
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3 text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+            <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
             <span className="text-xs font-semibold">Loading brand campaigns...</span>
           </div>
         ) : filteredCampaigns.length === 0 ? (
@@ -392,7 +392,7 @@ export default function CreatorMarketplacePage() {
                 >
                   <div>
                     {/* Top Atmospheric Graphic Banner */}
-                    <div className="h-32 bg-gradient-to-r from-slate-900 to-indigo-950 p-4 flex items-start justify-between relative overflow-hidden">
+                    <div className="h-32 bg-gradient-to-r from-[#070D0A] via-[#064E3B] to-[#070D0A] p-4 flex items-start justify-between relative overflow-hidden">
                       <img
                         src="/images/hero-clouds.jpg"
                         alt="Clouds banner"
@@ -436,11 +436,11 @@ export default function CreatorMarketplacePage() {
                     <div className="mt-4 px-6">
                       <div className="flex items-center justify-between text-[11px] mb-1.5">
                         <span className="text-slate-500 font-medium">Audience match</span>
-                        <span className="text-indigo-600 font-bold font-mono">{match.score}</span>
+                        <span className="text-emerald-700 font-bold font-mono">{match.score}</span>
                       </div>
                       <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-indigo-600 rounded-full transition-all duration-500" 
+                          className="h-full bg-emerald-600 rounded-full transition-all duration-500" 
                           style={{ width: `${match.percentage}%` }}
                         />
                       </div>
@@ -448,7 +448,7 @@ export default function CreatorMarketplacePage() {
 
                     {/* Forecaster 3-Metric Chips Bar */}
                     <div className="mx-6 my-4 p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 grid grid-cols-3 gap-2 text-left">
-                      <div className="border-l-2 border-indigo-500 pl-2.5">
+                      <div className="border-l-2 border-emerald-500 pl-2.5">
                         <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider font-mono">
                           BUDGET
                         </div>
@@ -490,7 +490,7 @@ export default function CreatorMarketplacePage() {
                     <button
                       type="button"
                       onClick={() => setSelectedCampaignForApply(camp)}
-                      className="flex-1 py-2.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md shadow-indigo-500/20 text-center flex items-center justify-center active:scale-95"
+                      className="flex-1 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md shadow-emerald-500/20 text-center flex items-center justify-center active:scale-95"
                     >
                       Apply Now
                     </button>
@@ -508,7 +508,7 @@ export default function CreatorMarketplacePage() {
           <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95">
             <div className="flex items-start justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full">
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-full">
                   Verified Brand Brief
                 </span>
                 <h3 className="text-lg font-black text-slate-900 mt-2">
@@ -537,9 +537,9 @@ export default function CreatorMarketplacePage() {
               )}
 
               <div className="grid grid-cols-2 gap-3 pt-1">
-                <div className="p-3.5 bg-indigo-50/60 border border-indigo-100 border-l-4 border-l-indigo-600 rounded-2xl">
+                <div className="p-3.5 bg-emerald-50/60 border border-emerald-200/80 border-l-4 border-l-emerald-600 rounded-2xl">
                   <span className="text-[10px] text-slate-500 font-bold uppercase font-mono">Budget per post</span>
-                  <div className="text-lg font-black text-indigo-700 mt-0.5 font-mono">€{selectedBrief.budgetPerPost || 240}</div>
+                  <div className="text-lg font-black text-emerald-800 mt-0.5 font-mono">€{selectedBrief.budgetPerPost || 240}</div>
                 </div>
                 <div className="p-3.5 bg-slate-50 border border-slate-200 border-l-4 border-l-emerald-500 rounded-2xl">
                   <span className="text-[10px] text-slate-500 font-bold uppercase font-mono">Target Audience</span>
@@ -563,7 +563,7 @@ export default function CreatorMarketplacePage() {
                   setSelectedBrief(null);
                   setSelectedCampaignForApply(camp);
                 }}
-                className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md shadow-indigo-500/20"
+                className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md shadow-emerald-500/20"
               >
                 Apply for Campaign
               </button>

@@ -61,7 +61,7 @@ export default function EscrowMilestoneStepper({
                   isDone
                     ? 'bg-emerald-500'
                     : isCurrent
-                    ? 'bg-indigo-600 animate-pulse'
+                    ? 'bg-emerald-600 animate-pulse'
                     : 'bg-slate-200'
                 }`}
                 title={`${s.label}: ${s.desc}`}
@@ -71,7 +71,7 @@ export default function EscrowMilestoneStepper({
                   isDone
                     ? 'text-emerald-700'
                     : isCurrent
-                    ? 'text-indigo-700 font-extrabold'
+                    ? 'text-emerald-700 font-extrabold'
                     : 'text-slate-400'
                 }`}
               >
@@ -91,7 +91,7 @@ export default function EscrowMilestoneStepper({
           <ShieldCheck className="w-4 h-4 text-emerald-600" />
           <span className="text-xs font-bold text-slate-800">Naano Escrow & Milestones</span>
         </div>
-        <span className="text-[11px] font-mono font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 px-2.5 py-0.5 rounded-full">
+        <span className="text-[11px] font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full">
           Stage {currentStep} of 5
         </span>
       </div>
@@ -115,7 +115,7 @@ export default function EscrowMilestoneStepper({
                   isDone
                     ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25 ring-4 ring-white'
                     : isCurrent
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/30 ring-4 ring-indigo-100 animate-pulse'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30 ring-4 ring-emerald-100 animate-pulse'
                     : 'bg-white text-slate-400 border border-slate-300 ring-4 ring-slate-50'
                 }`}
               >
@@ -132,7 +132,7 @@ export default function EscrowMilestoneStepper({
                   isDone
                     ? 'text-slate-800'
                     : isCurrent
-                    ? 'text-indigo-700'
+                    ? 'text-emerald-700'
                     : 'text-slate-400'
                 }`}
               >

@@ -294,15 +294,15 @@ export default function CompanyCollabsPage() {
         );
       case 'INVITED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 text-teal-700 text-xs font-bold border border-teal-200/60">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
             <span>Invited</span>
           </span>
         );
       case 'APPLIED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200/60">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
             <span>Applied</span>
           </span>
         );
@@ -335,7 +335,7 @@ export default function CompanyCollabsPage() {
       return (
         <button
           onClick={() => setSelectedReview(collab)}
-          className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 cursor-pointer bg-indigo-50 px-2.5 py-1 rounded-lg"
+          className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 cursor-pointer bg-emerald-50 px-2.5 py-1 rounded-lg"
         >
           <span>Review draft</span>
         </button>
@@ -378,7 +378,7 @@ export default function CompanyCollabsPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <Layers className="w-3 h-3 text-indigo-400" />
+                <Layers className="w-3 h-3 text-emerald-400" />
                 <span>Brand Pipeline</span>
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -395,7 +395,7 @@ export default function CompanyCollabsPage() {
 
           {/* Forecaster 3-chip inline summary */}
           <div className="flex items-center gap-4 bg-white border border-slate-200/90 rounded-2xl p-2.5 px-4 shadow-2xs self-start sm:self-auto">
-            <div className="border-l-2 border-indigo-500 pl-3">
+            <div className="border-l-2 border-emerald-500 pl-3">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                 Total
               </span>
@@ -403,7 +403,7 @@ export default function CompanyCollabsPage() {
                 {totalCollaborations}
               </span>
             </div>
-            <div className="border-l-2 border-emerald-500 pl-3">
+            <div className="border-l-2 border-teal-500 pl-3">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
                 Committed
               </span>
@@ -432,7 +432,7 @@ export default function CompanyCollabsPage() {
                   setSelectedCampaignId(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full sm:w-auto appearance-none bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 pr-10 text-xs font-semibold text-slate-800 shadow-2xs focus:outline-none focus:border-indigo-600 cursor-pointer"
+                className="w-full sm:w-auto appearance-none bg-slate-50/70 border border-slate-200 rounded-xl px-4 py-2.5 pr-10 text-xs font-semibold text-slate-800 shadow-2xs focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 cursor-pointer"
               >
                 <option value="ALL">All campaigns</option>
                 {campaigns.map((camp) => (
@@ -454,7 +454,7 @@ export default function CompanyCollabsPage() {
                   setCurrentPage(1);
                 }}
                 placeholder="Search creator name, campaign title..."
-                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white transition-all"
+                className="w-full bg-slate-50/70 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white transition-all"
               />
             </div>
           </div>
@@ -493,7 +493,7 @@ export default function CompanyCollabsPage() {
                 }}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
@@ -523,7 +523,7 @@ export default function CompanyCollabsPage() {
                       type="checkbox"
                       checked={allSelected}
                       onChange={handleSelectAll}
-                      className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-0 cursor-pointer"
+                      className="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                     />
                   </th>
                   <th className="py-4 px-4">Creator</th>
@@ -541,7 +541,7 @@ export default function CompanyCollabsPage() {
                   <tr>
                     <td colSpan={8} className="py-20 text-center text-slate-400">
                       <div className="flex flex-col items-center justify-center gap-2">
-                        <Loader2 className="w-7 h-7 animate-spin text-indigo-600" />
+                        <Loader2 className="w-7 h-7 animate-spin text-emerald-600" />
                         <span className="text-xs font-semibold">Loading collaborations...</span>
                       </div>
                     </td>
@@ -553,7 +553,7 @@ export default function CompanyCollabsPage() {
                       <span>No collaborations match this filter. Find and book creators in the </span>
                       <Link
                         href="/dashboard/company/marketplace"
-                        className="text-indigo-600 hover:underline font-bold"
+                        className="text-emerald-700 hover:underline font-bold"
                       >
                         Marketplace
                       </Link>
@@ -573,7 +573,7 @@ export default function CompanyCollabsPage() {
                       <tr
                         key={collab.id}
                         className={`hover:bg-slate-50/70 transition-colors ${
-                          isSelected ? 'bg-indigo-50/30' : ''
+                          isSelected ? 'bg-emerald-50/40' : ''
                         }`}
                       >
                         <td className="py-4 pl-6 pr-3">
@@ -581,7 +581,7 @@ export default function CompanyCollabsPage() {
                             type="checkbox"
                             checked={isSelected}
                             onChange={() => handleToggleSelect(collab.id)}
-                            className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-0 cursor-pointer"
+                            className="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                           />
                         </td>
 
@@ -595,7 +595,7 @@ export default function CompanyCollabsPage() {
                                   className="w-full h-full object-cover object-top"
                                 />
                               ) : (
-                                <div className="w-full h-full flex items-center justify-center font-black text-xs text-indigo-600 bg-indigo-50">
+                                <div className="w-full h-full flex items-center justify-center font-black text-xs text-emerald-700 bg-emerald-50">
                                   {creatorName.slice(0, 2).toUpperCase()}
                                 </div>
                               )}
@@ -650,7 +650,7 @@ export default function CompanyCollabsPage() {
                   onClick={() => setCurrentPage(page)}
                   className={`w-7 h-7 rounded-xl flex items-center justify-center font-bold text-xs transition-colors cursor-pointer ${
                     currentPage === page
-                      ? 'bg-indigo-600 text-white shadow-xs'
+                      ? 'bg-emerald-600 text-white shadow-xs'
                       : 'hover:bg-slate-100 text-slate-600'
                   }`}
                 >
@@ -668,7 +668,7 @@ export default function CompanyCollabsPage() {
                     setRowsPerPage(Number(e.target.value));
                     setCurrentPage(1);
                   }}
-                  className="appearance-none bg-white border border-slate-200 rounded-xl px-3 py-1 pr-7 text-xs font-semibold text-slate-700 focus:outline-none focus:border-indigo-600 cursor-pointer"
+                  className="appearance-none bg-white border border-slate-200 rounded-xl px-3 py-1 pr-7 text-xs font-semibold text-slate-700 focus:outline-none focus:border-emerald-600 cursor-pointer"
                 >
                   <option value={10}>10</option>
                   <option value={25}>25</option>
@@ -689,7 +689,7 @@ export default function CompanyCollabsPage() {
           <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-5 animate-in zoom-in-95 duration-200">
             <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider block">
+                <span className="text-[10px] font-black uppercase text-emerald-700 tracking-wider block">
                   Content Deliverable Review
                 </span>
                 <h3 className="text-lg font-black text-slate-900 mt-0.5">
@@ -713,7 +713,7 @@ export default function CompanyCollabsPage() {
                     href={selectedReview.draftUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-indigo-600 hover:underline font-semibold bg-indigo-50/70 border border-indigo-100 px-3.5 py-2 rounded-xl"
+                    className="inline-flex items-center gap-1.5 text-emerald-700 hover:underline font-semibold bg-emerald-50/70 border border-emerald-200/80 px-3.5 py-2 rounded-xl"
                   >
                     <span>{selectedReview.draftUrl}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -737,7 +737,7 @@ export default function CompanyCollabsPage() {
                   onChange={(e) => setFeedbackText(e.target.value)}
                   placeholder="Leave constructive revision notes if changes are required..."
                   rows={3}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white"
                 />
               </div>
             </div>
@@ -761,7 +761,7 @@ export default function CompanyCollabsPage() {
                 onClick={() =>
                   handleUpdateStatus(selectedReview.id, 'APPROVED')
                 }
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer flex items-center gap-1.5 shadow-md shadow-indigo-500/20"
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
               >
                 {processingId === selectedReview.id ? (
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />

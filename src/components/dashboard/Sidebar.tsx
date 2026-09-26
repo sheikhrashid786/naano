@@ -106,14 +106,14 @@ export default function Sidebar({ user }: SidebarProps) {
             {isHovered ? (
               <NaanoLogo />
             ) : (
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-indigo-500/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-700 via-emerald-600 to-teal-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-emerald-600/25">
                 N
               </div>
             )}
           </Link>
 
           {isHovered && (
-            <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-mono">
+            <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 font-mono">
               {user.role === 'ADMIN' ? 'Admin' : isCompany ? 'Brand' : 'Creator'}
             </span>
           )}
@@ -133,7 +133,7 @@ export default function Sidebar({ user }: SidebarProps) {
                   title={link.label}
                   className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all ${
                     active
-                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                      ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                       : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/70'
                   }`}
                 >
@@ -148,14 +148,14 @@ export default function Sidebar({ user }: SidebarProps) {
                 href={link.href}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm transition-all group ${
                   active
-                    ? 'text-indigo-700 font-bold bg-indigo-50/80 border-l-2 border-indigo-600 shadow-2xs'
+                    ? 'text-emerald-800 font-bold bg-emerald-50/80 border-l-2 border-emerald-600 shadow-2xs'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60 font-semibold'
                 }`}
               >
                 <div
                   className={`flex items-center justify-center w-7 h-7 rounded-xl transition-all ${
                     active
-                      ? 'bg-indigo-600 text-white shadow-xs'
+                      ? 'bg-emerald-600 text-white shadow-xs'
                       : 'text-slate-400 group-hover:text-slate-700 group-hover:scale-105'
                   }`}
                 >

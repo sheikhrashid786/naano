@@ -162,7 +162,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <ShieldCheck className="w-3 h-3 text-indigo-400" />
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 <span>Super Admin</span>
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -179,7 +179,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
 
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="self-start sm:self-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md shadow-indigo-500/20 flex items-center gap-2 transition-all active:scale-95 shrink-0 cursor-pointer"
+            className="self-start sm:self-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all active:scale-95 shrink-0 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
             <span>Create New User</span>
@@ -201,7 +201,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                 onClick={() => setSelectedRole(role.id)}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   selectedRole === role.id
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
@@ -221,7 +221,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
               placeholder="Search by name, email, or company..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2.5 text-xs bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus:bg-white text-slate-800 transition-all placeholder:text-slate-400"
+              className="w-full pl-9 pr-3.5 py-2.5 text-xs bg-slate-50/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 focus:bg-white text-slate-800 transition-all placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -253,7 +253,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                       {/* User Info */}
                       <td className="py-4 px-6">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 font-black text-sm flex items-center justify-center shrink-0 border border-indigo-100">
+                          <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-800 font-black text-sm flex items-center justify-center shrink-0 border border-emerald-200/80">
                             {user.name?.[0]?.toUpperCase() || 'U'}
                           </div>
                           <div>
@@ -270,12 +270,12 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                             user.role === 'ADMIN'
                               ? 'bg-slate-900 text-white'
                               : user.role === 'COMPANY'
-                              ? 'bg-indigo-50 text-indigo-700 border border-indigo-200/60'
+                              ? 'bg-teal-50 text-teal-800 border border-teal-200/80'
                               : 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
                           }`}
                         >
-                          {user.role === 'ADMIN' && <ShieldCheck className="w-3 h-3 text-indigo-400" />}
-                          {user.role === 'COMPANY' && <Building2 className="w-3 h-3 text-indigo-600" />}
+                          {user.role === 'ADMIN' && <ShieldCheck className="w-3 h-3 text-emerald-400" />}
+                          {user.role === 'COMPANY' && <Building2 className="w-3 h-3 text-teal-700" />}
                           {user.role === 'CREATOR' && <Contact className="w-3 h-3 text-emerald-600" />}
                           <span>{user.role}</span>
                         </span>
@@ -286,7 +286,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                         {user.company ? (
                           <div>
                             <div className="font-bold text-slate-800">{user.company.name}</div>
-                            <div className="text-[11px] text-indigo-600 font-mono">Brand Partner</div>
+                            <div className="text-[11px] text-teal-800 font-mono">Brand Partner</div>
                           </div>
                         ) : user.creator ? (
                           <div>
@@ -306,7 +306,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                           value={user.role}
                           disabled={loadingId === user.id}
                           onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                          className="bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none focus:border-indigo-600 cursor-pointer disabled:opacity-50"
+                          className="bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 cursor-pointer disabled:opacity-50"
                         >
                           <option value="COMPANY">COMPANY</option>
                           <option value="CREATOR">CREATOR</option>
@@ -347,7 +347,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
             </button>
 
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
                 <Plus className="w-5 h-5 stroke-[2.5]" />
               </div>
               <div>
@@ -373,7 +373,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                     placeholder="e.g. Sarah Connor"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
-                    className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900"
+                    className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white text-slate-900"
                   />
                 </div>
               </div>
@@ -388,7 +388,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                     placeholder="user@domain.com"
                     value={newEmail}
                     onChange={(e) => setNewEmail(e.target.value)}
-                    className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900"
+                    className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white text-slate-900"
                   />
                 </div>
               </div>
@@ -403,7 +403,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                     placeholder="••••••••"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 focus:bg-white text-slate-900"
+                    className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:bg-white text-slate-900"
                   />
                 </div>
               </div>
@@ -413,7 +413,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                 <select
                   value={newRole}
                   onChange={(e: any) => setNewRole(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 font-bold text-slate-800"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 font-bold text-slate-800"
                 >
                   <option value="COMPANY">COMPANY (Brand Customer)</option>
                   <option value="CREATOR">CREATOR (Marketplace Partner)</option>
@@ -432,7 +432,7 @@ export default function AdminUsersClient({ initialUser, users: initialUsers }: P
                 <button
                   type="submit"
                   disabled={formSubmitting}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold disabled:opacity-50 cursor-pointer shadow-md shadow-indigo-500/20"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold disabled:opacity-50 cursor-pointer shadow-md shadow-emerald-500/20"
                 >
                   {formSubmitting ? 'Creating...' : 'Create Account'}
                 </button>

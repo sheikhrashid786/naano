@@ -248,7 +248,7 @@ export default function CompanyResultsPage() {
           >
             <span>Leads</span>
             {activeTab === 'leads' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
             )}
           </button>
 
@@ -257,13 +257,13 @@ export default function CompanyResultsPage() {
             onClick={() => setActiveTab('posts')}
             className={`pb-3 transition-colors relative cursor-pointer ${
               activeTab === 'posts'
-                ? 'text-[#2563EB] font-bold'
+                ? 'text-emerald-700 font-bold'
                 : 'text-slate-500 hover:text-[#0F172A]'
             }`}
           >
             <span>Posts</span>
             {activeTab === 'posts' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
             )}
           </button>
         </div>
@@ -276,7 +276,7 @@ export default function CompanyResultsPage() {
             <select
               value={selectedCampaignId}
               onChange={(e) => setSelectedCampaignId(e.target.value)}
-              className="w-full sm:w-auto appearance-none bg-white border border-[#E2E8F0] rounded-xl px-4 py-2.5 pr-10 text-xs sm:text-sm font-medium text-slate-800 shadow-2xs focus:outline-none focus:border-[#2563EB] cursor-pointer"
+              className="w-full sm:w-auto appearance-none bg-white border border-[#E2E8F0] rounded-xl px-4 py-2.5 pr-10 text-xs sm:text-sm font-medium text-slate-800 shadow-2xs focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 cursor-pointer"
             >
               <option value="ALL">All campaigns</option>
               {campaigns.map((camp) => (
@@ -356,7 +356,7 @@ export default function CompanyResultsPage() {
                     <select
                       value={timeRange}
                       onChange={(e) => setTimeRange(e.target.value as any)}
-                      className="appearance-none bg-white border border-[#E2E8F0] rounded-xl px-3.5 py-1.5 pr-8 text-xs font-semibold text-slate-700 shadow-2xs focus:outline-none focus:border-[#2563EB] cursor-pointer"
+                      className="appearance-none bg-white border border-[#E2E8F0] rounded-xl px-3.5 py-1.5 pr-8 text-xs font-semibold text-slate-700 shadow-2xs focus:outline-none focus:border-emerald-600 cursor-pointer"
                     >
                       <option value="month">Month</option>
                       <option value="quarter">Quarter</option>
@@ -369,7 +369,7 @@ export default function CompanyResultsPage() {
                 {/* Subtitle & Legend */}
                 <div className="flex items-center justify-between mt-3 text-xs">
                   <div className="flex items-center gap-2 font-medium text-slate-600">
-                    <span className="w-2 h-2 rounded-full bg-[#2563EB]" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-600" />
                     <span>Qualified clicks</span>
                   </div>
                   <span className="text-[11px] text-slate-400">
@@ -400,7 +400,7 @@ export default function CompanyResultsPage() {
                       <path
                         d="M 0 115 L 500 115"
                         fill="none"
-                        stroke="#2563EB"
+                        stroke="#059669"
                         strokeWidth="2"
                       />
 
@@ -414,7 +414,7 @@ export default function CompanyResultsPage() {
                               cx={x}
                               cy={y}
                               r="3.5"
-                              fill="#2563EB"
+                              fill="#059669"
                               className="transition-transform hover:scale-150 cursor-pointer"
                               onMouseEnter={() =>
                                 setHoveredPoint({
@@ -434,14 +434,14 @@ export default function CompanyResultsPage() {
                     {/* Interactive Tooltip on hover */}
                     {hoveredPoint && (
                       <div
-                        className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-full mb-2 bg-[#0F172A] text-white text-[10px] font-semibold py-1 px-2.5 rounded-lg shadow-lg"
+                        className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-full mb-2 bg-[#070D0A] text-white text-[10px] font-semibold py-1 px-2.5 rounded-lg shadow-lg border border-emerald-500/20"
                         style={{
                           left: `${(hoveredPoint.x / 500) * 100}%`,
                           top: `${(hoveredPoint.y / 120) * 100}%`,
                         }}
                       >
                         <div>{hoveredPoint.date}</div>
-                        <div className="text-blue-400">
+                        <div className="text-emerald-400 font-bold">
                           {hoveredPoint.clicks} clicks
                         </div>
                       </div>
@@ -506,7 +506,7 @@ export default function CompanyResultsPage() {
               <div className="pt-6">
                 <Link
                   href="/dashboard/company/collabs"
-                  className="text-xs font-semibold text-[#2563EB] hover:underline inline-flex items-center gap-1.5 transition-colors"
+                  className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 hover:underline inline-flex items-center gap-1.5 transition-colors"
                 >
                   <span>View posts</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -539,7 +539,7 @@ export default function CompanyResultsPage() {
             {publishedPostsCount === 0 ? (
               <div className="p-12 text-center text-xs text-slate-500">
                 No live posts published yet. Invite creators from the{' '}
-                <Link href="/dashboard/company/marketplace" className="text-[#2563EB] hover:underline font-bold">
+                <Link href="/dashboard/company/marketplace" className="text-emerald-700 hover:underline font-bold">
                   Marketplace
                 </Link>{' '}
                 to get started.
@@ -580,7 +580,7 @@ export default function CompanyResultsPage() {
                             href={collab.postUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-[#2563EB] hover:underline"
+                            className="inline-flex items-center gap-1 text-emerald-700 hover:underline"
                           >
                             <span>Open post</span>
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -601,13 +601,13 @@ export default function CompanyResultsPage() {
       {showGoodToKnow && (
         <div className="fixed bottom-6 right-20 z-40 max-w-sm bg-white rounded-2xl border border-slate-200/90 shadow-2xl p-4 flex items-start gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200">
           {/* Left Handshake Icon */}
-          <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0">
-            <Handshake className="w-5 h-5" />
+          <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center justify-center shrink-0">
+            <Handshake className="w-5 h-5 text-emerald-600" />
           </div>
 
           {/* Center Copy */}
           <div className="flex-1 min-w-0 pr-1">
-            <span className="text-[10px] font-black uppercase tracking-wider text-[#2563EB] block">
+            <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 block">
               GOOD TO KNOW
             </span>
             <span className="font-bold text-xs text-[#0F172A] block mt-0.5">
@@ -623,7 +623,7 @@ export default function CompanyResultsPage() {
             <button
               type="button"
               onClick={() => setShowGoodToKnow(false)}
-              className="px-3 py-1 bg-[#EFF6FF] hover:bg-[#DBEAFE] text-[#2563EB] text-xs font-bold rounded-lg transition-colors cursor-pointer"
+              className="px-3 py-1 bg-emerald-50 hover:bg-emerald-100/80 text-emerald-800 border border-emerald-200/60 text-xs font-bold rounded-lg transition-colors cursor-pointer"
             >
               Got it
             </button>

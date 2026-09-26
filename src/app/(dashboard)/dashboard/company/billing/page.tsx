@@ -175,8 +175,8 @@ export default function CompanyBillingPage() {
         {/* 2. AVAILABLE BALANCE CARD (Matches Reference Screenshot)                   */}
         {/* ========================================================================= */}
         <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-2xs p-6 sm:p-7 relative">
-          {/* Top-Right Euro Blue Icon */}
-          <div className="w-10 h-10 rounded-full bg-[#EFF6FF] text-[#2563EB] font-bold text-base flex items-center justify-center absolute right-6 top-6 shadow-2xs">
+          {/* Top-Right Euro Emerald Icon */}
+          <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 font-bold text-base flex items-center justify-center absolute right-6 top-6 shadow-2xs border border-emerald-200/60">
             €
           </div>
 
@@ -200,7 +200,7 @@ export default function CompanyBillingPage() {
                 setTopUpAmount('2500');
                 setIsTopUpModalOpen(true);
               }}
-              className="px-4 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-bold rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-sm shadow-emerald-600/20 transition-all active:scale-95 cursor-pointer"
             >
               Add budget
             </button>
@@ -242,13 +242,13 @@ export default function CompanyBillingPage() {
               onClick={() => setActiveTab('all')}
               className={`pb-2.5 transition-colors relative cursor-pointer ${
                 activeTab === 'all'
-                  ? 'text-[#2563EB] font-bold'
+                  ? 'text-emerald-700 font-bold'
                   : 'text-slate-500 hover:text-[#0F172A] font-medium'
               }`}
             >
               <span>All</span>
               {activeTab === 'all' && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
               )}
             </button>
 
@@ -257,13 +257,13 @@ export default function CompanyBillingPage() {
               onClick={() => setActiveTab('topups')}
               className={`pb-2.5 transition-colors relative cursor-pointer ${
                 activeTab === 'topups'
-                  ? 'text-[#2563EB] font-bold'
+                  ? 'text-emerald-700 font-bold'
                   : 'text-slate-500 hover:text-[#0F172A] font-medium'
               }`}
             >
               <span>Top-ups</span>
               {activeTab === 'topups' && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
               )}
             </button>
 
@@ -272,13 +272,13 @@ export default function CompanyBillingPage() {
               onClick={() => setActiveTab('bookings')}
               className={`pb-2.5 transition-colors relative cursor-pointer ${
                 activeTab === 'bookings'
-                  ? 'text-[#2563EB] font-bold'
+                  ? 'text-emerald-700 font-bold'
                   : 'text-slate-500 hover:text-[#0F172A] font-medium'
               }`}
             >
               <span>Bookings</span>
               {activeTab === 'bookings' && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
               )}
             </button>
           </div>
@@ -302,7 +302,7 @@ export default function CompanyBillingPage() {
                 {loading ? (
                   <tr>
                     <td colSpan={6} className="py-12 text-center text-slate-400">
-                      <Loader2 className="w-5 h-5 animate-spin text-[#2563EB] mx-auto mb-1" />
+                      <Loader2 className="w-5 h-5 animate-spin text-emerald-600 mx-auto mb-1" />
                       Loading invoices...
                     </td>
                   </tr>
@@ -330,7 +330,7 @@ export default function CompanyBillingPage() {
                           className={`px-2 py-0.5 rounded-md text-[11px] font-bold ${
                             inv.type === 'Top-up'
                               ? 'bg-emerald-50 text-emerald-700'
-                              : 'bg-blue-50 text-[#2563EB]'
+                              : 'bg-teal-50 text-teal-800 border border-teal-200/60'
                           }`}
                         >
                           {inv.type}
@@ -377,7 +377,7 @@ export default function CompanyBillingPage() {
           <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-2xl max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span className="text-[10px] font-black uppercase text-[#2563EB] tracking-wider block">
+                <span className="text-[10px] font-black uppercase text-emerald-700 tracking-wider block">
                   Top Up Wallet
                 </span>
                 <h3 className="text-base font-bold text-[#0F172A] mt-0.5">
@@ -408,7 +408,7 @@ export default function CompanyBillingPage() {
                     step="50"
                     value={topUpAmount}
                     onChange={(e) => setTopUpAmount(e.target.value)}
-                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-8 pr-4 py-2.5 text-sm font-bold text-[#0F172A] focus:bg-white focus:outline-none focus:border-[#2563EB]"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl pl-8 pr-4 py-2.5 text-sm font-bold text-[#0F172A] focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10"
                   />
                 </div>
               </div>
@@ -422,7 +422,7 @@ export default function CompanyBillingPage() {
                     onClick={() => setTopUpAmount(amt)}
                     className={`py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                       topUpAmount === amt
-                        ? 'border-[#2563EB] bg-blue-50 text-[#2563EB]'
+                        ? 'border-emerald-600 bg-emerald-50 text-emerald-800'
                         : 'border-slate-200 hover:bg-slate-50 text-slate-700'
                     }`}
                   >
@@ -438,7 +438,7 @@ export default function CompanyBillingPage() {
                 </label>
                 <div className="p-3 bg-[#F8FAFC] border border-slate-200 rounded-xl flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <CreditCard className="w-4 h-4 text-[#2563EB]" />
+                    <CreditCard className="w-4 h-4 text-emerald-600" />
                     <span className="font-bold text-slate-700 text-xs">
                       Credit / Debit Card (Stripe)
                     </span>
@@ -460,7 +460,7 @@ export default function CompanyBillingPage() {
                 <button
                   type="submit"
                   disabled={isProcessingTopUp || !topUpAmount}
-                  className="px-5 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold rounded-xl text-xs transition-all shadow-xs cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
+                  className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm shadow-emerald-600/20 cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
                 >
                   {isProcessingTopUp ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -514,7 +514,7 @@ export default function CompanyBillingPage() {
             <div className="pt-2 flex items-center justify-between">
               <Link
                 href="/dashboard/company/messages"
-                className="text-xs font-bold text-[#2563EB] hover:underline"
+                className="text-xs font-bold text-emerald-700 hover:underline"
               >
                 Ask NaanoBot in Chat &rarr;
               </Link>

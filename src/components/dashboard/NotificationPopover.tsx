@@ -140,9 +140,9 @@ export default function NotificationPopover({ role }: NotificationPopoverProps) 
       case 'escrow':
         return <DollarSign className="w-3.5 h-3.5 text-emerald-600" />;
       case 'draft':
-        return <FileText className="w-3.5 h-3.5 text-blue-600" />;
+        return <FileText className="w-3.5 h-3.5 text-emerald-700" />;
       case 'invite':
-        return <Sparkles className="w-3.5 h-3.5 text-indigo-600" />;
+        return <Sparkles className="w-3.5 h-3.5 text-teal-600" />;
       default:
         return <ShieldCheck className="w-3.5 h-3.5 text-slate-600" />;
     }
@@ -159,7 +159,7 @@ export default function NotificationPopover({ role }: NotificationPopoverProps) 
       >
         <Bell className="w-3.5 h-3.5" />
         {unreadCount > 0 && (
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-600 ring-2 ring-white animate-pulse" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-600 ring-2 ring-white animate-pulse" />
         )}
       </button>
 
@@ -170,7 +170,7 @@ export default function NotificationPopover({ role }: NotificationPopoverProps) 
             <div className="flex items-center gap-2">
               <span className="text-xs font-black text-slate-900">Notifications</span>
               {unreadCount > 0 && (
-                <span className="text-[10px] font-mono font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full border border-indigo-100">
+                <span className="text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-200/80">
                   {unreadCount} new
                 </span>
               )}
@@ -180,7 +180,7 @@ export default function NotificationPopover({ role }: NotificationPopoverProps) 
               <button
                 type="button"
                 onClick={markAllAsRead}
-                className="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 transition-colors cursor-pointer flex items-center gap-1"
+                className="text-[11px] font-bold text-emerald-600 hover:text-emerald-800 transition-colors cursor-pointer flex items-center gap-1"
               >
                 <Check className="w-3 h-3" />
                 <span>Mark read</span>
@@ -203,7 +203,7 @@ export default function NotificationPopover({ role }: NotificationPopoverProps) 
                     setIsOpen(false);
                   }}
                   className={`p-3.5 flex items-start gap-3 transition-colors hover:bg-slate-50/80 block ${
-                    !item.read ? 'bg-indigo-50/25' : ''
+                    !item.read ? 'bg-emerald-50/30' : ''
                   }`}
                 >
                   <div className="w-7 h-7 rounded-xl bg-slate-100 border border-slate-200/60 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
@@ -227,7 +227,7 @@ export default function NotificationPopover({ role }: NotificationPopoverProps) 
                     </p>
                   </div>
                   {!item.read && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 shrink-0 self-center" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 self-center" />
                   )}
                 </Link>
               ))

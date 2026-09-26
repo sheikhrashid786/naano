@@ -201,9 +201,9 @@ export default function CompanyCampaignsPage() {
         )}
 
         {/* 1. TOP NOTICE BANNER (Forecaster Glassmorphic Banner) */}
-        <div className="rounded-3xl border border-indigo-100 bg-gradient-to-r from-indigo-50/70 via-white to-sky-50/50 p-5 px-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.03)]">
+        <div className="rounded-3xl border border-emerald-100 bg-gradient-to-r from-emerald-50/70 via-white to-teal-50/40 p-5 px-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.03)]">
           <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-indigo-500/20">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-600/20">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -234,7 +234,7 @@ export default function CompanyCampaignsPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <Briefcase className="w-3 h-3 text-indigo-400" />
+                <Briefcase className="w-3 h-3 text-emerald-400" />
                 <span>Brand Campaigns</span>
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -251,7 +251,7 @@ export default function CompanyCampaignsPage() {
 
           <Link
             href="/dashboard/company/campaigns/new"
-            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md shadow-indigo-500/20 flex items-center gap-2 transition-all active:scale-95 shrink-0 self-start sm:self-auto cursor-pointer"
+            className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md shadow-emerald-600/20 flex items-center gap-2 transition-all active:scale-95 shrink-0 self-start sm:self-auto cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
             <span>Create Campaign</span>
@@ -273,7 +273,7 @@ export default function CompanyCampaignsPage() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeTab === tab.id
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/25'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
@@ -299,7 +299,7 @@ export default function CompanyCampaignsPage() {
         {/* 4. CAMPAIGNS GRID (2 COLUMNS) */}
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3 text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+            <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
             <span className="text-xs font-semibold">Loading campaigns...</span>
           </div>
         ) : (
@@ -326,13 +326,13 @@ export default function CompanyCampaignsPage() {
                 >
                   <div>
                     {/* Atmospheric Banner */}
-                    <div className="h-32 relative overflow-hidden p-5 flex items-start justify-between bg-gradient-to-r from-slate-900 to-indigo-950">
+                    <div className="h-32 relative overflow-hidden p-5 flex items-start justify-between bg-gradient-to-r from-[#070D0A] to-[#064E3B]">
                       <img
                         src="/images/hero-clouds.jpg"
                         alt="Clouds"
                         className="absolute inset-0 w-full h-full object-cover object-center opacity-30 mix-blend-overlay pointer-events-none"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#070D0A]/80 via-transparent to-transparent" />
 
                       {/* Left: Logo & Status Badge */}
                       <div className="flex items-center gap-3 relative z-10">
@@ -372,7 +372,7 @@ export default function CompanyCampaignsPage() {
 
                     {/* 3 Forecaster Metric Chips */}
                     <div className="mx-6 my-4 p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80 grid grid-cols-3 gap-3">
-                      <div className="border-l-2 border-indigo-500 pl-3">
+                      <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                           Creators
                         </div>
@@ -381,11 +381,11 @@ export default function CompanyCampaignsPage() {
                         </div>
                       </div>
 
-                      <div className="border-l-2 border-emerald-500 pl-3">
+                      <div className="border-l-2 border-teal-500 pl-3">
                         <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                           Live Posts
                         </div>
-                        <div className="text-lg font-black text-emerald-600 font-mono mt-0.5">
+                        <div className="text-lg font-black text-teal-600 font-mono mt-0.5">
                           {publishedCount}
                         </div>
                       </div>
@@ -406,7 +406,7 @@ export default function CompanyCampaignsPage() {
                     <button
                       type="button"
                       onClick={() => setSelectedBrief(camp)}
-                      className="font-bold text-slate-700 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="font-bold text-slate-700 hover:text-emerald-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <FileText className="w-3.5 h-3.5 text-slate-400" />
                       <span>Inspect brief</span>
@@ -415,7 +415,7 @@ export default function CompanyCampaignsPage() {
                     <div className="flex items-center gap-3">
                       <Link
                         href="/dashboard/company/marketplace"
-                        className="font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 transition-colors cursor-pointer"
+                        className="font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 transition-colors cursor-pointer"
                       >
                         <span>Find Creators</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -441,10 +441,10 @@ export default function CompanyCampaignsPage() {
             })}
 
             {/* "CREATE A CAMPAIGN" DOTTED ACTION CARD */}
-            <div className="rounded-3xl border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-gradient-to-b from-white to-slate-50/50 p-6 sm:p-7 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.02)] flex flex-col justify-between transition-all group">
+            <div className="rounded-3xl border-2 border-dashed border-emerald-200 hover:border-emerald-500 bg-gradient-to-b from-white to-slate-50/50 p-6 sm:p-7 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.02)] flex flex-col justify-between transition-all group">
               <div>
-                <div className="h-28 bg-indigo-50/60 rounded-2xl p-4 flex items-center justify-center mb-5 border border-indigo-100/50">
-                  <div className="w-12 h-12 rounded-2xl bg-white border border-indigo-100 flex items-center justify-center shadow-xs text-indigo-600 group-hover:scale-110 transition-transform">
+                <div className="h-28 bg-emerald-50/60 rounded-2xl p-4 flex items-center justify-center mb-5 border border-emerald-100/50">
+                  <div className="w-12 h-12 rounded-2xl bg-white border border-emerald-100 flex items-center justify-center shadow-xs text-emerald-600 group-hover:scale-110 transition-transform">
                     <Plus className="w-6 h-6 stroke-[2.5]" />
                   </div>
                 </div>
@@ -476,7 +476,7 @@ export default function CompanyCampaignsPage() {
               <div className="pt-2">
                 <Link
                   href="/dashboard/company/campaigns/new"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md shadow-indigo-500/20 transition-all active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md shadow-emerald-600/20 transition-all active:scale-95 cursor-pointer"
                 >
                   <span>Build New Brief</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -495,7 +495,7 @@ export default function CompanyCampaignsPage() {
           <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 animate-in zoom-in-95 duration-200">
             <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider block">
+                <span className="text-[10px] font-black uppercase text-emerald-600 tracking-wider block">
                   Campaign Brief Specification
                 </span>
                 <h3 className="text-xl font-black text-slate-900 mt-0.5">
@@ -527,9 +527,9 @@ export default function CompanyCampaignsPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-2xl bg-indigo-50/60 border border-indigo-100 border-l-4 border-l-indigo-600">
+                <div className="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-100 border-l-4 border-l-emerald-600">
                   <span className="font-bold text-slate-600 block text-[11px]">Budget per post</span>
-                  <span className="text-xl font-black text-indigo-700 block mt-0.5 font-mono">
+                  <span className="text-xl font-black text-emerald-800 block mt-0.5 font-mono">
                     €{selectedBrief.budgetPerPost}
                   </span>
                 </div>
@@ -567,7 +567,7 @@ export default function CompanyCampaignsPage() {
             <div className="flex items-center justify-between pt-4 border-t border-slate-100">
               <Link
                 href="/dashboard/company/marketplace"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1.5"
+                className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1.5"
               >
                 <span>Find matching creators</span>
                 <ArrowRight className="w-3.5 h-3.5" />

@@ -41,11 +41,11 @@ export default function FaqSection() {
   ];
 
   return (
-    <section id="faq" className="py-24 bg-[#FAFAFC] border-b border-slate-200/80 scroll-mt-20">
+    <section id="faq" className="py-24 bg-[#EBF1EE] border-b border-slate-200/80 section-even scroll-mt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200 uppercase tracking-wider mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200/80 uppercase tracking-wider mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-emerald-600" />
             <span>Got Questions?</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -63,7 +63,7 @@ export default function FaqSection() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200"
+                className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200 hover:border-emerald-200"
               >
                 <button
                   type="button"
@@ -71,7 +71,7 @@ export default function FaqSection() {
                   className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50/50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100 uppercase tracking-wider">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80 uppercase tracking-wider">
                       {faq.category}
                     </span>
                     <span className="text-sm sm:text-base font-bold text-slate-900">
@@ -80,7 +80,7 @@ export default function FaqSection() {
                   </div>
                   <ChevronDown
                     className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-indigo-600' : ''
+                      isOpen ? 'rotate-180 text-emerald-600' : ''
                     }`}
                   />
                 </button>

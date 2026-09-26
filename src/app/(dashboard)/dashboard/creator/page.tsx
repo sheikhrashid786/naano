@@ -286,8 +286,8 @@ export default async function CreatorOverviewPage() {
           <div className="lg:col-span-5 bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)]">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold border border-blue-100 mb-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200/80 mb-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                   <span>Public Media Kit</span>
                 </div>
                 <h3 className="text-base font-black text-slate-900">Your Creator Card</h3>
@@ -301,9 +301,9 @@ export default async function CreatorOverviewPage() {
             </div>
 
             {/* LinkedIn Card Preview Mockup */}
-            <div className="mt-6 w-full border border-slate-200/90 rounded-3xl shadow-[0_12px_36px_-6px_rgba(28,78,178,0.1)] bg-white relative pb-3 overflow-hidden">
-              {/* Blue Gradient Header */}
-              <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 h-24 p-3.5 flex items-start justify-between text-white relative">
+            <div className="mt-6 w-full border border-slate-200/90 rounded-3xl shadow-[0_12px_36px_-6px_rgba(5,150,105,0.08)] bg-white relative pb-3 overflow-hidden">
+              {/* Luxury Obsidian Forest Header */}
+              <div className="bg-gradient-to-r from-[#070D0A] via-[#064E3B] to-[#070D0A] h-24 p-3.5 flex items-start justify-between text-white relative">
                 {/* LinkedIn Badge */}
                 <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-[#0A66C2] font-bold text-xs shadow-sm">
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -322,7 +322,7 @@ export default async function CreatorOverviewPage() {
                       d="M334 214C334 238.853 313.853 259 289 259H189.5C124.053 259 71 205.947 71 140.5C71 125.036 83.536 112.5 99 112.5H198.5C263.947 112.5 317 165.553 317 231"
                       fill="white"
                     />
-                    <circle cx="317" cy="242" r="17" fill="#60A5FA" />
+                    <circle cx="317" cy="242" r="17" fill="#10B981" />
                   </svg>
                   <span className="font-extrabold text-base tracking-tight text-white font-sans">
                     naano
@@ -340,7 +340,7 @@ export default async function CreatorOverviewPage() {
 
               {/* Creator Profile Avatar */}
               <div className="-mt-10 flex justify-center">
-                <div className="w-20 h-20 rounded-full ring-4 ring-white shadow-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xl overflow-hidden relative">
+                <div className="w-20 h-20 rounded-full ring-4 ring-white shadow-lg bg-gradient-to-tr from-emerald-600 to-teal-500 text-white font-bold flex items-center justify-center text-xl overflow-hidden relative">
                   <img
                     src={avatarUrl}
                     alt={fullName}
@@ -363,7 +363,7 @@ export default async function CreatorOverviewPage() {
                 {/* Post status pill & manual sync trigger */}
                 <div className="flex items-center justify-center gap-2 mt-3.5 flex-wrap">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-slate-50 text-[11px] font-medium text-slate-700">
-                    <Calendar className="w-3.5 h-3.5 text-indigo-600" />
+                    <Calendar className="w-3.5 h-3.5 text-emerald-600" />
                     <span>{hasPostData ? `${publicPostsCount} verified posts synced` : 'No post data available'}</span>
                   </div>
                   <CreatorSyncButton />
@@ -374,9 +374,9 @@ export default async function CreatorOverviewPage() {
               <div className="px-6 py-2.5 flex items-center justify-between text-xs text-slate-400 border-t border-slate-100">
                 <span className="font-semibold text-[10px] uppercase tracking-wider">Profile Sync</span>
                 <div className="flex-1 mx-3 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                  <div className={`h-full bg-indigo-600 rounded-full transition-all ${hasPostData ? 'w-full' : 'w-1/3'}`} />
+                  <div className={`h-full bg-emerald-600 rounded-full transition-all ${hasPostData ? 'w-full' : 'w-1/3'}`} />
                 </div>
-                <span className="font-semibold text-[10px] text-indigo-600">{hasPostData ? '100% Synced' : 'Ready'}</span>
+                <span className="font-semibold text-[10px] text-emerald-700">{hasPostData ? '100% Synced' : 'Ready'}</span>
               </div>
 
               {/* Bottom 3 Stats Grid */}
@@ -408,7 +408,7 @@ export default async function CreatorOverviewPage() {
                   className="inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 bg-white rounded-full border border-slate-200 shadow-md hover:shadow-lg transition-all cursor-pointer group text-xs font-bold text-slate-800"
                 >
                   <span>Edit profile details</span>
-                  <div className="w-6 h-6 rounded-full bg-indigo-600 group-hover:bg-indigo-700 text-white flex items-center justify-center transition-colors">
+                  <div className="w-6 h-6 rounded-full bg-emerald-600 group-hover:bg-emerald-700 text-white flex items-center justify-center transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </Link>
@@ -434,7 +434,7 @@ export default async function CreatorOverviewPage() {
 
                 <Link
                   href="/dashboard/creator/profile"
-                  className="text-xs font-bold text-indigo-600 hover:text-indigo-700 hover:underline"
+                  className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:underline"
                 >
                   Manage Profile
                 </Link>
@@ -491,7 +491,7 @@ export default async function CreatorOverviewPage() {
                 {/* 2. LinkedIn Feed Sync */}
                 <div className="border border-slate-200/80 bg-slate-50/50 hover:bg-white rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
                   <div className="flex items-center gap-3.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-xs">
                       <FileText className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
@@ -503,7 +503,7 @@ export default async function CreatorOverviewPage() {
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-blue-50 text-blue-700 border-blue-200">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-teal-50 text-teal-800 border-teal-200">
                       {publicPostsCount > 0 ? 'Active' : 'Standby'}
                     </span>
                     <Link
@@ -518,7 +518,7 @@ export default async function CreatorOverviewPage() {
                 {/* 3. Escrow Payout Wallet */}
                 <div className="border border-slate-200/80 bg-slate-50/50 hover:bg-white rounded-2xl p-4 flex items-center justify-between gap-4 transition-all">
                   <div className="flex items-center gap-3.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-indigo-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
@@ -530,7 +530,7 @@ export default async function CreatorOverviewPage() {
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-indigo-50 text-indigo-700 border-indigo-200">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-emerald-50 text-emerald-800 border-emerald-200">
                       Protected
                     </span>
                     <Link
@@ -555,7 +555,7 @@ export default async function CreatorOverviewPage() {
                 </div>
                 <Link
                   href="/dashboard/creator/collaborations"
-                  className="text-xs font-bold text-indigo-600 hover:text-indigo-700 hover:underline"
+                  className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:underline"
                 >
                   All ({collaborations.length})
                 </Link>
@@ -608,8 +608,8 @@ export default async function CreatorOverviewPage() {
                 </div>
               ) : (
                 <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-center bg-slate-50/40">
-                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 mx-auto flex items-center justify-center mb-2.5">
-                    <Sparkles className="w-5 h-5" />
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 mx-auto flex items-center justify-center mb-2.5">
+                    <Sparkles className="w-5 h-5 text-emerald-600" />
                   </div>
                   <h4 className="text-xs sm:text-sm font-bold text-slate-800">
                     Your profile is active in brand discovery
@@ -620,7 +620,7 @@ export default async function CreatorOverviewPage() {
                   <div className="mt-4 flex items-center justify-center gap-3">
                     <Link
                       href="/dashboard/creator/profile"
-                      className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs transition-colors"
+                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-colors"
                     >
                       Refine Keywords & Bio
                     </Link>
@@ -636,7 +636,7 @@ export default async function CreatorOverviewPage() {
       <button
         type="button"
         aria-label="Support chat"
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-slate-900 hover:bg-indigo-600 text-white flex items-center justify-center shadow-xl hover:shadow-indigo-500/25 transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
+        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center shadow-xl hover:shadow-emerald-600/25 transition-all cursor-pointer z-50 hover:scale-105 active:scale-95"
       >
         <ChatBubbleIcon className="w-5 h-5 text-white" />
       </button>

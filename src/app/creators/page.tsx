@@ -17,7 +17,7 @@ export default async function CreatorsPage() {
   const session = await getCurrentUser();
 
   return (
-    <div className="min-h-screen bg-[#FAFAFC] flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-white flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
       <Navbar initialUser={session} />
       <main className="w-full flex-1">
         <CreatorsPageClient />

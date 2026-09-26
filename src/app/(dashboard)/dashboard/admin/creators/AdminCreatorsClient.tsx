@@ -180,7 +180,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">
-                <ShieldCheck className="w-3 h-3 text-indigo-400" />
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 <span>Quality Curation</span>
               </span>
               <span className="text-xs font-semibold text-[#64748B]">
@@ -205,7 +205,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                 onClick={() => setFilterFeatured(f)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   filterFeatured === f
-                    ? 'bg-[#2563EB] text-white shadow-xs'
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/25'
                     : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200/60'
                 }`}
               >
@@ -221,7 +221,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
               placeholder="Search creator name, niche, or badge..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-800"
+              className="w-full pl-9 pr-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 text-slate-800"
             />
           </div>
         </div>
@@ -286,7 +286,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                         <div className="font-semibold text-slate-800">{creator.niche}</div>
                         <div className="flex items-center gap-1.5 mt-1">
                           {creator.badge ? (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100">
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
                               {creator.badge}
                             </span>
                           ) : (
@@ -337,7 +337,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                         <button
                           type="button"
                           onClick={() => openEditModal(creator)}
-                          className="p-2 rounded-xl text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors cursor-pointer"
+                          className="p-2 rounded-xl text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
@@ -386,7 +386,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                     max={10000}
                     value={editPrice}
                     onChange={(e) => setEditPrice(Number(e.target.value))}
-                    className="w-full pl-9 pr-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-mono font-bold"
+                    className="w-full pl-9 pr-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-mono font-bold"
                   />
                 </div>
               </div>
@@ -399,7 +399,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                   min={500}
                   value={editFollowers}
                   onChange={(e) => setEditFollowers(Number(e.target.value))}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-mono font-bold"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-mono font-bold"
                 />
               </div>
 
@@ -410,7 +410,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                   required
                   value={editNiche}
                   onChange={(e) => setEditNiche(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-medium"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-medium"
                 />
               </div>
 
@@ -419,7 +419,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                 <select
                   value={editBadge}
                   onChange={(e) => setEditBadge(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-bold text-slate-800"
+                  className="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 font-bold text-slate-800"
                 >
                   <option value="">No Badge</option>
                   <option value="Top Voice">Top Voice</option>
@@ -442,7 +442,7 @@ export default function AdminCreatorsClient({ initialUser, creators: initialCrea
                 <button
                   type="submit"
                   disabled={modalSubmitting}
-                  className="px-5 py-2.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold disabled:opacity-50 cursor-pointer shadow-xs"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold disabled:opacity-50 cursor-pointer shadow-md shadow-emerald-500/20"
                 >
                   {modalSubmitting ? 'Saving...' : 'Save Changes'}
                 </button>

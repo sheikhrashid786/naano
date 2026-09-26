@@ -174,13 +174,13 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
   }
 
   return (
-    <section id="creators" className="py-24 bg-white border-y border-slate-200/80 scroll-mt-20">
+    <section id="creators" className="py-24 bg-white border-b border-slate-200/80 section-odd scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold border border-indigo-100 uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200/80 uppercase tracking-wider mb-3">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
               <span>Verified Creator Network</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -199,7 +199,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
         </div>
 
         {/* Filter Bar */}
-        <div className="p-4 rounded-3xl bg-slate-50 border border-slate-200/80 mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <div className="p-4 rounded-3xl bg-slate-50/80 border border-slate-200/80 shadow-2xs mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Niche Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
             {niches.map((niche) => (
@@ -211,8 +211,8 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                 }}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   selectedNiche === niche
-                    ? 'bg-indigo-600 text-white shadow-xs'
-                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 border border-slate-200/60'
+                    ? 'bg-emerald-600 text-white shadow-xs'
+                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/60'
                 }`}
               >
                 {niche}
@@ -232,7 +232,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                   setSearchTerm(e.target.value);
                   setVisibleCount(6);
                 }}
-                className="w-full pl-9 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-800 placeholder:text-slate-400"
+                className="w-full pl-9 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-800 placeholder:text-slate-400"
               />
             </div>
 
@@ -261,30 +261,30 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
             return (
               <div
                 key={creator.id}
-                className="group relative bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-indigo-200 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                className="group relative bg-white hover:bg-[#070D0A] rounded-3xl border border-slate-200/90 hover:border-emerald-500/30 shadow-2xs hover:shadow-2xl hover:shadow-emerald-950/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
-                {/* Top Card Gradient Header */}
+                {/* Top Card Header */}
                 <div className="p-6 pb-4">
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <div className="relative">
                       <img
                         src={displayAvatar}
                         alt={displayName}
-                        className="w-14 h-14 rounded-2xl object-cover border-2 border-white shadow-md shadow-slate-200"
+                        className="w-14 h-14 rounded-2xl object-cover border-2 border-white group-hover:border-emerald-500/30 shadow-md shadow-slate-200 group-hover:shadow-emerald-950/50 transition-all"
                       />
-                      <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#0A66C2] flex items-center justify-center text-white border-2 border-white">
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#0A66C2] flex items-center justify-center text-white border-2 border-white group-hover:border-[#070D0A] transition-colors">
                         <LinkedInIcon className="w-2.5 h-2.5 text-white" />
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end gap-1">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-indigo-50 text-indigo-700 border border-indigo-100">
-                        <Sparkles className="w-3 h-3 text-indigo-500" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-emerald-50 group-hover:bg-emerald-950/80 text-emerald-800 group-hover:text-emerald-400 border border-emerald-200/80 group-hover:border-emerald-500/30 transition-colors">
+                        <Sparkles className="w-3 h-3 text-emerald-600 group-hover:text-emerald-400 transition-colors" />
                         <span>{fitScore}% Fit Score</span>
                       </span>
 
                       {creator.badge && (
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        <span className="text-[10px] font-bold text-slate-400 group-hover:text-emerald-400/80 uppercase tracking-wider transition-colors">
                           {creator.badge}
                         </span>
                       )}
@@ -293,37 +293,37 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
 
                   {/* Creator Info */}
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors flex items-center gap-1.5">
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-white transition-colors flex items-center gap-1.5">
                       <span>{displayName}</span>
-                      <CheckCircle2 className="w-4 h-4 text-blue-500 fill-blue-50 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 fill-emerald-50 group-hover:fill-emerald-950 group-hover:text-emerald-400 shrink-0 transition-colors" />
                     </h3>
-                    <p className="text-xs font-semibold text-indigo-600 mt-0.5">
+                    <p className="text-xs font-semibold text-emerald-700 group-hover:text-emerald-400 mt-0.5 transition-colors">
                       {creator.niche || creator.industry}
                     </p>
-                    <p className="text-xs text-slate-500 mt-2.5 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-500 group-hover:text-slate-300 mt-2.5 line-clamp-2 leading-relaxed transition-colors">
                       {creator.headline || creator.bio || 'B2B LinkedIn Creator focused on actionable growth.'}
                     </p>
                   </div>
                 </div>
 
                 {/* Key Statistics Strip */}
-                <div className="px-6 py-3.5 bg-slate-50/70 border-y border-slate-100 grid grid-cols-3 gap-2 text-center">
+                <div className="px-6 py-3.5 bg-slate-50/70 group-hover:bg-[#0D1812] border-y border-slate-100 group-hover:border-emerald-950/80 grid grid-cols-3 gap-2 text-center transition-all duration-300">
                   <div>
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       Followers
                     </div>
-                    <div className="text-sm font-black text-slate-900 mt-0.5 font-mono">
+                    <div className="text-sm font-black text-slate-900 group-hover:text-white mt-0.5 font-mono transition-colors">
                       {creator.followersCount >= 1000
                         ? `${(creator.followersCount / 1000).toFixed(1)}k`
                         : creator.followersCount}
                     </div>
                   </div>
 
-                  <div className="border-x border-slate-200/60">
+                  <div className="border-x border-slate-200/60 group-hover:border-emerald-950/80 transition-colors">
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       Engagement
                     </div>
-                    <div className="text-sm font-black text-slate-900 mt-0.5 font-mono text-emerald-600">
+                    <div className="text-sm font-black text-slate-900 group-hover:text-emerald-400 mt-0.5 font-mono text-emerald-600 transition-colors">
                       {creator.engagementRate || 4.2}%
                     </div>
                   </div>
@@ -332,18 +332,18 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       Price / Post
                     </div>
-                    <div className="text-sm font-black text-slate-900 mt-0.5 font-mono">
+                    <div className="text-sm font-black text-slate-900 group-hover:text-white mt-0.5 font-mono transition-colors">
                       €{creator.pricePerPost}
                     </div>
                   </div>
                 </div>
 
                 {/* Card Action Buttons */}
-                <div className="p-4 bg-white flex items-center gap-2">
+                <div className="p-4 bg-white group-hover:bg-[#070D0A] flex items-center gap-2 transition-colors duration-300">
                   <button
                     type="button"
                     onClick={() => setSelectedCreator(creator)}
-                    className="flex-1 py-2.5 px-3 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-all cursor-pointer text-center"
+                    className="flex-1 py-2.5 px-3 rounded-xl border border-slate-200 group-hover:border-emerald-500/30 bg-white group-hover:bg-white/10 hover:!bg-white/20 text-xs font-bold text-slate-700 group-hover:text-slate-200 transition-all cursor-pointer text-center"
                   >
                     View Card
                   </button>
@@ -351,7 +351,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                   <button
                     type="button"
                     onClick={() => handleInviteClick(creator)}
-                    className="flex-1 py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs hover:shadow-indigo-500/20 transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
+                    className="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-xs hover:shadow-emerald-600/30 transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
                   >
                     <span>Invite</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -368,31 +368,31 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
             <button
               type="button"
               onClick={() => setVisibleCount((prev) => prev + 6)}
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-slate-300 text-slate-900 font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all cursor-pointer group"
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-emerald-300 text-slate-900 font-bold text-xs sm:text-sm shadow-2xs hover:shadow-md transition-all cursor-pointer group"
             >
               <span>Load More Voices</span>
               <span className="text-xs font-mono text-slate-400 font-normal">
                 ({visibleCreators.length} of {filteredCreators.length})
               </span>
-              <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-y-0.5 transition-all" />
+              <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 group-hover:translate-y-0.5 transition-all" />
             </button>
           </div>
         )}
 
         {/* Bottom Banner */}
-        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-r from-[#070D0A] via-[#064E3B] to-[#070D0A] border border-emerald-500/20 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
           <div>
             <h3 className="text-xl sm:text-2xl font-black tracking-tight">
               Looking for a creator in a niche not listed?
             </h3>
-            <p className="text-slate-300 text-xs sm:text-sm mt-1 max-w-xl">
+            <p className="text-emerald-100/80 text-xs sm:text-sm mt-1 max-w-xl">
               We scout and vet bespoke creators for your specific ICP in under 48 hours. Zero upfront commitment.
             </p>
           </div>
 
           <Link
             href="/dashboard/company/campaigns"
-            className="px-6 py-3 rounded-2xl bg-white text-slate-900 hover:bg-indigo-50 font-bold text-xs sm:text-sm transition-all shrink-0 shadow-md"
+            className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-[#070D0A] font-bold text-xs sm:text-sm transition-all shrink-0 shadow-md shadow-emerald-500/20"
           >
             Request Custom Creator Scouting
           </Link>
@@ -420,18 +420,18 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'
                 }
                 alt={selectedCreator.user?.name || selectedCreator.name}
-                className="w-16 h-16 rounded-2xl object-cover border-2 border-indigo-100 shadow-md"
+                className="w-16 h-16 rounded-2xl object-cover border-2 border-emerald-100 shadow-md"
               />
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="text-xl font-bold text-slate-900">
                     {selectedCreator.user?.name || selectedCreator.name}
                   </h3>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-100">
                     {selectedCreator.country}
                   </span>
                 </div>
-                <p className="text-xs font-semibold text-indigo-600 mt-0.5">
+                <p className="text-xs font-semibold text-emerald-700 mt-0.5">
                   {selectedCreator.niche} · {selectedCreator.industry}
                 </p>
               </div>
@@ -474,7 +474,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                 </div>
                 <div>
                   <div className="text-[10px] font-bold uppercase text-slate-400">Rate / Post</div>
-                  <div className="text-lg font-black text-indigo-600 font-mono mt-0.5">
+                  <div className="text-lg font-black text-emerald-700 font-mono mt-0.5">
                     €{selectedCreator.pricePerPost}
                   </div>
                 </div>
@@ -494,7 +494,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                   setSelectedCreator(null);
                   handleInviteClick(c);
                 }}
-                className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-sm transition-all cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
               >
                 Invite to Campaign
               </button>
@@ -520,7 +520,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
             </button>
 
             <div className="mb-6">
-              <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
+              <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
                 Direct Booking Invite
               </span>
               <h3 className="text-xl font-bold text-slate-900 mt-1">
@@ -552,7 +552,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                     required
                     value={inviteBudget}
                     onChange={(e) => setInviteBudget(parseInt(e.target.value, 10))}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-900"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900"
                   />
                   <span className="text-[11px] text-slate-400 mt-1 block">
                     Creator standard rate: €{inviteModalCreator.pricePerPost}
@@ -569,7 +569,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                     value={invitePitch}
                     onChange={(e) => setInvitePitch(e.target.value)}
                     placeholder="Describe your product, the key message, and what kind of post you are looking for..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-900 placeholder:text-slate-400"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900 placeholder:text-slate-400"
                   />
                 </div>
 
@@ -590,7 +590,7 @@ export default function LiveCreatorsDirectory({ initialCreators, initialUser }: 
                   <button
                     type="submit"
                     disabled={inviteStatus === 'submitting'}
-                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-500/25 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/25 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>{inviteStatus === 'submitting' ? 'Sending...' : 'Send Collaboration Offer'}</span>
