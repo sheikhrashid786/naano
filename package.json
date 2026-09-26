@@ -10,7 +10,9 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "db:seed": "node prisma/seed.js",
+    "push": "node prisma/seed.js && git push"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",

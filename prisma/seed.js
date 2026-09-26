@@ -27,7 +27,7 @@ var import_client = require("@prisma/client");
 var import_bcryptjs = __toESM(require("bcryptjs"));
 var prisma = new import_client.PrismaClient();
 async function main() {
-  console.log("Seeding Naano database...");
+  console.log("Seeding Naano database with full comprehensive suite...");
   await prisma.message.deleteMany();
   await prisma.conversation.deleteMany();
   await prisma.payment.deleteMany();
@@ -40,11 +40,24 @@ async function main() {
   await prisma.notification.deleteMany();
   await prisma.creator.deleteMany();
   await prisma.company.deleteMany();
+  await prisma.caseStudyItem.deleteMany();
+  await prisma.blogItem.deleteMany();
+  await prisma.platformSetting.deleteMany();
+  await prisma.adminAuditLog.deleteMany();
   await prisma.user.deleteMany();
   const passwordHash = await import_bcryptjs.default.hash("password123", 10);
+  const adminUser = await prisma.user.create({
+    data: {
+      email: "admin@naano.io",
+      name: "Super Admin",
+      passwordHash,
+      role: import_client.Role.ADMIN,
+      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80"
+    }
+  });
   const lemlistUser = await prisma.user.create({
     data: {
-      email: "company@lemlist.com",
+      email: "brand@lemlist.com",
       name: "Guillaume Moubeche",
       passwordHash,
       role: import_client.Role.COMPANY,
@@ -66,6 +79,15 @@ async function main() {
       }
     },
     include: { company: true }
+  });
+  await prisma.user.create({
+    data: {
+      email: "company@lemlist.com",
+      name: "lemlist Growth Team",
+      passwordHash,
+      role: import_client.Role.COMPANY,
+      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80"
+    }
   });
   const leadbayUser = await prisma.user.create({
     data: {
@@ -119,7 +141,7 @@ async function main() {
   });
   const creatorsData = [
     {
-      email: "eric@creator.io",
+      email: "creator@naano.io",
       name: "Eric Nowosielski",
       headline: "Helping 50,000+ Founders & SDRs scale B2B Outbound | 150M+ impressions",
       bio: "Ex-VP Sales sharing actionable breakdowns of cold outreach, lead magnets, and LinkedIn organic playbooks for B2B tech companies.",
@@ -131,6 +153,21 @@ async function main() {
       pricePerPost: 250,
       badge: "Top Creator",
       featured: true,
+      avatarUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=80"
+    },
+    {
+      email: "eric@creator.io",
+      name: "Eric N. (Backup)",
+      headline: "B2B Cold Outreach & LinkedIn Growth",
+      bio: "Practitioner insights on cold emails and inbound demand generation.",
+      niche: "B2B Outbound",
+      industry: "Sales Tech",
+      country: "FR",
+      followersCount: 35e3,
+      engagementRate: 4.6,
+      pricePerPost: 220,
+      badge: "Verified B2B",
+      featured: false,
       avatarUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=80"
     },
     {
@@ -322,14 +359,14 @@ async function main() {
       }
     }
   });
-  const eric = createdCreators.find((c) => c.niche.includes("Outbound"));
+  const demoCreator = createdCreators[0];
   const robin = createdCreators.find((c) => c.niche.includes("AI Agents"));
   const aya = createdCreators.find((c) => c.niche.includes("GTM"));
-  const collab1 = await prisma.collaboration.create({
+  await prisma.collaboration.create({
     data: {
       campaignId: lemlistCampaign.id,
       companyId: lemlistUser.company.id,
-      creatorId: eric.id,
+      creatorId: demoCreator.id,
       status: import_client.CollabStatus.CONTENT_SUBMITTED,
       fixedRate: 250,
       pitchMessage: "Hey Guillaume! I've been using lemlist for 3 years. I have a 12-slide carousel ready breaking down our exact 42% reply rate sequence. Would love to feature you guys.",
@@ -347,7 +384,7 @@ async function main() {
                 content: "Hi Eric! Loved your pitch. The brief is attached. Looking forward to your breakdown post."
               },
               {
-                senderId: eric.userId,
+                senderId: demoCreator.userId,
                 content: "Thanks Guillaume! Post is live now. Link and tracking proof submitted for your review."
               }
             ]
@@ -363,7 +400,7 @@ async function main() {
       }
     }
   });
-  const collab2 = await prisma.collaboration.create({
+  await prisma.collaboration.create({
     data: {
       campaignId: leadbayCampaign.id,
       companyId: leadbayUser.company.id,
@@ -435,7 +472,7 @@ async function main() {
         isRead: false
       },
       {
-        userId: eric.userId,
+        userId: demoCreator.userId,
         title: "New Campaign Invitation",
         message: "lemlist invited you to collaborate on their upcoming AI Outbound campaign with a fixed fee of \u20AC250.",
         link: "/dashboard/creator/applications",
@@ -453,10 +490,10 @@ async function main() {
   await prisma.favorite.create({
     data: {
       companyId: lemlistUser.company.id,
-      creatorId: eric.id
+      creatorId: demoCreator.id
     }
   });
-  for (let i = 7; i >= 0; i--) {
+  for (let i = 14; i >= 0; i--) {
     const d = /* @__PURE__ */ new Date();
     d.setDate(d.getDate() - i);
     await prisma.campaignAnalytics.create({
@@ -469,10 +506,284 @@ async function main() {
       }
     });
   }
-  console.log("Seed completed successfully!");
+  await prisma.caseStudyItem.createMany({
+    data: [
+      {
+        slug: "lemlist-outbound-engine",
+        company: "lemlist",
+        logo: "/lp/logo-lemlist.png",
+        tagline: "Driving \u20AC140k in B2B SaaS Pipeline with 8 Micro-Influencers",
+        industry: "Sales Tech & Outbound",
+        metric: "\u20AC140,000",
+        metricLabel: "Attributed Pipeline",
+        quote: "Naano allowed us to tap directly into authentic sales practitioner audiences with zero retainer fees or broker overhead.",
+        author: "Guillaume Moubeche",
+        role: "CEO & Co-Founder, lemlist",
+        creatorsUsed: "8 Vetted Creators",
+        pipelineAdded: "\u20AC140,000 ARR",
+        impressions: "310,000 Views",
+        clicks: "4,850 Clicks",
+        readTime: "4 min read",
+        date: "Sep 2026",
+        summary: "How lemlist activated 8 niche B2B outbound influencers to drive 4,850 high-intent demo clicks with closed-loop UTM attribution.",
+        challenge: "Traditional paid search and LinkedIn sponsored updates had ballooned to \u20AC180+ CPL with low trial conversion rates.",
+        strategy: "Contracted 8 verified sales leaders to share genuine cold email audit carousels and outbound templates using Naano milestone escrow.",
+        results: JSON.stringify([
+          "\u20AC140,000 in tracked pipeline generated in 45 days",
+          "310,000+ organic impressions across enterprise buyers",
+          "CPL dropped by 64% compared to standard LinkedIn paid ads",
+          "100% of posts delivered on schedule with verified UTM analytics"
+        ]),
+        keyTakeaways: JSON.stringify([
+          "Practitioner-led proof outperforms brand-led ads by 4.2x",
+          "Comments section lead magnet strategy drove 62% of all conversions",
+          "Prepaid escrow built trust and eliminated contract renegotiations"
+        ]),
+        published: true
+      },
+      {
+        slug: "leadbay-claude-mcp",
+        company: "Leadbay",
+        logo: "/lp/logo-leadbay.png",
+        tagline: "Scaling AI Agent & MCP Tool Adoption Among 25k Technical Founders",
+        industry: "AI & Developer Tools",
+        metric: "+340%",
+        metricLabel: "CLI Downloads & Trials",
+        quote: "Working with engineering creators on Naano transformed our open-source MCP launch from obscure GitHub repo into a viral industry standard.",
+        author: "Thomas Marcelle",
+        role: "Head of Growth, Leadbay",
+        creatorsUsed: "5 AI Engineers",
+        pipelineAdded: "\u20AC85,000 ARR",
+        impressions: "185,000 Views",
+        clicks: "2,420 Clicks",
+        readTime: "5 min read",
+        date: "Sep 2026",
+        summary: "Leadbay partnered with 5 technical AI builders to demonstrate real-time account research directly inside Claude Code and Cursor.",
+        challenge: "Developer tools are notoriously hard to promote through conventional corporate advertising.",
+        strategy: "Identified top AI agent creators on LinkedIn who built real-world CLI demos showcasing Leadbay APIs.",
+        results: JSON.stringify([
+          "340% increase in weekly CLI package installations",
+          "12,000 developer account signups in 30 days",
+          "Over 40 organic reposts from enterprise CTOs and founders"
+        ]),
+        keyTakeaways: JSON.stringify([
+          "Developers only trust other developers showing working code",
+          "Screen demos under 45 seconds achieved 82% retention",
+          "UTM-tagged comment links avoided LinkedIn algorithm reach penalties"
+        ]),
+        published: true
+      },
+      {
+        slug: "attio-crm-migration",
+        company: "Attio",
+        logo: "/lp/logo-attio.png",
+        tagline: "Capturing Enterprise RevOps Buyers Migrating Away from Legacy CRMs",
+        industry: "CRM & Cloud",
+        metric: "48 Migrations",
+        metricLabel: "Enterprise Wins",
+        quote: "Naano gave us unprecedented transparency into creator performance and guaranteed escrow safety.",
+        author: "Nicolas Vorsteveld",
+        role: "VP Marketing, Attio",
+        creatorsUsed: "6 RevOps Experts",
+        pipelineAdded: "\u20AC210,000 ARR",
+        impressions: "420,000 Views",
+        clicks: "5,600 Clicks",
+        readTime: "6 min read",
+        date: "Sep 2026",
+        summary: "Attio enlisted 6 senior RevOps consultants on LinkedIn to share migration playbooks from Salesforce and HubSpot.",
+        challenge: "High customer acquisition costs in the crowded CRM software space.",
+        strategy: "Positioned Attio as the modern developer-friendly alternative through teardowns published by respected revenue architects.",
+        results: JSON.stringify([
+          "48 qualified enterprise CRM migration deals initiated",
+          "\u20AC210,000 ARR added to sales pipeline in 60 days",
+          "5,600 qualified clicks to the interactive migration calculator"
+        ]),
+        keyTakeaways: JSON.stringify([
+          "Consultant authority cuts sales cycles by nearly half",
+          "Deep workflow breakdowns drive higher ASP than short promotional posts"
+        ]),
+        published: true
+      }
+    ]
+  });
+  await prisma.blogItem.createMany({
+    data: [
+      {
+        slug: "b2b-creator-led-growth-guide-2026",
+        title: "The 2026 Guide to B2B Creator-Led Growth: From Vanity Likes to Qualified Pipeline",
+        topic: "Creator-led growth",
+        readTime: "8 min read",
+        date: "Sep 2026",
+        author: "Naano Editorial",
+        authorRole: "GTM Strategy Research",
+        authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+        gradient: "from-indigo-600 to-violet-600",
+        summary: "How fast-growing SaaS scaleups are replacing saturated ad channels with niche practitioner networks on LinkedIn.",
+        takeaways: JSON.stringify([
+          "Why corporate brand pages are dead and individual practitioner voices dominate engagement algorithms.",
+          "How to structure performance-driven creator briefs without destroying editorial authenticity.",
+          "The 3-stage funnel: Awareness hooks, educational carousels, and high-intent DM lead magnets."
+        ]),
+        contentJson: JSON.stringify([
+          {
+            heading: "1. The Death of the Corporate Social Account",
+            paragraphs: [
+              "Algorithm data from 2025 and 2026 reveals a brutal reality for corporate B2B marketing teams: organic reach for company pages on LinkedIn has plummeted below 0.8% of follower count. Meanwhile, personal profiles of recognized practitioners and builders routinely command organic engagement rates between 3.5% and 7.2%.",
+              "Buyers no longer trust logo-branded whitepapers. They trust peer practitioners who share unfiltered screenshots, failure post-mortems, and actionable workflows."
+            ]
+          },
+          {
+            heading: "2. Structuring Creator Briefs for Maximum Conversion",
+            paragraphs: [
+              "The most common mistake B2B companies make is treating creators like billboard ad slots. Handing an influencer a rigid PR script guarantees audience rejection.",
+              "Instead, the highest-performing campaigns on Naano specify only three core parameters: the problem angle, the target persona challenge, and the CTA link destination. The creator retains 100% control over the opening hook and tone of voice."
+            ]
+          },
+          {
+            heading: "3. Closed-Loop Attribution Architecture",
+            paragraphs: [
+              "By utilizing unique UTM tags per creator and delivering lead magnets in first comments or direct messages, brands can track visitors from first post impression through trial signup to closed-won CRM revenue."
+            ]
+          }
+        ]),
+        published: true,
+        featured: true
+      },
+      {
+        slug: "cpl-economics-creators-vs-paid-ads",
+        title: "The Unit Economics of B2B Creators vs. Google & LinkedIn Ads in 2026",
+        topic: "CPL economics",
+        readTime: "6 min read",
+        date: "Sep 2026",
+        author: "Eric Nowosielski",
+        authorRole: "VP Outbound & Creator Advisor",
+        authorAvatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=80",
+        gradient: "from-blue-600 to-cyan-600",
+        summary: "A direct mathematical breakdown comparing cost-per-lead, demo show-up rate, and CAC payback periods.",
+        takeaways: JSON.stringify([
+          "LinkedIn Sponsored Content average CPC has climbed to \u20AC14.50 in major European and US tech hubs.",
+          "Niche creator campaigns achieve effective CPCs under \u20AC3.20 with 3x higher demo attendance.",
+          "Creator-sourced prospects churn 28% less than cold paid traffic due to pre-established trust."
+        ]),
+        contentJson: JSON.stringify([
+          {
+            heading: "The Rising Cost of Conventional B2B Paid Search and Display",
+            paragraphs: [
+              "Across Series A to Series C enterprise software firms, customer acquisition costs have surged by over 40% year-over-year. As competition for intent keywords heats up, ad networks extract the lion\u2019s share of margin.",
+              "In contrast, a micro-creator with 25,000 high-density followers in RevOps or cybersecurity can deliver an authoritative case study post for \u20AC250, reaching 15,000 targeted buyers at an effective CPM under \u20AC18."
+            ]
+          }
+        ]),
+        published: true,
+        featured: false
+      },
+      {
+        slug: "micro-creators-conversion-rates",
+        title: "Why 10k-Follower Technical Creators Outperform 200k-Follower Generic Influencers",
+        topic: "LinkedIn micro-creators",
+        readTime: "5 min read",
+        date: "Sep 2026",
+        author: "Robin Delaere",
+        authorRole: "AI Workflow Architect",
+        authorAvatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
+        gradient: "from-emerald-600 to-teal-600",
+        summary: "Audience density beats sheer follower counts every time when selling complex B2B software solutions.",
+        takeaways: JSON.stringify([
+          "Audience composition ratio: A 10k follower base containing 60% VP and Director level buyers beats 200k student and recruiter followers.",
+          "High comment-to-view ratios create organic algorithm re-amplification on LinkedIn.",
+          "Creators with focused technical niches command 5x higher trust from engineering leads."
+        ]),
+        contentJson: JSON.stringify([
+          {
+            heading: "Understanding B2B Audience Density",
+            paragraphs: [
+              "Consumer influencer marketing taught marketers to chase vanity reach. In B2B SaaS, reaching 500,000 random viewers is worthless if none of them hold purchasing budget.",
+              "Micro-creators who write exclusively about Kubernetes, MCP integrations, or cold outbound speak the insider dialect of decision makers."
+            ]
+          }
+        ]),
+        published: true,
+        featured: false
+      },
+      {
+        slug: "escrow-milestone-architecture",
+        title: "Why Milestone Escrow is Mandatory for Performance-Driven Creator Partnerships",
+        topic: "Naano vs alternatives",
+        readTime: "7 min read",
+        date: "Sep 2026",
+        author: "Naano Product Engineering",
+        authorRole: "FinTech & Escrow Infrastructure",
+        authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+        gradient: "from-violet-600 to-fuchsia-600",
+        summary: "How automated Stripe Connect escrow guarantees eliminate non-delivery risk for brands and late payment anxiety for creators.",
+        takeaways: JSON.stringify([
+          "Traditional influencer agencies charge 30-50% margins while providing zero delivery guarantees.",
+          "Naano locks project funds safely in Stripe Connect milestone vaults before creators begin work.",
+          "Automatic verification of published post URLs and live analytics releases funds without friction."
+        ]),
+        contentJson: JSON.stringify([
+          {
+            heading: "The Broken Legacy Influencer Agency Model",
+            paragraphs: [
+              "Until now, brands faced two bad options: risk paying expensive agency retainers with unpredictable outcomes, or risk paying freelance creators upfront with zero recourse if deliverables were delayed.",
+              "Naano solves this two-sided trust dilemma with automated milestone vaults powered by Stripe Connect."
+            ]
+          }
+        ]),
+        published: true,
+        featured: false
+      }
+    ]
+  });
+  await prisma.platformSetting.createMany({
+    data: [
+      {
+        key: "commission_rate",
+        value: "0",
+        description: "Platform commission fee percentage taken from creators (0% guaranteed)"
+      },
+      {
+        key: "min_payout",
+        value: "50",
+        description: "Minimum balance required in EUR to initiate an instant bank transfer"
+      },
+      {
+        key: "escrow_auto_release_days",
+        value: "7",
+        description: "Days before submitted content is automatically approved if brand is unresponsive"
+      },
+      {
+        key: "support_email",
+        value: "support@naano.io",
+        description: "Primary customer support and concierge email"
+      },
+      {
+        key: "stripe_mode",
+        value: "live",
+        description: "Stripe Connect processing environment mode"
+      }
+    ]
+  });
+  await prisma.adminAuditLog.createMany({
+    data: [
+      {
+        adminId: adminUser.id,
+        adminName: "Super Admin",
+        action: "SYSTEM_SEED",
+        details: "Full initial seed of 8 verified creators, 3 companies, active campaigns, blogs, case studies, and platform settings."
+      },
+      {
+        adminId: adminUser.id,
+        adminName: "Super Admin",
+        action: "UPDATE_SETTINGS",
+        details: "Verified 0% creator commission rate and activated Stripe Connect Escrow milestone vault."
+      }
+    ]
+  });
+  console.log("\u2705 Naano database seeded successfully with all roles, blogs, case studies, and settings!");
 }
 main().catch((e) => {
-  console.error(e);
+  console.error("\u274C Seeding error:", e);
   process.exit(1);
 }).finally(async () => {
   await prisma.$disconnect();
